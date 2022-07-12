@@ -1,0 +1,7 @@
+body {
+  /* https://www.w3schools.com/css/css3_gradients.asp */
+  background-image: linear-gradient(to bottom right, #276174, #33C58E, #63FD88);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color:white;
+}
