@@ -1,13 +1,10 @@
-h1 {   
-    padding-top: 150px;
-    padding-bottom: 10px;
-    padding-left: 80px;
-    font-size: 3.5rem;
-    font-family: revert;
-    color: darkslategrey;
-}
-
 p {
     padding-left: 100px;
     font-family: revert;
+}
+
+video {
+position: fixed;
+padding-top: 50px;
+width: 85%;
 }

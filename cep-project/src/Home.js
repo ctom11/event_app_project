@@ -1,11 +1,11 @@
 import React from "react";
 import './Home.css';
+/*import videoCinema from './assets/cinema.mp4';*/
 
 export const Home = () => (
     <div className="row">
-    <div>
-      <h1> Find everything you want to do, all in one place. </h1>
-      <p> Testing out the webapp homepage </p>
+       {/*<div className="videohome">
+            <video src={videoCinema} autoPlay loop muted></video>
+        </div>*/}
     </div>
-  </div>
 )

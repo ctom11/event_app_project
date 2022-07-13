@@ -1,0 +1,68 @@
+/*sign up card*/
+.card {
+    max-width: 50%;
+    margin: auto;
+    margin-top: 100px;
+    color: #276174;
+}
+
+/*sign up title*/
+.card-title {
+    padding-top: 50px;
+}
+
+h5 {
+    font-size:xx-large !important;
+    padding-left: 50px;
+}
+
+form {
+    margin-top: 10px;
+    padding: 0px 50px 0px 50px;
+}
+
+.form-group {
+    padding-top: 15px;
+}
+
+label {
+    font-size: larger;
+}
+
+/*input boxes*/
+.form-control {
+    margin-top: 10px !important;
+}
+
+/*sign up button design*/
+.btn-primary {
+    margin-top: 20px !important;
+    width: -webkit-fill-available !important;
+    --bs-btn-color: # !important;
+    --bs-btn-bg: #63FD88 !important;
+    --bs-btn-border-color: #63FD88 !important;
+    --bs-btn-hover-color: #276174 !important;
+    --bs-btn-hover-bg: #33C58E !important;
+    --bs-btn-hover-border-color: #33C58E !important;
+    --bs-btn-focus-shadow: #276174 !important;
+    --bs-btn-active-color: #276174 !important;
+    --bs-btn-active-bg: #63FD88 !important;
+    --bs-btn-active-border-color: #33C58E !important;
+    --bs-btn-disabled-color: #63FD88 !important;
+    --bs-btn-disabled-border-color: #276174 !important;
+}
+
+/*input box style*/
+.signup {
+    border-radius: 0px;
+    border: none;
+    background-color: whitesmoke;
+    border-bottom: 2px solid #276174;
+}
+
+/*style when user clicks into input box*/
+.signup:focus {
+    background-color: whitesmoke;
+    box-shadow: none;
+    border-bottom: 2px solid #63FD88;
+}
