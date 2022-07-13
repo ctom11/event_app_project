@@ -5,7 +5,7 @@ import { Signup } from "./Signup";
 import LoginArt from './assets/loginart.png';
 
 export const Login = () => (
-        <div className="card mb-3">
+        <div className="card mb-3" style={{ maxWidth: 1000 }}>
       <div className="row g-0">
         {/*image beside login form*/}
         <div className="col-md-7">
@@ -17,14 +17,14 @@ export const Login = () => (
           <div className="card-body">
             <form>
               <div className="mb-3">
-                <h1>Sign In</h1>
+                <h1 className="SignIn-header">Sign In</h1>
                 <label htmlFor="inputemail" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="inputemail" aria-describedby="emailHelp"></input>
+                <input type="email" className="form-control login" id="inputemail" aria-describedby="emailHelp"></input>
                 <div id="emailHelp" className="form-text"></div>
               </div>
               <div className="mb-3">
                 <label htmlFor="inputpassword" className="form-label">Password</label>
-                <input type="password" className="form-control" id="inputpassword"></input>
+                <input type="password" className="form-control login" id="inputpassword"></input>
               </div>
               <div className="mb-3 form-check">
                 <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>

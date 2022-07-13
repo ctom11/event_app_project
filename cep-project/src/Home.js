@@ -1,7 +1,11 @@
 import React from "react";
+import './Home.css';
 
 export const Home = () => (
+    <div className="row">
     <div>
-        <h1>This will be the home page.</h1>
+      <h1> Find everything you want to do, all in one place. </h1>
+      <p> Testing out the webapp homepage </p>
     </div>
+  </div>
 )

@@ -1,43 +1,47 @@
+.container {
+    max-width: 800px;
+}
+
 .mb-3 {
     margin: auto;
     margin-top: 20px;
     background-color: initial;
-    border-radius: 20px !important;
+    border-radius: 10px !important;
 }
 
 /*image side of login*/
 .col-md-7 {
     background-color: #ff5147;
-    border-radius: 20px 0px 0px 20px;
-}
-
-.card-body {
-    border-radius: 20px;
+    border-radius: 10px 0px 0px 10px;
 }
 
 .img-fluid {
-    padding-top: 20px;
+    padding-top: 60px;
+}
+
+a {
+    color: #276174;
 }
 
 .card {
     border: none !important;
     margin-top: 75px;
     color: #276174;
-}
-
-a {
-    color: #276174 !important;
+    background-color: whitesmoke;
 }
 
 /*column containing login*/
 .col-md-5 {
     color: #276174;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /*login header*/
-h1 {
+.SignIn-header {
     padding-bottom: 30px;
     padding-top: 30px;
+    font-size: xx-large;
 }
 
 /*register account link*/
@@ -51,6 +55,19 @@ h2 {
 /*keep me signed in checkbox*/
 .form-check {
     padding-top: 20px;
+}
+
+.login {
+    border-radius: 0px;
+    border: none;
+    background-color: whitesmoke;
+    border-bottom: 2px solid #276174;
+}
+
+.login:focus {
+    background-color: whitesmoke;
+    box-shadow: none;
+    border-bottom: 2px solid #63FD88;
 }
 
 /*login button design*/
@@ -68,4 +85,5 @@ h2 {
     --bs-btn-active-border-color: #33C58E !important;
     --bs-btn-disabled-color: #63FD88 !important;
     --bs-btn-disabled-border-color: #276174 !important;
+    margin-bottom: 50px;
 }

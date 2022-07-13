@@ -1,0 +1,51 @@
+nav {
+    display: flex;
+}
+
+.navbar-nav me-auto mb-2 mb-lg-0 {
+    margin-left: auto;
+    padding-top: 20px;
+}
+
+/* spaces the logo slightly to the right */
+.navbar-brand {
+    padding-left: 10px;
+    padding-right: 350px;
+}
+
+.nav-item {
+    padding-left: 100px;
+}
+
+/* spaces the search bar slightly to the left */
+.d-flex {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+body {
+    /* https://www.w3schools.com/css/css3_gradients.asp */
+    background-image: linear-gradient(to bottom right, #276174, #33C58E, #63FD88);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color:white;
+  }
+
+.nav-link {
+    color: white !important;
+}
+
+.btn-outline-success {
+    --bs-btn-color: white;
+    --bs-btn-bg: darkcyan;
+    --bs-btn-border-color: #276174;
+    --bs-btn-hover-bg: #276174;
+    --bs-btn-hover-border-color: #276174;
+    --bs-btn-active-bg: #276174;
+    --bs-btn-active-border-color: #276174;
+    --bs-btn-disabled-color: #276174;
+    --bs-btn-hover-color: white;
+    --bs-btn-focus-shadow: #276174;
+    --bs-btn-active-color: #276174;
+    --bs-btn-disabled-border-color: #276174;
+}
