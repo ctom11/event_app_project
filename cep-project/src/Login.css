@@ -1,0 +1,71 @@
+.mb-3 {
+    margin: auto;
+    margin-top: 20px;
+    background-color: initial;
+    border-radius: 20px !important;
+}
+
+/*image side of login*/
+.col-md-7 {
+    background-color: #ff5147;
+    border-radius: 20px 0px 0px 20px;
+}
+
+.card-body {
+    border-radius: 20px;
+}
+
+.img-fluid {
+    padding-top: 20px;
+}
+
+.card {
+    border: none !important;
+    margin-top: 75px;
+    color: #276174;
+}
+
+a {
+    color: #276174 !important;
+}
+
+/*column containing login*/
+.col-md-5 {
+    color: #276174;
+}
+
+/*login header*/
+h1 {
+    padding-bottom: 30px;
+    padding-top: 30px;
+}
+
+/*register account link*/
+h2 {
+    color: #276174;
+    text-align: center;
+    padding-bottom: 40px;
+    font-size: 1.2rem !important;
+}
+
+/*keep me signed in checkbox*/
+.form-check {
+    padding-top: 20px;
+}
+
+/*login button design*/
+.btn-primary {
+    width: -webkit-fill-available !important;
+    --bs-btn-color: #276174 !important;
+    --bs-btn-bg: #63FD88 !important;
+    --bs-btn-border-color: #63FD88 !important;
+    --bs-btn-hover-color: #276174 !important;
+    --bs-btn-hover-bg: #33C58E !important;
+    --bs-btn-hover-border-color: #33C58E !important;
+    --bs-btn-focus-shadow: #276174 !important;
+    --bs-btn-active-color: #276174 !important;
+    --bs-btn-active-bg: #63FD88 !important;
+    --bs-btn-active-border-color: #33C58E !important;
+    --bs-btn-disabled-color: #63FD88 !important;
+    --bs-btn-disabled-border-color: #276174 !important;
+}
