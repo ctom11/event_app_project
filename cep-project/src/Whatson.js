@@ -1,5 +1,6 @@
 import React from "react";
 import './Whatson.css';
+import { Event } from "./Event";
 import { Col, Row, Card, Button, Container } from "react-bootstrap";
 import TestImage from './assets/test.jpg';
 
@@ -7,33 +8,34 @@ export const Whatson = () => (
 
 <Row>
     {/*This first column contains the side menu*/}
-    <Col className="col-md-2">
+    {/*d-md-block d-sm-none prevents the side menu from being shown when screen is smaller than medium - mobile friendly*/}
+    <Col className="col-md-2 d-md-block d-sm-none">
         <div id="wrapper" className="toggled">
             <div id="sidebar-wrapper">
                 <ul className="sidebar-nav">
                     <li>
-                        <a href="#">Music</a>
+                        <a href="#" className='sidemenu-items'>Music</a>
                     </li>
                     <li>
-                        <a href="#">Sight-Seeing</a>
+                        <a href="#" className='sidemenu-items'>Sight-Seeing</a>
                     </li>
                     <li>
-                        <a href="#">Nightlife</a>
+                        <a href="#" className='sidemenu-items'>Nightlife</a>
                     </li>
                     <li>
-                        <a href="#">Comedy</a>
+                        <a href="#" className='sidemenu-items'>Comedy</a>
                     </li>
                     <li>
-                        <a href="#">Family Events</a>
+                        <a href="#" className='sidemenu-items'>Family Events</a>
                     </li>
                     <li>
-                        <a href="#">Sport</a>
+                        <a href="#" className='sidemenu-items'>Sport</a>
                     </li>
                     <li>
-                        <a href="#">Art</a>
+                        <a href="#" className='sidemenu-items'>Art</a>
                     </li>
                     <li>
-                        <a href="#">Film</a>
+                        <a href="#" className='sidemenu-items'>Film</a>
                     </li>
                 </ul>
             </div>
@@ -51,12 +53,12 @@ export const Whatson = () => (
                         <Card className="whatson-card">
                             <Card.Img variant="top" src={TestImage} />
                             <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
+                                <Card.Title>Event Name</Card.Title>
                                 <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
+                                <p>14th July 2022</p>
+                                <p>Custom House Square, Belfast</p>
                                 </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
+                                <Button variant="primary" href={Event}>More info</Button>
                             </Card.Body>
                         </Card>
                     </Col>

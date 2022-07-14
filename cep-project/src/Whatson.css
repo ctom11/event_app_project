@@ -6,6 +6,7 @@
 .col-md-2 {
     margin-top: 140px;
     text-align: justify;
+    font-size: xx-large;
 }
 
 /*event filter at top of page*/
@@ -17,6 +18,11 @@
 /*individual event cards*/
 .whatson-card {
     min-width: fit-content;
+    color: #276174;
+}
+
+.card-title {
+    color: #ff5147;
 }
 
 /*entire column of event cards*/
@@ -24,15 +30,19 @@
     margin-top: auto;
 }
 
+.card-text {
+    margin-bottom: 0;
+}
+
 /*side menu text*/
-a {
+.sidemenu-items {
     text-decoration-line: none;
     color: whitesmoke !important;
     font-size: x-large;
 }
 
 /*side menu text hover*/
-a:hover {
+.sidemenu-items:hover {
     color: #63FD88 !important;
     text-decoration-line: none;
 }

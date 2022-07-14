@@ -18,7 +18,8 @@
 
 /*link to register page - keeps all font in this line the same*/
 a {
-    color: #276174;
+    color: #276174 !important;
+    font-size: large !important;
 }
 
 /*login card as a whole*/
@@ -32,16 +33,17 @@ a {
 /*column containing login*/
 .col-md-5 {
     color: #276174;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     background-color: white;
+    border-radius: 10px;
 }
 
 /*login header*/
 .SignIn-header {
     padding-bottom: 30px;
     padding-top: 30px;
-    font-size: xx-large;
+    font-size: x-large;
 }
 
 /*register account link*/
@@ -54,7 +56,7 @@ h2 {
 
 /*keep me signed in checkbox*/
 .form-check {
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 /*input box style*/
@@ -87,5 +89,4 @@ h2 {
     --bs-btn-active-border-color: #33C58E !important;
     --bs-btn-disabled-color: #63FD88 !important;
     --bs-btn-disabled-border-color: #276174 !important;
-    margin-bottom: 50px;
 }

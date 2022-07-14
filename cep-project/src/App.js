@@ -8,6 +8,7 @@ import { Login } from './Login';
 import { NoMatch } from './NoMatch';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
+import { Event } from './Event';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
               <Route path ='/whatson' element = {<Whatson/>}/>
               <Route path ='/signup' element = {<Signup/>}/>
               <Route path ='/login' element = {<Login/>}/>
+              <Route path ='/event' element = {<Event/>}/>
               <Route element = {<NoMatch/>} />
             </Routes>
           </Router>

@@ -4,7 +4,7 @@ import './Signup.css';
 export const Signup = () => (
 <div className="card signup-card">
     <div className="card-body">
-        <h5 className="card-title">Sign Up</h5>
+        <h5 className="card-title signup-title">Sign Up</h5>
         <form>
         <div className="row">
             <div className="form-group col-md-6">
@@ -35,7 +35,7 @@ export const Signup = () => (
                     </label>
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary">Sign in</button>
+            <button type="submit" className="btn btn-primary signup-button">Sign in</button>
         </div>
         </form>
     </div>
