@@ -5,7 +5,7 @@ import { Signup } from "./Signup";
 import LoginArt from './assets/loginart.png';
 
 export const Login = () => (
-        <div className="card mb-3" style={{ maxWidth: 1000 }}>
+        <div className="card mb-3 login-card" style={{ maxWidth: 1000 }}>
       <div className="row g-0">
         {/*image beside login form*/}
         <div className="col-md-7">

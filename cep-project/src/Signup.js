@@ -2,7 +2,7 @@ import React from "react";
 import './Signup.css';
 
 export const Signup = () => (
-<div className="card">
+<div className="card signup-card">
     <div className="card-body">
         <h5 className="card-title">Sign Up</h5>
         <form>

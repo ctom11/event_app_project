@@ -1,3 +1,43 @@
-.col-md-1 {
-margin-top: 60px;
+.container {
+    margin: inherit;
+    max-width: 1500px;
+}
+
+.col-md-2 {
+    margin-top: 140px;
+    text-align: justify;
+}
+
+/*event filter at top of page*/
+.whatson-filter {
+    padding-left: 80px;
+    margin-top: 60px;
+}
+
+/*individual event cards*/
+.whatson-card {
+    min-width: fit-content;
+}
+
+/*entire column of event cards*/
+.g-4 {
+    margin-top: auto;
+}
+
+/*side menu text*/
+a {
+    text-decoration-line: none;
+    color: whitesmoke !important;
+    font-size: x-large;
+}
+
+/*side menu text hover*/
+a:hover {
+    color: #63FD88 !important;
+    text-decoration-line: none;
+}
+
+/*side menu*/
+.sidebar-nav {
+    list-style: none;
 }
