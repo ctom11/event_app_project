@@ -14,7 +14,7 @@ nav {
 }
 
 .nav-item {
-    padding-left: 100px;
+    padding-left: 120px;
 }
 
 /* spaces the search bar slightly to the left */
@@ -31,7 +31,7 @@ body {
     color:white;
   }
 
-.nav-link {
+.nav-nav {
     color: white !important;
 }
 
@@ -48,4 +48,8 @@ body {
     --bs-btn-focus-shadow: #276174;
     --bs-btn-active-color: #276174;
     --bs-btn-disabled-border-color: #276174;
+}
+
+.search-btn {
+    --bs-btn-padding-x: 1rem;
 }

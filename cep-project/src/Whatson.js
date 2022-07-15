@@ -1,7 +1,7 @@
 import React from "react";
 import './Whatson.css';
 import { Event } from "./Event";
-import { Col, Row, Card, Button, Container } from "react-bootstrap";
+import { Col, Row, Card, Button } from "react-bootstrap";
 import TestImage from './assets/test.jpg';
 
 export const Whatson = () => (
@@ -10,7 +10,7 @@ export const Whatson = () => (
     {/*This first column contains the side menu*/}
     {/*d-md-block d-sm-none prevents the side menu from being shown when screen is smaller than medium - mobile friendly*/}
     <Col className="col-md-2 d-md-block d-sm-none">
-        <div id="wrapper" className="toggled">
+        <div id="wrapper" className="toggled whatson-div">
             <div id="sidebar-wrapper">
                 <ul className="sidebar-nav">
                     <li>

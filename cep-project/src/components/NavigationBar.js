@@ -18,16 +18,16 @@ export const NavigationBar = () => (
         <Navbar.Collapse id="basic-navbar-nav">
 
             <Nav className="ml-auto">
-                <Nav.Item><Nav.Link href="/whatson">What's On</Nav.Link></Nav.Item>
-                <Nav.Item><Nav.Link href="/signup">Sign Up</Nav.Link></Nav.Item>
-                <Nav.Item><Nav.Link href="/login">Login</Nav.Link></Nav.Item>
+                <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
+                <Nav.Item><Nav.Link href="/signup" className="nav-nav">Sign Up</Nav.Link></Nav.Item>
+                <Nav.Item><Nav.Link href="/login" className="nav-nav">Login</Nav.Link></Nav.Item>
             </Nav>
 
         </Navbar.Collapse>
 
         <form class="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
-            <button className="btn btn-outline-success" type="submit">Search</button>
+            <button className="btn btn-outline-success search-btn" type="submit">Search</button>
           </form>
 
     </Navbar>

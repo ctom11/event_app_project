@@ -16,7 +16,8 @@ h5 {
     padding-left: 50px;
 }
 
-form {
+/*entire form*/
+.signup-form {
     margin-top: 10px;
     padding: 0px 50px 0px 50px;
 }
@@ -29,14 +30,10 @@ label {
     font-size: larger;
 }
 
-/*input boxes*/
-.form-control {
-    margin-top: 10px !important;
-}
-
 /*sign up button design*/
 .signup-button {
     margin-top: 20px !important;
+    margin-bottom: 50px;
     width: -webkit-fill-available !important;
     --bs-btn-color: # !important;
     --bs-btn-bg: #63FD88 !important;
@@ -53,11 +50,12 @@ label {
 }
 
 /*input box style*/
-.signup {
+.form-input-signup {
     border-radius: 0px;
     border: none;
     background-color: white;
     border-bottom: 2px solid #276174;
+    margin-top: 10px !important;
 }
 
 /*style when user clicks into input box*/

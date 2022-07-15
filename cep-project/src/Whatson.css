@@ -1,6 +1,5 @@
 .container {
-    margin: inherit;
-    max-width: 1500px;
+    max-width: fit-content;
 }
 
 .col-md-2 {

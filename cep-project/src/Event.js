@@ -21,8 +21,18 @@ export const Event = () => (
       </Card.Header>
       <Card.Body>
         <Card.Title>Event Name</Card.Title>
-        <Card.Text>
-          With supporting text below as a natural lead-in to additional content.
+        <Card.Text className="event-text">
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
         </Card.Text>
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>
