@@ -1,11 +1,3 @@
-
-.mb-3 {
-    margin: auto;
-    margin-top: 20px;
-    background-color: initial;
-    border-radius: 10px !important;
-}
-
 /*image side of login*/
 .col-md-7 {
     background-color: #ff5147;
@@ -25,9 +17,11 @@ a {
 /*login card as a whole*/
 .login-card {
     border: none !important;
-    margin-top: 75px;
+    border-radius: 10px !important;
     color: #276174;
     background-color: whitesmoke;
+    margin: auto;
+    margin-top: 75px;
 }
 
 /*column containing login*/
