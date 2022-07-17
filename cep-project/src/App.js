@@ -9,6 +9,7 @@ import { NoMatch } from './NoMatch';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Event } from './Event';
+import { Userprofile } from './Userprofile';
 
 class App extends Component {
   render() {
@@ -24,6 +25,7 @@ class App extends Component {
               <Route path ='/signup' element = {<Signup/>}/>
               <Route path ='/login' element = {<Login/>}/>
               <Route path ='/event' element = {<Event/>}/>
+              <Route path ='/Userprofile' element = {<Userprofile/>}/>
               <Route element = {<NoMatch/>} />
             </Routes>
           </Router>

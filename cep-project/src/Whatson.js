@@ -1,6 +1,6 @@
 import React from "react";
 import './Whatson.css';
-import { Event } from "./Event";
+import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import TestImage from './assets/test.jpg';
 
@@ -58,7 +58,9 @@ export const Whatson = () => (
                                 <p>14th July 2022</p>
                                 <p>Custom House Square, Belfast</p>
                                 </Card.Text>
-                                <Button variant="primary" href={Event}>More info</Button>
+                                <Link to="/Event">
+                                    <Button variant="primary">More info</Button>
+                                </Link>
                             </Card.Body>
                         </Card>
                     </Col>

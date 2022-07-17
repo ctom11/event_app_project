@@ -1,0 +1,15 @@
+.profile-picture {
+    border: 2px solid #33C58E;
+    border-radius: 50%;
+    max-width: 90%;
+    margin-top: 20px;
+    align-self: center;
+}
+
+.profile-title {
+    color: #276174;
+}
+
+.profile-text {
+    color: #276174;
+}
