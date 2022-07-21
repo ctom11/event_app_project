@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Home } from './Home.js';
-import { Whatson } from './Whatson';
-import { Signup } from './Signup';
-import { Login } from './Login';
+import { Home } from './pages/home/Home.js';
+import { Whatson } from './pages/whatson/Whatson';
+import { Signup } from './pages/signup/Signup';
+import { Login } from './pages/login/Login';
 import { NoMatch } from './NoMatch';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
-import { Event } from './Event';
-import { Userprofile } from './Userprofile';
+import { Event } from './pages/event/Event';
+import { Userprofile } from './pages/userprofile/Userprofile';
 
 class App extends Component {
   render() {

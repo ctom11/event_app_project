@@ -3,7 +3,7 @@ import './NavigationBar.css';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import { NavLink } from "react-router-dom";
-import Logo from '../assets/logo.png';
+import Logo from '../assets/images/logo.png';
 
 export const NavigationBar = () => (
 
@@ -25,7 +25,7 @@ export const NavigationBar = () => (
 
         </Navbar.Collapse>
 
-        <form class="d-flex" role="search">
+        <form className="d-flex" role="search">
             <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
             <button className="btn btn-outline-success search-btn" type="submit">Search</button>
           </form>

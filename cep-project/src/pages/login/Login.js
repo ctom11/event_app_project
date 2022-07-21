@@ -1,16 +1,16 @@
 import React from "react";
 import './Login.css';
 import { Link } from 'react-router-dom';
-import { Signup } from "./Signup";
-import LoginArt from './assets/loginart.png';
+import LoginArt from '../../assets/images/loginart.png';
 
 export const Login = () => (
-        <div className="card mb-3 login-card" style={{ maxWidth: 1000 }}>
+
+    <div className="card mb-3 login-card" style={{ maxWidth: 1000 }}>
       <div className="row g-0">
         {/*image beside login form*/}
         <div className="col-md-7">
           <img src={LoginArt} className="img-fluid rounded-start"></img>
-          <h2>Don't have an account yet? <Link to={Signup}><i>Sign up here.</i></Link></h2>
+          <h2>Don't have an account yet? <Link to="/Signup"><i>Sign up here.</i></Link></h2>
         </div>
         {/*login form*/}
         <div className="col-md-5">          

@@ -1,7 +1,7 @@
 import React from "react";
 import './Userprofile.css';
 import { Card, Row, Col } from "react-bootstrap";
-import TestImage from './assets/profile-pic-logo.png';
+import TestImage from '../../assets/images/profile-pic-logo.png';
 
 export const Userprofile = () => (
     <Row xs={1} md={1} className="g-4">

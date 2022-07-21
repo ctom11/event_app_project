@@ -2,7 +2,7 @@ import React from "react";
 import './Whatson.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from "react-bootstrap";
-import TestImage from './assets/test.jpg';
+import TestImage from '../../assets/images/test.jpg';
 
 export const Whatson = () => (
 
