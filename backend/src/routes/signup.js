@@ -1,17 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const app = express();
-const mysql = require('mysql');
+const db = require("../config/db");
+const router = express.Router();
 
-const db = mysql.createPool({
-   host: 'localhost',
-   user: 'clare',
-   password: 'password',
-   database: 'eventure'
-});
+/* practice api call
 
-/*app.get('/', (req, res) => {
+app.get('/', (req, res) => {
 
     const sqlInsert = "INSERT INTO genre (genre_name, genre_description) VALUES ('test genre name', 'test genre description');"
     db.query(sqlInsert, (err, result) => {
@@ -20,11 +13,7 @@ const db = mysql.createPool({
     
 });*/
 
-app.use(cors());
-app.use(express.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.post("/api/register", (req, res)=> {
+router.post("/", (req, res)=> {
 
     const firstName = req.body.firstName
     const lastName = req.body.lastName
@@ -43,7 +32,4 @@ app.post("/api/register", (req, res)=> {
     })
 });
 
-
-app.listen(3001, () => {
-    console.log("Running on port 3001")
-});
+module.exports = router;

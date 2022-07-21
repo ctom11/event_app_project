@@ -11,7 +11,7 @@ const [password, setPassword] = useState('')
 const [confirm_password, setConfirmPassword] = useState('')
 
 const SubmitRegister = () => {
-    Axios.post('http://localhost:3001/api/register', {
+    Axios.post('http://localhost:3001/signup', {
         firstName: first_name, lastName: last_name, emailAddress: email_address, password: password, confirmPassword: confirm_password
     }).then(() => {
         alert("successful register");
