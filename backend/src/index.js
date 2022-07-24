@@ -10,6 +10,8 @@ app.use(express.json());
 
 var signupRoute = require("./routes/signup");
 app.use("/signup", signupRoute);
+var loginRoute = require("./routes/login");
+app.use("/login", loginRoute);
 
 server.listen(3001, () => console.log("Server started!"));
 
