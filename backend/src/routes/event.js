@@ -8,8 +8,14 @@ router.get("/", (req, res)=> {
 
     console.log(req);
 
+    /*const eventId = req.body.eventId
+    const eventName = req.body.eventName
+    const eventDate = req.body.eventDate
+    const eventTime = req.body.eventTime
+    const eventLocation = req.body.eventLocation*/
+
     db.query(
-        "SELECT event_name, event_date, event_time, event_location FROM event",
+        "SELECT * FROM event",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
