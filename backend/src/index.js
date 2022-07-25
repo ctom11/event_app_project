@@ -12,6 +12,8 @@ var signupRoute = require("./routes/signup");
 app.use("/signup", signupRoute);
 var loginRoute = require("./routes/login");
 app.use("/login", loginRoute);
+var whatsonRoute = require("./routes/whatson");
+app.use("/whatson", whatsonRoute);
 
 server.listen(3001, () => console.log("Server started!"));
 
