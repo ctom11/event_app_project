@@ -9,7 +9,7 @@ router.get("/", (req, res)=> {
     console.log(req);
 
     db.query(
-        "SELECT first_name, last_name, email_address, password, admin_status FROM user_account",
+        "SELECT first_name, last_name, email_address, password, user_profile_picture, admin_status FROM user_account",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
