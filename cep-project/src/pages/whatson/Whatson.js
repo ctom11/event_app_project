@@ -1,16 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './Whatson.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import TestImage from '../../assets/images/test.jpg';
-import axios from "axios";
+import Axios from "axios";
 
 
 export const Whatson = () => {
 
-    /*get the data from API to fill the event cards
-    axios.get('http://localhost:3001/login')*/
-    
+    /*get the data from API to fill the event cards*/
+    const [listOfEvents, setListOfEvents] = useState([]);
+
+    useEffect(() => {
+    Axios.get('http://localhost:3001/whatson').then((Response) => {
+        console.log(Response)
+        setListOfEvents(Response.data)
+    });
+    }, []);
 
 return (
   
@@ -56,15 +62,16 @@ return (
                 <h1>This is where the filter will go.</h1>
             </Row>
             <Row xs={1} md={3} className="g-4">
-                {Array.from({ length: 6 }).map((_, idx) => (
+                {listOfEvents.map((value, key) => {
+                    return(
                     <Col>
                         <Card className="whatson-card">
-                            <Card.Img variant="top" src={TestImage} />
+                            <Card.Img variant="top" src={value.event_img} />
                             <Card.Body>
-                                <Card.Title>Event Name</Card.Title>
+                                <Card.Title>{value.event_name}</Card.Title>
                                 <Card.Text>
-                                <p>14th July 2022</p>
-                                <p>Custom House Square, Belfast</p>
+                                <p>{value.event_date} {value.event_time}</p>
+                                <p>{value.event_location}</p>
                                 </Card.Text>
                                 <Link to="/Event">
                                     <Button variant="primary">More info</Button>
@@ -72,7 +79,8 @@ return (
                             </Card.Body>
                         </Card>
                     </Col>
-                ))}
+                )}
+                )}
             </Row>
         </div>
     </Col>

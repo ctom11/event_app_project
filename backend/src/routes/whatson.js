@@ -4,7 +4,7 @@ const db = require("../config/db");
 const router = express.Router();
 
 router.get("/", (req, res)=> {
-
+    console.log("in whatson")
     console.log(req);
 
     db.query(
