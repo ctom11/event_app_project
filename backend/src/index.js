@@ -16,6 +16,8 @@ var whatsonRoute = require("./routes/whatson");
 app.use("/whatson", whatsonRoute);
 var eventRoute = require("./routes/event");
 app.use("/event", eventRoute);
+var useraccountRoute = require("./routes/useraccount");
+app.use("/useraccount", useraccountRoute);
 
 server.listen(3001, () => console.log("Server started!"));
 
