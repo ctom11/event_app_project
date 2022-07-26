@@ -18,6 +18,8 @@ var eventRoute = require("./routes/event");
 app.use("/event", eventRoute);
 var useraccountRoute = require("./routes/useraccount");
 app.use("/useraccount", useraccountRoute);
+var updateprofilepicRoute = require("./routes/useraccount");
+app.use("/useraccount/updateprofilepic", updateprofilepicRoute);
 
 server.listen(3001, () => console.log("Server started!"));
 

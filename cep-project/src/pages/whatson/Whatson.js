@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Whatson.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import TestImage from '../../assets/images/test.jpg';
+import axios from "axios";
 
-export const Whatson = () => (
 
+export const Whatson = () => {
+
+    /*get the data from API to fill the event cards
+    axios.get('http://localhost:3001/login')*/
+    
+
+return (
+  
 <Row>
     {/*This first column contains the side menu*/}
     {/*d-md-block d-sm-none prevents the side menu from being shown when screen is smaller than medium - mobile friendly*/}
@@ -69,5 +77,7 @@ export const Whatson = () => (
         </div>
     </Col>
 </Row>
+  
+) 
 
-)
+};

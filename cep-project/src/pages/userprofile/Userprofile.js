@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import './Userprofile.css';
 import { Card, Row, Col } from "react-bootstrap";
 import TestImage from '../../assets/images/profile-pic-logo.png';
+import Axios from 'axios';
 
-export const Userprofile = () => (
+export const Userprofile = () => {
+
+  const [user_profile_picture, setUserProfilePicture] = useState('')
+  const [user_account_id, setUserAccountId] = useState('')
+  
+  const UpdateProfilePicture = () => {
+      Axios.post('http://localhost:3001/updateprofilepic', {
+          userProfilePicture: user_profile_picture, userAccountId: user_account_id
+      }).then(() => {
+          alert("profile picture successfully updated");
+      });
+  };
+
+  return (
+
     <Row xs={1} md={1} className="g-4">
         <Col className="col-md-3">
             <Card>
                 <Card.Img className="profile-picture" variant="top" src={TestImage} />
                 <Card.Body>
                     <Card.Title className="profile-title">Card title</Card.Title>
+                    <button type="submit" className="btn btn-primary signup-button" onClick={UpdateProfilePicture}>Update Profile Picture</button>
                     <Card.Text className="profile-text">
                         This is a longer card with supporting text below as a natural
                         lead-in to additional content. This content is a little bit
@@ -43,4 +59,6 @@ export const Userprofile = () => (
           </Card>
         </Col>
     </Row>
-)
+
+  )
+}
