@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'
 import './Event.css';
 import Axios from "axios";
+import CreateEventArt from '../../assets/images/crowd-background.jpg';
 
 export const CreateEvent = () => {
 
@@ -48,55 +49,55 @@ export const CreateEvent = () => {
 
         <Card className="create-event">
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <form className="form-container">
-                    <h1>Create Event</h1>
-                    <h2>We'll have to approve of the event before it goes public, but all you have to do is fill out the form below.</h2>
+                <form className="form-container form-group">
+                    <h1>Create Your Own Event</h1>
+                    <h2>Have an event coming up that you'd like to promote? We can help you with that, free of charge.</h2>
                     <div>
-                    <label>Event Name</label><br/>
-                    <ErrorMessage name="name" component="span"/>
-                    <Field id="input-event-name" name="Event Name"
-                    onChange={(e) => {
-                        setEventName(e.target.value);
-                    }}
-                    />
+                        <label>Event Name</label><br/>
+                        <ErrorMessage name="name" component="span"/>
+                        <Field id="input-event-name" className="form-input-signup signup" name="Event Name"
+                        onChange={(e) => {
+                            setEventName(e.target.value);
+                        }}
+                        />
                     </div>
                     <div>
-                    <label>Description</label><br/>
-                    <ErrorMessage name="description" component="span"/>
-                    <Field id="input-event-description" name="Description"
-                    onChange={(e) => {
-                        setEventDescription(e.target.value);
-                    }}/>
+                        <label>Description</label><br/>
+                        <ErrorMessage name="description" component="span"/>
+                        <Field id="input-event-description" className="form-input-signup signup" name="Description"
+                        onChange={(e) => {
+                            setEventDescription(e.target.value);
+                        }}/>
                     </div>
                     <div>
-                    <label>Date</label><br/>
-                    <ErrorMessage name="date" component="span"/>
-                    <DatePicker selected={selectedDate} onChange={date => setSelectedDate(date)} />
+                        <label>Date</label><br/>
+                        <ErrorMessage name="date" component="span"/>
+                        <DatePicker className="form-input-signup signup" selected={selectedDate} onChange={date => setSelectedDate(date)} />
                     </div>
                     <div>
-                    <label>Time</label><br/>
-                    <ErrorMessage name="time" component="span"/>
-                    <Field id="input-event-time" name="Time" 
-                    onChange={(e) => {
-                        setEventTime(e.target.value);
-                    }}/>
+                        <label>Time</label><br/>
+                        <ErrorMessage name="time" component="span"/>
+                        <Field id="input-event-time" className="form-input-signup signup" name="Time" 
+                        onChange={(e) => {
+                            setEventTime(e.target.value);
+                        }}/>
                     </div>
                     <div>
-                    <label>Location</label><br/>
-                    <ErrorMessage name="location" component="span"/>
-                    <Field id="input-event-location" name="Location"
-                    onChange={(e) => {
-                        setEventLocation(e.target.value);
-                    }}/>
+                        <label>Location</label><br/>
+                        <ErrorMessage name="location" component="span"/>
+                        <Field id="input-event-location" className="form-input-signup signup" name="Location"
+                        onChange={(e) => {
+                            setEventLocation(e.target.value);
+                        }}/>
                     </div>
                     <div>
-                    <label>Image</label><br/>
-                    <Field type="text" id="input-event-image" name="Image"
-                    onChange={(e) => {
-                        setEventImage(e.target.value);
-                    }}/>
+                        <label>Image</label><br/>
+                        <Field type="text" id="input-event-image" className="form-input-signup signup" name="Image"
+                        onChange={(e) => {
+                            setEventImage(e.target.value);
+                        }}/>
                     </div>
-                    <button type="submit" className="btn btn-primary signup-button" onClick={onSubmit}>Create Event</button>
+                    <button type="submit" className="btn btn-primary form-button" onClick={onSubmit}>Create Event</button>
                 </form>
             </Formik>
         </Card>

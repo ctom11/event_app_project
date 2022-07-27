@@ -56,7 +56,7 @@ return (
             <div className="form-group col-md-6">
                 <label htmlFor="inputFirstName">First Name</label>
                 <ErrorMessage name="firstName" component="span"/>
-                <input type="text" className="form-control form-input-signup" id="inputFirstName" placeholder="First Name"
+                <input type="text" className="form-control form-input-signup signup" id="inputFirstName" placeholder="First Name"
                 onChange={(e) => {
                     setFirstName(e.target.value);
                 }}></input>
@@ -64,7 +64,7 @@ return (
             <div className="form-group col-md-6">
                 <label htmlFor="inputLastName">Last Name</label>
                 <ErrorMessage name="lastName" component="span"/>
-                <input type="text" className="form-control form-input-signup" id="inputLastName" placeholder="Last Name"
+                <input type="text" className="form-control form-input-signup signup" id="inputLastName" placeholder="Last Name"
                 onChange={(e) => {
                     setLastName(e.target.value);
                 }}></input>
@@ -72,7 +72,7 @@ return (
             <div className="form-group">
                 <label htmlFor="inputEmail4">Email</label>
                 <ErrorMessage name="emailAddress" component="span"/>
-                <input type="email" className="form-control form-input-signup" id="inputEmail4" placeholder="Email"
+                <input type="email" className="form-control form-input-signup signup" id="inputEmail4" placeholder="Email"
                 onChange={(e) => {
                     setEmailAddress(e.target.value);
                 }}></input>
@@ -80,7 +80,7 @@ return (
             <div className="form-group">
                 <label htmlFor="inputPassword4">Password</label>
                 <ErrorMessage name="password" component="span"/>
-                <input type="password" className="form-control form-input-signup" id="inputPassword4" placeholder="Password"
+                <input type="password" className="form-control form-input-signup signup" id="inputPassword4" placeholder="Password"
                 onChange={(e) => {
                     setPassword(e.target.value);
                 }}></input>
@@ -88,7 +88,7 @@ return (
             <div className="form-group">
                 <label htmlFor="inputConfirmPassword4">Confirm Password</label>
                 <ErrorMessage name="confirmPassword" component="span"/>
-                <input type="password" className="form-control form-input-signup" id="inputConfirmPassword4" placeholder="Confirm Password"
+                <input type="password" className="form-control form-input-signup signup" id="inputConfirmPassword4" placeholder="Confirm Password"
                 onChange={(e) => {
                     setConfirmPassword(e.target.value);
                 }}></input>
@@ -101,7 +101,7 @@ return (
                     </label>
                 </div>
             </div>
-            <button type="submit" className="btn btn-primary signup-button" onClick={SubmitRegister}>Register</button>
+            <button type="submit" className="btn btn-primary form-button" onClick={SubmitRegister}>Register</button>
         </div>
         </form>
         </Formik>
