@@ -1,6 +1,6 @@
 import React from "react";
 import './Event.css';
-import { Card, Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs } from "react-bootstrap";
 
 export const Event = () => (
 
