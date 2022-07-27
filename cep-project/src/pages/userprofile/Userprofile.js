@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import './Userprofile.css';
-import { Card, Row, Col } from "react-bootstrap";
+import { Link } from 'react-router-dom';
+import { Card, Row, Col, Button } from "react-bootstrap";
 import TestImage from '../../assets/images/profile-pic-logo.png';
 import Axios from 'axios';
 
@@ -55,6 +56,9 @@ export const Userprofile = () => {
               <Card.Text className="profile-text">
                 Here will be information on user's own events.
               </Card.Text>
+              <Link to="/CreateEvent">
+                <Button variant="primary">Create Event</Button>
+              </Link>
             </Card.Body>
           </Card>
         </Col>

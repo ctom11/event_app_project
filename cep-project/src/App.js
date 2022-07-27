@@ -9,6 +9,7 @@ import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Event } from './pages/event/Event';
 import { Userprofile } from './pages/userprofile/Userprofile';
+import { CreateEvent } from './pages/event/CreateEvent';
 
 class App extends Component {
   render() {
@@ -25,6 +26,7 @@ class App extends Component {
               <Route path ='/login' element = {<Login/>}/>
               <Route path ='/event' element = {<Event/>}/>
               <Route path ='/Userprofile' element = {<Userprofile/>}/>
+              <Route path ='/CreateEvent' element = {<CreateEvent/>}/>
             </Routes>
           </Router>
         </Layout>

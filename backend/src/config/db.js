@@ -5,6 +5,7 @@ const db = mysql.createPool({
    user: 'clare',
    password: 'password',
    database: 'eventure',
+   /*Allows dates to be shown in YYYY/MM/DD format*/
    dateStrings: 'true'
 });
 
