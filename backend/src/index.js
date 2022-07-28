@@ -20,8 +20,8 @@ var useraccountRoute = require("./routes/useraccount");
 app.use("/useraccount", useraccountRoute);
 var updateprofilepicRoute = require("./routes/useraccount");
 app.use("/useraccount/updateprofilepic", updateprofilepicRoute);
-var createeventRoute = require("./routes/event");
-app.use("/event/createevent", createeventRoute);
+//var createeventRoute = require("./routes/event");
+//app.use("/event/createevent", createeventRoute);
 
 server.listen(3001, () => console.log("Server started!"));
 

@@ -23,6 +23,7 @@ router.get("/", (req, res)=> {
 
 router.post("/createevent", (req, res)=> {
 
+    console.log(req.body)
     const eventName = req.body.eventName
     const eventDescription = req.body.eventDescription
     const eventDate = req.body.eventDate
@@ -30,12 +31,15 @@ router.post("/createevent", (req, res)=> {
     const eventLocation = req.body.eventLocation
     const eventImage = req.body.eventImage
 
+    console.log(eventName)
+
     const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description, event_img) VALUES (?, ?, ?, ?, ?, ?)"
-    db.query(sqlInsert, [eventName, eventDescription, eventDate, eventTime, eventLocation, eventImage], (err, result) => {
+    db.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescription, eventImage], (err, result) => {
         if(err){
             console.log(err);
         }
         console.log(result);
+        res.send(result)
     })
 });
 
