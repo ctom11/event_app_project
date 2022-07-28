@@ -18,27 +18,16 @@ export const Event = () => {
 
     return (
 
-        /*where i left off: event info is coming through to console. just wont display*/
-
-        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 event-tabs">
-            <Tab eventKey="event-info" title="Event Information">
+        <div>
                 <div className="event-p">{eventObject.event_name}</div>
                 <div className="event-p">{eventObject.event_description}</div>
                 <div className="event-p">{eventObject.event_date}</div>
                 <div className="event-p">{eventObject.event_time}</div>
                 <div className="event-p">{eventObject.event_location}</div>
-                <div className="event-p">{eventObject.event_img}</div>
-            </Tab>
-            <Tab eventKey="location" title="Location">
-                <div className="event-p">{id}</div>
-            </Tab>
-            <Tab eventKey="buy-tickets" title="Buy Tickets">
-                <div className="event-p">{id}</div>
-            </Tab>
-            <Tab eventKey="comments" title="Comments">
-                <div className="event-p">{id}</div>
-            </Tab>
-        </Tabs>
+                <div className="event-p"><img src={eventObject.event_img}/></div>
+        
+        </div>
+          
 
     )
 }

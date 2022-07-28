@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './Event.css';
 import Axios from "axios";
 import CreateEventArt from '../../assets/images/crowd-background.jpg';
+import { useNavigate } from "react-router-dom";
 
 export const CreateEvent = () => {
 
@@ -28,6 +29,9 @@ export const CreateEvent = () => {
         image: ""
     }
 
+    /*set up for connecting to individual event page*/
+    let navigate = useNavigate()
+
     /*provides validation on form input*/
     const validationSchema = Yup.object().shape({
         name: Yup.string().max(100).required, //Event name must be a string, max 100 chars and is required
@@ -38,10 +42,11 @@ export const CreateEvent = () => {
     })
 
     const onSubmit = (data) => {
-        Axios.post('http://localhost:3001/createevent', {
+        Axios.post('http://localhost:3001/event/createevent', {
             eventName: event_name, eventDate: selectedDate, eventTime: event_time, eventLocation: event_location, eventDescription: event_description, eventImage: event_img
         }).then(() => {
-            alert("successful event creation");
+            /*navigate to home after creating event - change*/
+            navigate(`/home`)
         });
     }
 
