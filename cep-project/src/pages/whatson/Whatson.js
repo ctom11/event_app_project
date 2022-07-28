@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import './Whatson.css';
 import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from "react-bootstrap";
-import TestImage from '../../assets/images/test.jpg';
+/*import TestImage from '../../assets/images/test.jpg';*/
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export const Whatson = () => {
@@ -11,8 +12,11 @@ export const Whatson = () => {
     /*get the data from API to fill the event cards*/
     const [listOfEvents, setListOfEvents] = useState([]);
 
+    /*set up for connecting to individual event page*/
+    let navigate = useNavigate()
+
     useEffect(() => {
-    Axios.get('http://localhost:3001/whatson').then((Response) => {
+    Axios.get('http://localhost:3001/event').then((Response) => {
         console.log(Response)
         setListOfEvents(Response.data)
     });
@@ -65,7 +69,7 @@ export const Whatson = () => {
                         {listOfEvents.map((value, key) => {
                         return(
                             <Col>
-                                <Card className="whatson-card">
+                                <Card className="whatson-card" onClick={() => {navigate(`/event/${value.event_id}`)}}>
                                     <Card.Img variant="top" src={value.event_img} />
                                     <Card.Body>
                                         <Card.Title>{value.event_name}</Card.Title>
@@ -73,9 +77,6 @@ export const Whatson = () => {
                                             <p>{value.event_date} {value.event_time}</p>
                                             <p>{value.event_location}</p>
                                         </Card.Text>
-                                        <Link to="/Event">
-                                            <Button variant="primary">More info</Button>
-                                        </Link>
                                     </Card.Body>
                                 </Card>
                             </Col>

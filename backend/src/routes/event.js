@@ -3,7 +3,7 @@ const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
 
-
+/*get all info about an event*/
 router.get("/", (req, res)=> {
 
     console.log(req);
@@ -21,6 +21,14 @@ router.get("/", (req, res)=> {
 
 });
 
+
+/*get all info for a particular event*/
+router.get("/byId/:id", (req, res)=> {
+    const id =  req.params.id
+
+});
+
+/*create new event*/
 router.post("/createevent", (req, res)=> {
 
     console.log(req.body)

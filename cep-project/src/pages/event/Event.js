@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './Event.css';
 import { Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
-import axios from "axios";
 
 export const Event = () => {
 
     let { id } = useParams();
+    const [listOfEvents, setListOfEvents] = useState([]);
 
     useEffect(() => {
         Axios.get('http://localhost:3001/whatson').then((Response) => {

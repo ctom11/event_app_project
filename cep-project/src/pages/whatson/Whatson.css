@@ -18,6 +18,7 @@
 .whatson-card {
     min-width: fit-content;
     color: #276174;
+    cursor: pointer;
 }
 
 .card-title {

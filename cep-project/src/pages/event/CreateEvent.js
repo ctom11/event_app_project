@@ -39,7 +39,7 @@ export const CreateEvent = () => {
 
     const onSubmit = (data) => {
         Axios.post('http://localhost:3001/createevent', {
-            eventName: event_name, eventDescription: event_description, eventDate: selectedDate, eventTime: event_time, eventLocation: event_location, eventImage: event_img
+            eventName: event_name, eventDate: selectedDate, eventTime: event_time, eventLocation: event_location, eventDescription: event_description, eventImage: event_img
         }).then(() => {
             alert("successful event creation");
         });
