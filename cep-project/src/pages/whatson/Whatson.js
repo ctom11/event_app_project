@@ -69,8 +69,8 @@ export const Whatson = () => {
                         {listOfEvents.map((value, key) => {
                         return(
                             <Col>
-                                <Card className="whatson-card" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                                    <Card.Img variant="top" src={value.event_img} />
+                                <Card className="whatson-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                                    <Card.Img className="event-img" variant="top" src={value.event_img} />
                                     <Card.Body>
                                         <Card.Title>{value.event_name}</Card.Title>
                                         <Card.Text>

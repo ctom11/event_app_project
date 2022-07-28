@@ -7,39 +7,38 @@ import Axios from "axios";
 export const Event = () => {
 
     let { id } = useParams();
-    const [listOfEvents, setListOfEvents] = useState([]);
+    const [eventObject, setEventObject] = useState({});
 
     useEffect(() => {
-        Axios.get('http://localhost:3001/whatson').then((Response) => {
+        Axios.get(`http://localhost:3001/event/byId/${id}`).then((Response) => {
             console.log(Response)
-            setListOfEvents(Response.data)
+            setEventObject(Response.data);
         });
-    })
+    }, [])
 
     return (
 
-<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 event-tabs">
-    <Tab eventKey="event-info" title="Event Information">
-        <card>
-            <div className="event-p">{id}</div>
-        </card>
-    </Tab>
-    <Tab eventKey="location" title="Location">
-        <card>
-            <div className="event-p">{id}</div>
-        </card>
-    </Tab>
-    <Tab eventKey="buy-tickets" title="Buy Tickets">
-        <card>
-            <div className="event-p">{id}</div>
-        </card>
-    </Tab>
-    <Tab eventKey="comments" title="Comments">
-        <card>
-            <div className="event-p">{id}</div>
-        </card>
-    </Tab>
-</Tabs>
+        /*where i left off: event info is coming through to console. just wont display*/
 
-)
-    }
+        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 event-tabs">
+            <Tab eventKey="event-info" title="Event Information">
+                <div className="event-p">{eventObject.event_name}</div>
+                <div className="event-p">{eventObject.event_description}</div>
+                <div className="event-p">{eventObject.event_date}</div>
+                <div className="event-p">{eventObject.event_time}</div>
+                <div className="event-p">{eventObject.event_location}</div>
+                <div className="event-p">{eventObject.event_img}</div>
+            </Tab>
+            <Tab eventKey="location" title="Location">
+                <div className="event-p">{id}</div>
+            </Tab>
+            <Tab eventKey="buy-tickets" title="Buy Tickets">
+                <div className="event-p">{id}</div>
+            </Tab>
+            <Tab eventKey="comments" title="Comments">
+                <div className="event-p">{id}</div>
+            </Tab>
+        </Tabs>
+
+    )
+}

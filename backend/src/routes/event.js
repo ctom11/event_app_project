@@ -26,6 +26,22 @@ router.get("/", (req, res)=> {
 router.get("/byId/:id", (req, res)=> {
     const id =  req.params.id
 
+    db.query(
+        "SELECT * FROM event WHERE event_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows.length > 0){
+                res.send(rows[0])
+            }
+            else {
+                res.send({message:"No event"})
+            }
+      
+        });
+
 });
 
 /*create new event*/
