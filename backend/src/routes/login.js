@@ -2,6 +2,7 @@ const { application } = require('express');
 const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 
 router.post("/", (req, res)=> {
@@ -12,20 +13,28 @@ router.post("/", (req, res)=> {
 
     console.log(emailAddress);
 
-    db.query(
-        "SELECT * FROM user_account WHERE email_address = ? AND password = ?",
-        [emailAddress, password],
-        (err, result) => {
-            if (err) {
-                res.send({err: err});
+    bcrypt.hash(password, 10).then((hash) => {
+
+        console.log(" This is the hash " + hash)
+
+        var loginInfo = db.query(
+            "SELECT * FROM user_account WHERE email_address = ? AND password = ?",
+            [emailAddress, hash],
+            (err, result) => {
+                if (err) {
+                    res.send({err: err});
+                }
+                if (result.length >0) {
+                    res.send(result)
+                } else {
+                    res.send({message: "Wrong email address/password combination"})
+                }   
             }
-            if (result.length >0) {
-                res.send(result)
-            } else {
-                res.send({message: "Wrong email address/password combination"})
-            }
-        }
-    );
+        );
+            
+        console.log(loginInfo)
+
+    })
 
 });
 
