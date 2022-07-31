@@ -11,7 +11,7 @@ router.post("/", async (req, res)=> {
     const attemptedPassword = req.body.password
     console.log(emailAddress);
     try {
-        const [rows, fields] = await db.query("SELECT password FROM user_account WHERE email_address = ?",[emailAddress]);
+        const [rows, fields] = await db.promiseDb.query("SELECT password FROM user_account WHERE email_address = ?",[emailAddress]);
         if(rows.length <= 0){
             res.send("Incorrect email")
         }

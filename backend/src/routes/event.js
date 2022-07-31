@@ -26,7 +26,7 @@ router.get("/", (req, res)=> {
 router.get("/byId/:id", (req, res)=> {
     const id =  req.params.id
 
-    db.query(
+    db.normalDb.query(
         "SELECT * FROM event WHERE event_id = ?",
         [id],
         (err, rows) => {

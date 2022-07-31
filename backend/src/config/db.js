@@ -1,6 +1,6 @@
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
-const db = mysql.createPool({
+const normalDb = mysql.createPool({
    host: 'localhost',
    user: 'clare',
    password: 'password',
@@ -9,4 +9,6 @@ const db = mysql.createPool({
    dateStrings: 'true'
 });
 
-module.exports = db
+const promiseDb = normalDb.promise();
+
+module.exports = {normalDb, promiseDb}
