@@ -10,6 +10,7 @@ router.post("/", (req, res)=> {
     const emailAddress = req.body.emailAddress
     const password = req.body.password
 
+    /*bcrypt hashes new passwords as they are added to the db*/
     bcrypt.hash(password, 10).then((hash) => {
 
         console.log(firstName);

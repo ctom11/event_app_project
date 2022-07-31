@@ -4,38 +4,27 @@ const db = require("../config/db");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
-
-router.post("/", (req, res)=> {
+router.post("/", async (req, res)=> {
 
     console.log(req);
     const emailAddress = req.body.emailAddress
-    const password = req.body.password
-
+    const attemptedPassword = req.body.password
     console.log(emailAddress);
-
-    bcrypt.hash(password, 10).then((hash) => {
-
-        console.log(" This is the hash " + hash)
-
-        var loginInfo = db.query(
-            "SELECT * FROM user_account WHERE email_address = ? AND password = ?",
-            [emailAddress, hash],
-            (err, result) => {
-                if (err) {
-                    res.send({err: err});
-                }
-                if (result.length >0) {
-                    res.send(result)
-                } else {
-                    res.send({message: "Wrong email address/password combination"})
-                }   
+    try {
+        const [rows, fields] = await db.query("SELECT password FROM user_account WHERE email_address = ?",[emailAddress]);
+        if(rows.length <= 0){
+            res.send("Incorrect email")
+        }
+        let password = rows[0].password;
+        bcrypt.compare(attemptedPassword, password).then((match) => {
+            if(!match){
+                res.send({error: "Wrong Username and password combination"})
             }
-        );
-            
-        console.log(loginInfo)
-
-    })
-
+            res.send("You logged in")
+        })
+    } catch(err) {
+        throw err;
+    }
 });
 
 module.exports = router;

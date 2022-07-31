@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Signup.css';
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Axios from 'axios';
 
@@ -27,15 +27,11 @@ export const Signup = () => {
         firstName: Yup.string().max(100).required, //Event name must be a string, max 100 chars and is required
         lastName: Yup.string().max(250).required, //Event description must be a string, max 250 chars and is required
         emailAddress: Yup.date().required, //date is required
-        password: Yup.string().required, //Event time must be a string and is required
-        confirmPassword: Yup.string().required, //Event location must be a string and is required
+        password: Yup.string().min(8).max(30).required, //Event time must be a string and is required
+        confirmPassword: Yup.string().required//Event location must be a string and is required
     })
 
-    const onSubmit = (data) => {
-        console.log(data);
-    }
-
-    const SubmitRegister = () => {
+    const SubmitRegister = (data) => {
         Axios.post('http://localhost:3001/signup', {
             firstName: first_name, lastName: last_name, emailAddress: email_address, password: password, confirmPassword: confirm_password
         }).then(() => {
@@ -48,8 +44,8 @@ export const Signup = () => {
     <div className="card signup-card">
         <div className="card-body">
             <h5 className="card-title signup-title">Sign Up</h5>
-            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <form className="signup-form">
+            <Formik initialValues={initialValues} onSubmit={SubmitRegister} validationSchema={validationSchema}>
+                <Form className="signup-form">
                     <div className="row">
                         <div className="form-group col-md-6">
                             <label htmlFor="inputFirstName">First Name</label>
@@ -101,7 +97,7 @@ export const Signup = () => {
                         </div>
                         <button type="submit" className="btn btn-primary form-button" onClick={SubmitRegister}>Register</button>
                     </div>
-                </form>
+                </Form>
         </Formik>
     </div>
 </div>
