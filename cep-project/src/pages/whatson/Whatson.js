@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import './Whatson.css';
-import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button } from "react-bootstrap";
-/*import TestImage from '../../assets/images/test.jpg';*/
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 

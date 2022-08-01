@@ -8,17 +8,15 @@ export const Login = () => {
 
   const [email_address, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
-
-  const [loginStatus, setLoginStatus] = useState("")
   
   const login = () => {
       Axios.post('http://localhost:3001/login', {
           emailAddress: email_address, password: password
       }).then((response) => {
-          if (response.data.message) {
-            setLoginStatus(response.data.message)
+          if (response.data.error) {
+            alert(response.data.error);
           } else {
-            setLoginStatus(response.data[0].emailAddress)
+          sessionStorage.setItem("accessToken", response.data);
           }
       });
   };
@@ -59,7 +57,6 @@ export const Login = () => {
                 <button type="submit" className="btn btn-primary" onClick={login}>Login</button>
               </form>
           </div>
-          <h1>{loginStatus}</h1>
         </div>
       </div>
     </div>

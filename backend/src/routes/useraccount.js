@@ -29,7 +29,7 @@ router.post("/updateprofilepic", (req, res)=> {
 
     console.log(userAccountId);
 
-    db.query(
+    db.normalDb.query(
         "UPDATE user_account SET user_profile_picture = ? WHERE user_account_id= ?",
         [userProfilePicture, userAccountId],
         (err, result) => {

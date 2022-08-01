@@ -8,7 +8,7 @@ router.get("/", (req, res)=> {
 
     console.log(req);
 
-    db.query(
+    db.normalDb.query(
         "SELECT * FROM event",
         (err, rows) => {
             if (err) {
@@ -58,7 +58,7 @@ router.post("/createevent", (req, res)=> {
     console.log(eventName)
 
     const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description, event_img) VALUES (?, ?, ?, ?, ?, ?)"
-    db.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescription, eventImage], (err, result) => {
+    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescription, eventImage], (err, result) => {
         if(err){
             console.log(err);
         }
