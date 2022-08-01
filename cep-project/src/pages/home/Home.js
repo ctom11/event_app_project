@@ -1,11 +1,18 @@
 import React from "react";
 import './Home.css';
+import { Link } from 'react-router-dom';
 import homeImage1 from '../../assets/images/crowd-background.jpg';
 import homeImage2 from '../../assets/images/circus-crowd.jpg';
 import homeImage3 from '../../assets/images/cinema.jpg';
 import Carousel from 'react-bootstrap/Carousel';
 
-export const Home = () => (
+export const Home = () => {
+
+  return (
+
+    <div>
+
+    <h2><Link to="/Userprofile">Link to user profile</Link></h2>
    
   <Carousel fade>
     <Carousel.Item>
@@ -31,4 +38,8 @@ export const Home = () => (
     </Carousel.Item>
   </Carousel>
 
+  </div>
+
 )
+
+  }

@@ -25,7 +25,7 @@ class App extends Component {
               <Route path ='/signup' element = {<Signup/>}/>
               <Route path ='/login' element = {<Login/>}/>
               <Route path ='/event/:id' element = {<Event/>}/>
-              <Route path ='/userprofile' element = {<Userprofile/>}/>
+              <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
               <Route path ='/createEvent' element = {<CreateEvent/>}/>
             </Routes>
           </Router>

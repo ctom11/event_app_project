@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Login.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LoginArt from '../../assets/images/loginart.png';
 import Axios from 'axios';
 
@@ -8,6 +8,9 @@ export const Login = () => {
 
   const [email_address, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
+
+  /*set up for connecting to individual event page*/
+  let navigate = useNavigate()
   
   const login = () => {
       Axios.post('http://localhost:3001/login', {
@@ -16,7 +19,9 @@ export const Login = () => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
+          navigate("/");
           sessionStorage.setItem("accessToken", response.data);
+          
           }
       });
   };

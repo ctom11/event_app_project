@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Userprofile.css';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button } from "react-bootstrap";
 import TestImage from '../../assets/images/profile-pic-logo.png';
+import { useParams } from "react-router-dom";
 import Axios from 'axios';
 
 export const Userprofile = () => {
 
-  const [user_profile_picture, setUserProfilePicture] = useState('')
-  const [user_account_id, setUserAccountId] = useState('')
+  let { id } = useParams();
+  const [userObject, setUserObject] = useState({});
   
+  useEffect(() => {
+      Axios.get(`http://localhost:3001/useraccount/byId/${id}`, {headers: {accessToken: sessionStorage.getItem("accessToken")}, }) .then((Response) => {
+          console.log(Response)
+          setUserObject(Response.data);
+      });
+  }, [])
+
   const UpdateProfilePicture = () => {
       Axios.post('http://localhost:3001/updateprofilepic', {
-          userProfilePicture: user_profile_picture, userAccountId: user_account_id
+          userProfilePicture: userObject.user_profile_picture, userAccountId: userObject.user_account_id
       }).then(() => {
           alert("profile picture successfully updated");
       });
@@ -28,9 +36,9 @@ export const Userprofile = () => {
             <Card.Title className="profile-title">Card title</Card.Title>
             <button type="submit" className="btn btn-primary signup-button" onClick={UpdateProfilePicture}>Update Profile Picture</button>
             <Card.Text className="profile-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
+              <p>{userObject.first_name} {userObject.last_name}
+              {userObject.email_address}
+              </p>
             </Card.Text>
           </Card.Body>
         </Card>
