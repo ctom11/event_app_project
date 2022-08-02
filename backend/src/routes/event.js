@@ -44,6 +44,32 @@ router.get("/byId/:id", (req, res)=> {
 
 });
 
+
+/*get all events in particular genre*/
+router.get("/byGenre/:id", (req, res)=> {
+    const id =  req.params.id
+
+    db.normalDb.query(
+        "SELECT event_id FROM event_genre WHERE genre_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows.length > 0){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"No events in this genre"})
+            }
+      
+        });
+
+});
+
+
+
+
 /*create new event*/
 router.post("/createevent", (req, res)=> {
 

@@ -64,7 +64,7 @@ export const Event = () => {
                     </Col>
                 </Row>
                 <Row className="justify-content-md-center">
-                    <Col xs lg="8">
+                    <Col xs lg="8" className="event-description">
                         <p className="event-p">{eventObject.event_description_intro}</p>
                         <p className="event-p">{eventObject.event_description_body}</p>
                     </Col>

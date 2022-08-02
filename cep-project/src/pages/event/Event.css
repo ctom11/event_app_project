@@ -101,3 +101,7 @@ a:hover {
 .event-bottom-card {
     margin-bottom: 50px;
 }
+
+.event-description {
+    padding-left: 20px;
+}
