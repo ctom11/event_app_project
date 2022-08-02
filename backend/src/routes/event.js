@@ -49,7 +49,9 @@ router.post("/createevent", (req, res)=> {
 
     console.log(req.body)
     const eventName = req.body.eventName
-    const eventDescription = req.body.eventDescription
+    const eventDescriptionIntro = req.body.eventDescriptionIntro
+    const eventDescriptionBody = req.body.eventDescriptionBody
+    const eventTicketLink = req.body.eventTicketLink
     const eventDate = req.body.eventDate
     const eventTime = req.body.eventTime
     const eventLocation = req.body.eventLocation
@@ -58,7 +60,7 @@ router.post("/createevent", (req, res)=> {
     console.log(eventName)
 
     const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description, event_img) VALUES (?, ?, ?, ?, ?, ?)"
-    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescription, eventImage], (err, result) => {
+    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventTicketLink, eventImage], (err, result) => {
         if(err){
             console.log(err);
         }

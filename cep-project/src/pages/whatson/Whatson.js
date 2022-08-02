@@ -3,9 +3,13 @@ import './Whatson.css';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Moment from "moment";
 
 
 export const Whatson = () => {
+
+    //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
+    const formatDate = Moment().format("Do MMMM YYYY");
 
     /*get the data from API to fill the event cards*/
     const [listOfEvents, setListOfEvents] = useState([]);
@@ -68,11 +72,12 @@ export const Whatson = () => {
                         return(
                             <Col>
                                 <Card className="whatson-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                                    <Card.Img className="event-img" variant="top" src={value.event_img} />
+                                    <Card.Img className="event-img" variant="top" src={value.event_img}/>                                
                                     <Card.Body>
                                         <Card.Title>{value.event_name}</Card.Title>
                                         <Card.Text>
-                                            <p>{value.event_date} {value.event_time}</p>
+                                            <p>{formatDate}</p>
+                                            <p>{value.event_time}</p>
                                             <p>{value.event_location}</p>
                                         </Card.Text>
                                     </Card.Body>

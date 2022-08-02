@@ -33,7 +33,7 @@ export const Login = () => {
         {/*image beside login form*/}
         <div className="col-md-7">
           <img src={LoginArt} className="img-fluid rounded-start"></img>
-          <h2>Don't have an account yet? <Link to="/Signup"><i>Sign up here.</i></Link></h2>
+          <h2>Don't have an account yet? <Link to="/Signup" className="reg-link"><i>Sign up here.</i></Link></h2>
         </div>
         {/*login form*/}
         <div className="col-md-5">          

@@ -8,6 +8,8 @@ import Axios from 'axios';
 
 export const Userprofile = () => {
 
+  //use offcanvas for editing profile
+
   let { id } = useParams();
   const [userObject, setUserObject] = useState({});
   

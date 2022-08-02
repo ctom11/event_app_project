@@ -9,7 +9,7 @@
 }
 
 /*link to register page - keeps all font in this line the same*/
-a {
+.reg-link {
     color: #276174 !important;
     font-size: large !important;
 }

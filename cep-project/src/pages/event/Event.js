@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import './Event.css';
-import { Card } from "react-bootstrap";
+//banner used if event image has not been provided
+import defaultEventBanner from '../../assets/images/default-event-banner.png';
+import { Card, Row, Col, Accordion, Toast } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
+import Moment from "moment";
 
 export const Event = () => {
 
+    //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
+    const formatDate = Moment().format("Do MMMM YYYY");
+
+    //for passing id through to display individual event info
     let { id } = useParams();
     const [eventObject, setEventObject] = useState({});
 
@@ -16,12 +23,14 @@ export const Event = () => {
         });
     }, [])
 
+    //set background image for banner
     var eventImageStyle = {
         height: "600px",
         width: "1400px",
         backgroundSize: '1400px',
         backgroundRepeat: 'no-repeat',
-        backgroundImage: `url(${eventObject.event_img})`
+        backgroundImage: `url(${eventObject.event_img}), url(${defaultEventBanner})`, 
+        onerror: "this.onerror=null; this.src=${defaultEventBanner}"
     };
 
     return (
@@ -33,25 +42,63 @@ export const Event = () => {
                     <div className="d-flex justify-content-center align-items-center h-100">
                         <div className="text-white">
                             <h1 className="event-name-h1 mb-3">{eventObject.event_name}</h1>
-                            <h4 className="mb-3">{eventObject.event_location}</h4>
+                            <h4 className=" event-name-h4 mb-3">{eventObject.event_location}</h4>
                         </div>
                     </div>
                 </div>
             </div>
             </Card>
             
-            <Card>
-                <div>
-                    <h1 className="event-p">{eventObject.event_name}</h1>
-                    <p className="event-p">{eventObject.event_date} {eventObject.event_time}</p>
-                </div>
-
-                <p className="event-p">{eventObject.event_description}</p>
-
-                <p className="event-p">{eventObject.event_location}</p>
+            <Card className="event-bottom-card">
+                <Row className="justify-content-md-center">
+                    <Col xs lg="8">
+                        <h1 className="event-p event-title">{eventObject.event_name}</h1>
+                        <h2 className="event-p event-name-h2">{formatDate} - {eventObject.event_location}</h2>
+                    </Col>
+                    <Col xs lg="4">
+                            <Card className="tickets-card">
+                                <div>
+                                    <a className="tickets-text" href={eventObject.event_ticket_link}><h1 className="tickets-text">Get Tickets</h1></a>
+                                </div>
+                            </Card>
+                    </Col>
+                </Row>
+                <Row className="justify-content-md-center">
+                    <Col xs lg="8">
+                        <p className="event-p">{eventObject.event_description_intro}</p>
+                        <p className="event-p">{eventObject.event_description_body}</p>
+                    </Col>
+                        <Col xs lg="4">
+                    </Col>
+                </Row>
+                <Accordion defaultActiveKey="0">
+                    <Accordion.Item eventKey="0">
+                        <Accordion.Header className="event-p">More Information</Accordion.Header>
+                        <Accordion.Body>
+                            <h2 className="event-p event-name-h2">{eventObject.event_time}</h2>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="1">
+                        <Accordion.Header  className="event-p">Location</Accordion.Header>
+                        <Accordion.Body>
+                            <h2 className="event-p event-name-h2">{eventObject.event_location}</h2>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="2">
+                        <Accordion.Header  className="event-p">Comments</Accordion.Header>
+                        <Accordion.Body>
+                            <Toast className="comments-toast">
+                                <Toast.Header>
+                                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                                    <strong className="me-auto">Example Name</strong>
+                                    <small>11 mins ago</small>
+                                </Toast.Header>
+                                <Toast.Body>Can't wait for this event!</Toast.Body>
+                            </Toast>
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
             </Card>
-
-
         </div>
 
     )
