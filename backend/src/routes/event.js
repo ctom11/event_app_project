@@ -50,7 +50,7 @@ router.get("/byGenre/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT event_id FROM event_genre WHERE genre_id = ?",
+        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event_genre.genre_id = ?",
         [id],
         (err, rows) => {
             if (err) {
@@ -62,9 +62,7 @@ router.get("/byGenre/:id", (req, res)=> {
             else {
                 res.send({message:"No events in this genre"})
             }
-      
         });
-
 });
 
 
@@ -85,7 +83,7 @@ router.post("/createevent", (req, res)=> {
 
     console.log(eventName)
 
-    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description, event_img) VALUES (?, ?, ?, ?, ?, ?)"
+    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img) VALUES (?, ?, ?, ?, ?, ?)"
     db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventTicketLink, eventImage], (err, result) => {
         if(err){
             console.log(err);

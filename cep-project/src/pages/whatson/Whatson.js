@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import './Whatson.css';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import Axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Moment from "moment";
-
 
 export const Whatson = () => {
 
@@ -16,13 +15,22 @@ export const Whatson = () => {
 
     /*set up for connecting to individual event page*/
     let navigate = useNavigate()
-
     useEffect(() => {
     Axios.get('http://localhost:3001/event').then((Response) => {
         console.log(Response)
         setListOfEvents(Response.data)
     });
     }, []);
+    
+    //for passing id through for filtering purposes
+    function FilterEventByGenre(id) {
+        useEffect(() => {
+            Axios.get(`http://localhost:3001/event/byGenre/${id}`).then((Response) => {
+                console.log(Response)
+                setListOfEvents(Response.data);
+            });
+        }, [])
+    }
 
     return (
   
@@ -34,7 +42,7 @@ export const Whatson = () => {
                     <div id="sidebar-wrapper">
                         <ul className="sidebar-nav">
                             <li>
-                                <a href="#" className='sidemenu-items'>Music</a>
+                                <Button onClick={FilterEventByGenre(16)} className='sidemenu-items'>Music</Button>
                             </li>
                             <li>
                                 <a href="#" className='sidemenu-items'>Sight-Seeing</a>
