@@ -18,7 +18,6 @@ router.get("/", (req, res)=> {
             }
         }
     );
-
 });
 
 
@@ -39,9 +38,7 @@ router.get("/byId/:id", (req, res)=> {
             else {
                 res.send({message:"No event"})
             }
-      
         });
-
 });
 
 

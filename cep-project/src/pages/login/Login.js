@@ -59,7 +59,7 @@ export const Login = () => {
                   <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
                   <label className="form-check-label" htmlFor="exampleCheck1">Keep me logged in</label>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={login}>Login</button>
+                <button type="submit" className="btn btn-primary login-btn" onClick={login}>Login</button>
               </form>
           </div>
         </div>

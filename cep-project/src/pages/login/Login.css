@@ -70,7 +70,7 @@ h2 {
 }
 
 /*login button design*/
-.btn-primary {
+.login-btn {
     width: -webkit-fill-available !important;
     --bs-btn-color: #276174 !important;
     --bs-btn-bg: #63FD88 !important;

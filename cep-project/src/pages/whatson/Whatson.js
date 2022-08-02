@@ -23,13 +23,11 @@ export const Whatson = () => {
     }, []);
     
     //for passing id through for filtering purposes
-    function FilterEventByGenre(id) {
-        useEffect(() => {
+    const FilterEventByGenre = (id) => {
             Axios.get(`http://localhost:3001/event/byGenre/${id}`).then((Response) => {
                 console.log(Response)
                 setListOfEvents(Response.data);
             });
-        }, [])
     }
 
     return (
@@ -42,28 +40,28 @@ export const Whatson = () => {
                     <div id="sidebar-wrapper">
                         <ul className="sidebar-nav">
                             <li>
-                                <Button onClick={FilterEventByGenre(16)} className='sidemenu-items'>Music</Button>
+                                <Button onClick={() => FilterEventByGenre(16)} className='sidemenu-items'>Music</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Sight-Seeing</a>
+                                <Button onClick={() => FilterEventByGenre(18)} className='sidemenu-items'>Sight-Seeing</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Nightlife</a>
+                                <Button onClick={() => FilterEventByGenre(19)} className='sidemenu-items'>Nightlife</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Comedy</a>
+                                <Button onClick={() => FilterEventByGenre(17)} className='sidemenu-items'>Comedy</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Family Events</a>
+                                <Button onClick={() => FilterEventByGenre(20)} className='sidemenu-items'>Family Events</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Sport</a>
+                                <Button onClick={() => FilterEventByGenre(21)} className='sidemenu-items'>Sport</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Art</a>
+                                <Button onClick={() => FilterEventByGenre(22)} className='sidemenu-items'>Art</Button>
                             </li>
                             <li>
-                                <a href="#" className='sidemenu-items'>Film</a>
+                                <Button onClick={() => FilterEventByGenre(23)} className='sidemenu-items'>Film</Button>
                             </li>
                         </ul>
                     </div>
