@@ -66,7 +66,7 @@ export const Home = () => {
       <div className="home-featured-events">
         <h1>Featured Events</h1>
 
-        <Row xs={1} md={2} className="g-4">
+        <Row xs={1} md={2} className="g-4 home-event-cards">
           {listOfEvents.map((value, key) => { 
             return(
               //<Col key={key}>
