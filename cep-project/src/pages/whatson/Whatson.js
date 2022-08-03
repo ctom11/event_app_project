@@ -1,34 +1,50 @@
 import React, { useEffect, useState } from "react";
+import Select from "react-select";
 import './Whatson.css';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import Axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Moment from "moment";
 
 export const Whatson = () => {
 
-    //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
+    //for displaying date in Do MMMM YYYY format rather than YYYY/MM/DD
     const formatDate = Moment().format("Do MMMM YYYY");
 
-    /*get the data from API to fill the event cards*/
+    //get the data from API to fill the event cards
     const [listOfEvents, setListOfEvents] = useState([]);
 
-    /*set up for connecting to individual event page*/
+    //set up for connecting to individual event page
     let navigate = useNavigate()
     useEffect(() => {
-    Axios.get('http://localhost:3001/event').then((Response) => {
-        console.log(Response)
-        setListOfEvents(Response.data)
+        Axios.get('http://localhost:3001/event').then((Response) => {
+            console.log(Response)
+            setListOfEvents(Response.data)
     });
     }, []);
     
-    //for passing id through for filtering purposes
+    //for passing id through for genre filtering purposes
     const FilterEventByGenre = (id) => {
             Axios.get(`http://localhost:3001/event/byGenre/${id}`).then((Response) => {
                 console.log(Response)
                 setListOfEvents(Response.data);
             });
     }
+
+    //for filtering free events
+    const FilterFreeEvents = () => {
+        Axios.get(`http://localhost:3001/event/free`).then((Response) => {
+            console.log(Response)
+            setListOfEvents(Response.data);
+        });
+    }
+
+    //create options to choose from for filter at top
+    const sortOptions = [
+        { value: 1, label: 'A-Z' },
+        { value: 2, label: 'Newest' },
+        { value: 3, label: 'Oldest' }
+        ]
 
     return (
   
@@ -63,6 +79,9 @@ export const Whatson = () => {
                             <li>
                                 <Button onClick={() => FilterEventByGenre(23)} className='sidemenu-items'>Film</Button>
                             </li>
+                            <li>
+                                <Button onClick={() => FilterFreeEvents()} className='sidemenu-items'>Free Events</Button>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -71,11 +90,12 @@ export const Whatson = () => {
             <Col className="col-md-10">
                 <div>
                     <Row className="whatson-filter">
-                        <h1>This is where the filter will go.</h1>
+                        <Select options={sortOptions}  placeholder={'Sort Events'} clearable={false}/>
                     </Row>
                     <Row xs={1} md={3} className="g-4">
-                        {listOfEvents.map((value, key) => {
+                        {listOfEvents.map((value, key) => { 
                         return(
+                            //<Col key={key}>
                             <Col>
                                 <Card className="whatson-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
                                     <Card.Img className="event-img" variant="top" src={value.event_img}/>                                

@@ -8,6 +8,7 @@
 .whatson-filter {
     padding-left: 80px;
     margin-top: 60px;
+    width: fit-content;
 }
 
 /*individual event cards*/

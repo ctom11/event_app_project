@@ -63,7 +63,23 @@ router.get("/byGenre/:id", (req, res)=> {
 });
 
 
+/*get all free events*/
+router.get("/free", (req, res)=> {
 
+    db.normalDb.query(
+        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event.event_free = 1",
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows.length > 0){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"No events in this genre"})
+            }
+        });
+});
 
 /*create new event*/
 router.post("/createevent", (req, res)=> {
