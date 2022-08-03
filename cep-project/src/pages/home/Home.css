@@ -3,3 +3,70 @@ position: fixed;
 padding-top: 50px;
 width: 85%;
 }
+
+.carousel-inner {
+    height: 50vh;
+    min-height: 860px;
+    min-width: auto;
+}
+
+.container-fluid {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding: none;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.carousel-slide-label {
+
+}
+
+.carousel-slide-p {
+
+}
+
+.carousel-caption-1 {
+    background-color: #ff5147;
+    border-radius: 20px;
+    bottom: initial;
+    top: 30%;
+    left: 30%;
+    right: 30%;
+}
+
+.carousel-caption-2 {
+    background-color: #a668f2;
+    border-radius: 20px;
+    bottom: initial;
+    top: 30%;
+    left: 30%;
+    right: 30%;
+}
+
+.carousel-caption-3 {
+    padding: 20px;
+    background-color: #f5c011;
+    border-radius: 20px;
+    bottom: initial;
+    top: 30%;
+    left: 30%;
+    right: 30%;
+}
+
+.home-featured-events {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    color: #a668f2;
+    font-weight: 600;
+    margin: 50px;
+    padding: 20px;
+    border: 2px solid #276174;
+}
+
+.featured-card {
+    
+}

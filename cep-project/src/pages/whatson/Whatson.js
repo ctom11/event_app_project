@@ -79,9 +79,6 @@ export const Whatson = () => {
                             <li>
                                 <Button onClick={() => FilterEventByGenre(23)} className='sidemenu-items'>Film</Button>
                             </li>
-                            <li>
-                                <Button onClick={() => FilterFreeEvents()} className='sidemenu-items'>Free Events</Button>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -90,7 +87,14 @@ export const Whatson = () => {
             <Col className="col-md-10">
                 <div>
                     <Row className="whatson-filter">
-                        <Select options={sortOptions}  placeholder={'Sort Events'} clearable={false}/>
+                        <Row>
+                            <Col class="col-md-10">
+                                <Button className="free-events-btn" onClick={() => FilterFreeEvents()}>Free Events</Button>
+                            </Col>
+                            <Col class="col-md-10 sort-events">
+                                <Select options={sortOptions}  placeholder={'Sort Events'} clearable={false}/>
+                            </Col>
+                        </Row>
                     </Row>
                     <Row xs={1} md={3} className="g-4">
                         {listOfEvents.map((value, key) => { 

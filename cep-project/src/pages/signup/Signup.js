@@ -79,7 +79,7 @@ export const Signup = () => {
                             </div>
                         </div>
 
-                        <button type="submit" className="btn btn-primary form-button" onClick={submitRegister}>Register</button>
+                        <button type="submit" className="btn btn-primary login-btn" onClick={submitRegister}>Register</button>
                     </div>
                 </Form>
             </Formik>
