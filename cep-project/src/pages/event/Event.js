@@ -31,6 +31,22 @@ export const Event = () => {
         });
     }, [])
 
+    let commentblock = <Toast className="comments-toast"></Toast>;
+    if(Array.isArray(commentObject)){
+        commentblock = commentObject.map((value, key) => { 
+            return(
+                <Toast className="comments-toast">
+                    <Toast.Header>
+                        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                        <strong className="me-auto">{value.event_comment_header}</strong>
+                        <small>{value.event_comment_time}</small>
+                    </Toast.Header>
+                    <Toast.Body>{value.event_comment_body}</Toast.Body>
+                </Toast>
+            )
+            })
+    }
+
     //set background image for banner
     var eventImageStyle = {
         height: "600px",
@@ -103,17 +119,11 @@ export const Event = () => {
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing.."></textarea>
                                 <button>Add Comment</button>
                             </div>
-                            {commentObject.map((value, key) => { 
-                            return(
-                                <Toast className="comments-toast">
-                                    <Toast.Header>
-                                        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                                        <strong className="me-auto">{value.event_comment_header}</strong>
-                                        <small>{value.event_comment_time}</small>
-                                    </Toast.Header>
-                                    <Toast.Body>{value.event_comment_body}</Toast.Body>
-                                </Toast>
-                            )})}
+                            <div>
+                                {
+                                commentblock
+                                }
+                            </div>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
