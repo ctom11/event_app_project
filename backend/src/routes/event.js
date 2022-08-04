@@ -32,7 +32,7 @@ router.get("/byId/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows.length > 0){
+            if(rows.length){
                 res.send(rows[0])
             }
             else {
@@ -53,7 +53,7 @@ router.get("/byGenre/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows.length > 0){
+            if(rows){
                 res.send(rows)
             }
             else {
@@ -104,13 +104,13 @@ router.get("/comments/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT comments.comment_id, event_comments.event_comment_id, comments.event_comment_header, comments.event_comment_body, comments.event_comment_date, comments.event_comment_time FROM comments INNER JOIN event_comments ON comments.comment_id=event_comments.event_comment_id WHERE event_comments.event_id = ?",
+        "SELECT comment_id, event_comment_header, event_comment_body, event_comment_time FROM comments WHERE comments.comment_event_id = ?",
         [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
             }
-            if(rows.length > 0){
+            if(rows){
                 res.send(rows)
             }
             else {
@@ -147,7 +147,6 @@ router.post("/createevent", (req, res)=> {
 });
 
 /*add new event comment*/
-
 router.post("/addcomment/:id", (req, res)=> {
     const id =  req.params.id
 

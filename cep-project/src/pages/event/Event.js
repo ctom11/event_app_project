@@ -15,11 +15,19 @@ export const Event = () => {
     //for passing id through to display individual event info
     let { id } = useParams();
     const [eventObject, setEventObject] = useState({});
+    const [commentObject, setCommentObject] = useState({});
 
     useEffect(() => {
         Axios.get(`http://localhost:3001/event/byId/${id}`).then((Response) => {
             console.log(Response)
             setEventObject(Response.data);
+        });
+    }, [])
+
+    useEffect(() => {
+        Axios.get(`http://localhost:3001/event/comments/${id}`).then((Response) => {
+            console.log(Response)
+            setCommentObject(Response.data);
         });
     }, [])
 
@@ -89,23 +97,23 @@ export const Event = () => {
                         <Accordion.Header  className="event-p">Comments</Accordion.Header>
                         <Accordion.Body>
 
-                            <div className="add-comment-container"></div>
+                            <div className="add-comment-container">
                                 <h2>{eventObject.event_name} </h2>
                                 <h2>Leave a comment here:</h2>
                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing.."></textarea>
                                 <button>Add Comment</button>
-
-
-
-
-                            <Toast className="comments-toast">
-                                <Toast.Header>
-                                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                                    <strong className="me-auto">Example Name</strong>
-                                    <small>11 mins ago</small>
-                                </Toast.Header>
-                                <Toast.Body>Can't wait for this event!</Toast.Body>
-                            </Toast>
+                            </div>
+                            {commentObject.map((value, key) => { 
+                            return(
+                                <Toast className="comments-toast">
+                                    <Toast.Header>
+                                        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                                        <strong className="me-auto">{value.event_comment_header}</strong>
+                                        <small>{value.event_comment_time}</small>
+                                    </Toast.Header>
+                                    <Toast.Body>{value.event_comment_body}</Toast.Body>
+                                </Toast>
+                            )})}
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>

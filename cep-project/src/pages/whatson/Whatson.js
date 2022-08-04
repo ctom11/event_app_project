@@ -16,6 +16,7 @@ export const Whatson = () => {
 
     //set up for connecting to individual event page
     let navigate = useNavigate()
+    
     useEffect(() => {
         Axios.get('http://localhost:3001/event').then((Response) => {
             console.log(Response)
@@ -106,9 +107,9 @@ export const Whatson = () => {
                                     <Card.Body className="event-card-body">
                                         <Card.Title>{value.event_name}</Card.Title>
                                         <Card.Text>
-                                            <p>{formatDate}</p>
-                                            <p>{value.event_time}</p>
-                                            <p>{value.event_location}</p>
+                                            <p className="event-pa">{formatDate}</p>
+                                            <p className="event-pa">{value.event_time}</p>
+                                            <p className="event-pa">{value.event_location}</p>
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
