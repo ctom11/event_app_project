@@ -15,6 +15,8 @@ nav {
 
 .nav-item {
     padding-left: 120px;
+    font-size: x-large;
+    font-weight: 600;
 }
 
 /* spaces the search bar slightly to the left */
@@ -52,4 +54,8 @@ body {
 
 .search-btn {
     --bs-btn-padding-x: 1rem;
+}
+
+.logo {
+    padding-left: 20px;
 }

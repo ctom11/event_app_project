@@ -1,6 +1,6 @@
 /*sign up card*/
 .signup-card {
-    max-width: 50%;
+    max-width: 45%;
     margin: auto;
     margin-top: 100px;
     color: #276174;
@@ -15,9 +15,16 @@
 .signup-form {
     margin-top: 10px;
     padding: 0px 50px 0px 50px;
+    margin-bottom: 50px;
 }
 
 .form-group {
     padding-top: 15px;
+    padding-bottom: 20px;
 }
+
+.form-check-input:checked {
+    background-color: #276174;
+}
+
 

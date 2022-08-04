@@ -26,18 +26,10 @@ export const Home = () => {
           setListOfEvents(Response.data)
   });
   }, []);
-      
-  //for passing id through for genre filtering purposes
-  const FilterEventByGenre = (id) => {
-          Axios.get(`http://localhost:3001/event/byGenre/${id}`).then((Response) => {
-              console.log(Response)
-              setListOfEvents(Response.data);
-          });
-  }
 
   return (
 
-    <div>
+    <div className="home-page-full">
 
       <Carousel fade>
         <Carousel.Item>
@@ -64,16 +56,16 @@ export const Home = () => {
       </Carousel>
 
       <div className="home-featured-events">
-        <h1>Featured Events</h1>
+        <h1 className="h1-featured">Featured Events</h1>
 
         <Row xs={1} md={2} className="g-4 home-event-cards">
           {listOfEvents.map((value, key) => { 
             return(
               //<Col key={key}>
-              <Col>
+              <Col className="featured-card-size">
                 <Card className="featured-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                  <Card.Img className="event-img" variant="top" src={value.event_img}/>                                
-                  <Card.Body>
+                  <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
+                  <Card.Body className="home-card-body">
                     <Card.Title>{value.event_name}</Card.Title>
                     <Card.Text>
                       <p>{formatDate}</p>

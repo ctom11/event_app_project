@@ -84,9 +84,20 @@ export const Event = () => {
                             <h2 className="event-p event-name-h2">{eventObject.event_location}</h2>
                         </Accordion.Body>
                     </Accordion.Item>
+
                     <Accordion.Item eventKey="2">
                         <Accordion.Header  className="event-p">Comments</Accordion.Header>
                         <Accordion.Body>
+
+                            <div className="add-comment-container"></div>
+                                <h2>{eventObject.event_name} </h2>
+                                <h2>Leave a comment here:</h2>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing.."></textarea>
+                                <button>Add Comment</button>
+
+
+
+
                             <Toast className="comments-toast">
                                 <Toast.Header>
                                     <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />

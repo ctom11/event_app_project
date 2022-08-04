@@ -99,6 +99,26 @@ router.get("/featured", (req, res)=> {
         });
 });
 
+/*get all event comments*/
+router.get("/comments/:id", (req, res)=> {
+    const id =  req.params.id
+
+    db.normalDb.query(
+        "SELECT comments.comment_id, event_comments.event_comment_id, comments.event_comment_header, comments.event_comment_body, comments.event_comment_date, comments.event_comment_time FROM comments INNER JOIN event_comments ON comments.comment_id=event_comments.event_comment_id WHERE event_comments.event_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows.length > 0){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"No comments for this event"})
+            }
+        });
+});
+
 /*create new event*/
 router.post("/createevent", (req, res)=> {
 
@@ -118,6 +138,27 @@ router.post("/createevent", (req, res)=> {
 
     const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, event_featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, eventFeatured], (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        console.log(result);
+        res.send(result)
+    })
+});
+
+/*add new event comment*/
+
+router.post("/addcomment/:id", (req, res)=> {
+    const id =  req.params.id
+
+    console.log(req.body)
+    const commentHeader = req.body.commentHeader
+    const commentBody = req.body.commentBody
+
+    console.log(commentHeader)
+
+    const sqlInsert = "INSERT INTO comments (event_comment_header, event_comment_body, event_comment_time, comment_event_id) VALUES (?, ?, ?, NOW())"
+    db.normalDb.query(sqlInsert, [commentHeader, commentBody, id], (err, result) => {
         if(err){
             console.log(err);
         }
