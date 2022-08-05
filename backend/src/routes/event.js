@@ -104,7 +104,7 @@ router.get("/comments/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT comment_id, event_comment_header, event_comment_body, event_comment_time FROM comments WHERE comments.comment_event_id = ?",
+        "SELECT comment_id, event_comment_body, event_comment_time FROM comments WHERE comments.comment_event_id = ?",
         [id],
         (err, rows) => {
             if (err) {
@@ -147,17 +147,17 @@ router.post("/createevent", (req, res)=> {
 });
 
 /*add new event comment*/
-router.post("/addcomment/:id", (req, res)=> {
-    const id =  req.params.id
+router.post("/addcomment", (req, res)=> {
 
     console.log(req.body)
-    const commentHeader = req.body.commentHeader
     const commentBody = req.body.commentBody
+    const commentEventId = req.body.commentEventId
+    const commentTime = req.body.commentTime
 
-    console.log(commentHeader)
+    console.log(commentBody)
 
-    const sqlInsert = "INSERT INTO comments (event_comment_header, event_comment_body, event_comment_time, comment_event_id) VALUES (?, ?, ?, NOW())"
-    db.normalDb.query(sqlInsert, [commentHeader, commentBody, id], (err, result) => {
+    const sqlInsert = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id) VALUES (?, ?, ?)"
+    db.normalDb.query(sqlInsert, [commentBody, commentTime, commentEventId], (err, result) => {
         if(err){
             console.log(err);
         }

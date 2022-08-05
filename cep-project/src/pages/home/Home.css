@@ -74,9 +74,8 @@ width: 85%;
 
 /*individual event cards*/
 .featured-card {
-    background-color:#ff5147;
+    background-color: white;
     border-radius: 20px;
-    color: white;
     border: 3px solid #276174;
     cursor: pointer;
     margin-bottom: 30px;

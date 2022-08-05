@@ -16,6 +16,7 @@ export const Event = () => {
     let { id } = useParams();
     const [eventObject, setEventObject] = useState({});
     const [commentObject, setCommentObject] = useState({});
+    const [newComment, setNewComment] = useState("");
 
     useEffect(() => {
         Axios.get(`http://localhost:3001/event/byId/${id}`).then((Response) => {
@@ -38,7 +39,7 @@ export const Event = () => {
                 <Toast className="comments-toast">
                     <Toast.Header>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                        <strong className="me-auto">{value.event_comment_header}</strong>
+                        <strong className="me-auto">Where name will go</strong>
                         <small>{value.event_comment_time}</small>
                     </Toast.Header>
                     <Toast.Body>{value.event_comment_body}</Toast.Body>
@@ -56,6 +57,13 @@ export const Event = () => {
         backgroundImage: `url(${eventObject.event_img}), url(${defaultEventBanner})`, 
         onerror: "this.onerror=null; this.src=${defaultEventBanner}"
     };
+
+    const addComment = () => {
+        Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: Date.now()}).then ((Response) => {
+            console.log("Comment added");
+        })
+        
+    }
 
     return (
 
@@ -116,8 +124,8 @@ export const Event = () => {
                             <div className="add-comment-container">
                                 <h2>{eventObject.event_name} </h2>
                                 <h2>Leave a comment here:</h2>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing.."></textarea>
-                                <button>Add Comment</button>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing.." onChange={(e) => {setNewComment(e.target.value)}}></textarea>
+                                <button className="eventure-btn" onClick={addComment}>Add Comment</button>
                             </div>
                             <div>
                                 {
