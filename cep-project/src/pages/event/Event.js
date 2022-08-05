@@ -6,11 +6,14 @@ import { Card, Row, Col, Accordion, Toast } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Moment from "moment";
+import moment from "moment";
 
 export const Event = () => {
 
     //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
     const formatDate = Moment().format("Do MMMM YYYY");
+    //for passing time of comment through to db
+    var commentTimeNow = Moment().format();
 
     //for passing id through to display individual event info
     let { id } = useParams();
@@ -35,12 +38,15 @@ export const Event = () => {
     let commentblock = <Toast className="comments-toast"></Toast>;
     if(Array.isArray(commentObject)){
         commentblock = commentObject.map((value, key) => { 
+            //for displaying comment time for now
+            var date = moment().format(value.event_comment_time);
+            const fromNow = Moment(date).fromNow();
             return(
                 <Toast className="comments-toast">
                     <Toast.Header>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
                         <strong className="me-auto">Where name will go</strong>
-                        <small>{value.event_comment_time}</small>
+                        <small>{fromNow}</small>
                     </Toast.Header>
                     <Toast.Body>{value.event_comment_body}</Toast.Body>
                 </Toast>
@@ -59,8 +65,8 @@ export const Event = () => {
     };
 
     const addComment = () => {
-        Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: Date.now()}).then ((Response) => {
-            console.log("Comment added");
+        Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: commentTimeNow}).then ((Response) => {
+            setNewComment([...commentObject, newComment]);
         })
         
     }
@@ -100,7 +106,15 @@ export const Event = () => {
                         <p className="event-p">{eventObject.event_description_intro}</p>
                         <p className="event-p">{eventObject.event_description_body}</p>
                     </Col>
-                        <Col xs lg="4">
+                    <Col xs lg="4">
+                        <Card className="event-stats">
+                            <div>
+                                <h1>NUMBER</h1>
+                                <p>Going to this event</p>
+                                <h1>NUMBER</h1>
+                                <p>Interested in this event</p>
+                            </div>
+                        </Card>
                     </Col>
                 </Row>
                 <Accordion defaultActiveKey="0">
