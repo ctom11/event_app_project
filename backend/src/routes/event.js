@@ -2,6 +2,7 @@ const { application } = require('express');
 const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
+const { validateToken } = require("../authentication/authentication")
 
 /*get all info about an event*/
 router.get("/", (req, res)=> {
@@ -104,7 +105,7 @@ router.get("/comments/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT comment_id, event_comment_body, event_comment_time FROM comments WHERE comments.comment_event_id = ?",
+        "SELECT comment_id, event_comment_body, event_comment_time, first_name, last_name FROM comments JOIN user_account ON comments.user_account_id = user_account.user_account_id WHERE comments.comment_event_id = ?",
         [id],
         (err, rows) => {
             if (err) {
@@ -147,17 +148,19 @@ router.post("/createevent", (req, res)=> {
 });
 
 /*add new event comment*/
-router.post("/addcomment", (req, res)=> {
+router.post("/addcomment", validateToken, (req, res)=> {
 
     console.log(req.body)
     const commentBody = req.body.commentBody
     const commentEventId = req.body.commentEventId
     const commentTime = req.body.commentTime
 
+    const userId = req.user.user_account_id;
+
     console.log(commentBody)
 
-    const sqlInsert = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id) VALUES (?, ?, ?)"
-    db.normalDb.query(sqlInsert, [commentBody, commentTime, commentEventId], (err, result) => {
+    const sqlInsert = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id, user_account_id) VALUES (?, ?, ?, ?)"
+    db.normalDb.query(sqlInsert, [commentBody, commentTime, commentEventId, userId], (err, result) => {
         if(err){
             console.log(err);
         }

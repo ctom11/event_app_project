@@ -2,7 +2,7 @@ const { application } = require('express');
 const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
-const {validateToken} = require("../../authentication/authentication");
+const {validateToken} = require("../authentication/authentication");
 
 /*get all info for a particular user*/
 router.get("/byId/:id", validateToken, (req, res)=> {

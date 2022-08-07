@@ -45,7 +45,7 @@ export const Event = () => {
                 <Toast className="comments-toast">
                     <Toast.Header>
                         <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                        <strong className="me-auto">Where name will go</strong>
+                        <strong className="me-auto">{value.first_name} {value.last_name}</strong>
                         <small>{fromNow}</small>
                     </Toast.Header>
                     <Toast.Body>{value.event_comment_body}</Toast.Body>
@@ -65,8 +65,18 @@ export const Event = () => {
     };
 
     const addComment = () => {
-        Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: commentTimeNow}).then ((Response) => {
-            setNewComment([...commentObject, newComment]);
+        Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: commentTimeNow},
+        {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+            },
+        }
+        ).then ((Response) => {
+            if (Response.data.error) {
+                console.log(Response.data.error);
+            } else {
+                setNewComment([...commentObject, newComment]);
+            }
         })
         
     }
@@ -76,14 +86,6 @@ export const Event = () => {
         <div className="event-full">
             <Card className="event-img-card">
             <div className="p-5 text-center bg-image rounded-3 no-repeat h-120" style={eventImageStyle}>
-                <div className="mask" styles="background-color: rgba(0, 0, 0, 0.6);">
-                    <div className="d-flex justify-content-center align-items-center h-100">
-                        <div className="text-white">
-                            <h1 className="event-name-h1 mb-3">{eventObject.event_name}</h1>
-                            <h4 className=" event-name-h4 mb-3">{eventObject.event_location}</h4>
-                        </div>
-                    </div>
-                </div>
             </div>
             </Card>
             
@@ -109,9 +111,9 @@ export const Event = () => {
                     <Col xs lg="4">
                         <Card className="event-stats">
                             <div>
-                                <h1>NUMBER</h1>
+                                <h1>{eventObject.event_going}</h1>
                                 <p>Going to this event</p>
-                                <h1>NUMBER</h1>
+                                <h1>{eventObject.event_interested}</h1>
                                 <p>Interested in this event</p>
                             </div>
                         </Card>

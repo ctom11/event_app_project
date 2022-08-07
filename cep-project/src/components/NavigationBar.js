@@ -5,8 +5,25 @@ import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import { NavLink } from "react-router-dom";
 import Logo from '../assets/images/logo.png';
 
-export const NavigationBar = () => (
+export const NavigationBar = () => {
+    
+    const accessToken = sessionStorage.getItem("accessToken");
 
+    let navbarContent = <Nav className="ml-auto">
+    <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
+    <Nav.Item><Nav.Link href="/signup" className="nav-nav">Sign Up</Nav.Link></Nav.Item>
+    <Nav.Item><Nav.Link href="/login" className="nav-nav">Login</Nav.Link></Nav.Item>
+    </Nav>;
+
+    if (accessToken) {
+        navbarContent = <Nav className="ml-auto">
+        <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="/userprofile/:id" className="nav-nav">My Profile</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="" className="nav-nav">Logout</Nav.Link></Nav.Item>
+    </Nav>
+    }
+
+    return(
     <Navbar expand="lg" fixed="top">
         <Container fluid>
             <Navbar.Brand href="/">
@@ -14,11 +31,7 @@ export const NavigationBar = () => (
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="ml-auto">
-                    <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/signup" className="nav-nav">Sign Up</Nav.Link></Nav.Item>
-                    <Nav.Item><Nav.Link href="/login" className="nav-nav">Login</Nav.Link></Nav.Item>
-                </Nav>
+                {navbarContent}
             </Navbar.Collapse>
             <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
@@ -26,4 +39,5 @@ export const NavigationBar = () => (
             </form>
         </Container>
     </Navbar>
-)
+    )
+}
