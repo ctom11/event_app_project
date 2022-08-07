@@ -19,9 +19,8 @@ export const Login = () => {
           if (response.data.error) {
             alert(response.data.error);
           } else {
-          navigate("/");
           sessionStorage.setItem("accessToken", response.data);
-          
+          navigate("/");
           }
       });
   };
@@ -38,7 +37,6 @@ export const Login = () => {
         {/*login form*/}
         <div className="col-md-5">          
           <div className="card-body">
-              <form>
                 <div className="mb-3">
                   <h1 className="SignIn-header">Sign In</h1>
                   <label htmlFor="inputemail" className="form-label">Email address</label>
@@ -60,7 +58,6 @@ export const Login = () => {
                   <label className="form-check-label" htmlFor="exampleCheck1">Keep me logged in</label>
                 </div>
                 <button type="submit" className="btn btn-primary eventure-btn" onClick={login}>Login</button>
-              </form>
           </div>
         </div>
       </div>

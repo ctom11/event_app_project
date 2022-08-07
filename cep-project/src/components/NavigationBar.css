@@ -1,5 +1,6 @@
 nav {
     display: flex;
+    background-color: #276174;
 }
 
 .navbar-nav me-auto mb-2 mb-lg-0 {
@@ -10,12 +11,11 @@ nav {
 /* spaces the logo slightly to the right */
 .navbar-brand {
     padding-left: 10px;
-    padding-right: 350px;
 }
 
 .nav-item {
-    padding-left: 120px;
-    font-size: x-large;
+    padding: 0px 40px 0px 40px;
+    font-size: larger;
     font-weight: 600;
 }
 
@@ -58,4 +58,8 @@ body {
 
 .logo {
     padding-left: 20px;
+}
+
+.navbar-expand-lg .navbar-collapse {
+    place-content: center;
 }

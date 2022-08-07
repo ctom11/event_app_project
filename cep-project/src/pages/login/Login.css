@@ -16,12 +16,13 @@
 
 /*login card as a whole*/
 .login-card {
+    display: flex;
     border: none !important;
     border-radius: 10px !important;
     color: #276174;
     background-color: whitesmoke;
     margin: auto;
-    margin-top: 75px;
+    margin-top: 120px;
 }
 
 /*column containing login*/

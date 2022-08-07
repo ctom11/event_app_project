@@ -25,7 +25,7 @@ router.get("/byId/:id", validateToken, (req, res)=> {
 
 });
 
-
+//get account info (no longer used)
 router.get("/", (req, res)=> {
 
     console.log(req);
@@ -43,6 +43,7 @@ router.get("/", (req, res)=> {
 
 });
 
+//update profile pic
 router.post("/updateprofilepic", (req, res)=> {
 
     console.log(req);

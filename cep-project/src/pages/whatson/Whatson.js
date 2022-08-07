@@ -5,6 +5,7 @@ import { Col, Row, Card, Button } from "react-bootstrap";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Moment from "moment";
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
 export const Whatson = () => {
 

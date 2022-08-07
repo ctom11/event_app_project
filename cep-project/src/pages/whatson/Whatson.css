@@ -1,13 +1,13 @@
 .col-md-2 {
-    margin-top: 140px;
+    margin-top: 160px;
     text-align: center;
     font-size: xx-large;
 }
 
 /*event filter at top of page*/
 .whatson-filter {
-    padding-top: 50px;
-    padding-left: 1200px;
+    padding-top: 100px;
+    padding-left: 60%;
     margin-top: 100px;
     margin:auto;
     width: auto;
@@ -25,7 +25,7 @@
 /*individual event cards*/
 .whatson-card {
     background-color: whitesmoke;
-    width: 500px;
+    width: 100%;
     cursor: pointer;
     border: 2px solid #276174;
     border-radius: 20px;
@@ -82,7 +82,7 @@
 }
 
 .event-img {
-    height: 500px;
+    height: 480px;
     border: 3px solid #276174;
     border-radius: 20px 20px 0px 0px;
 }
