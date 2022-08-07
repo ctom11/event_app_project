@@ -68,7 +68,7 @@ export const Event = () => {
         Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: commentTimeNow},
         {
             headers: {
-                accessToken: sessionStorage.getItem("accessToken"),
+                accessToken: localStorage.getItem("accessToken"),
             },
         }
         ).then ((Response) => {

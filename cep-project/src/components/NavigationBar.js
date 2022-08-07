@@ -7,7 +7,9 @@ import Logo from '../assets/images/logo.png';
 
 export const NavigationBar = () => {
     
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
+
+    //where I left off: figure out how to pass user ID through to bring to specific profile page
 
     let navbarContent = <Nav className="ml-auto">
     <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>

@@ -15,12 +15,15 @@ export const Login = () => {
   const login = () => {
       Axios.post('http://localhost:3001/login', {
           emailAddress: email_address, password: password
-      }).then((response) => {
-          if (response.data.error) {
-            alert(response.data.error);
+      }).then((Response) => {
+          if (Response.data.error) {
+            alert(Response.data.error);
           } else {
-          sessionStorage.setItem("accessToken", response.data);
-          navigate("/");
+          localStorage.setItem("accessToken", Response.data);
+
+        // figure out how to pass user id through here as this isnt working - navbar too
+          let id = Response.accountId;
+          navigate(`http://localhost:3001/userprofile/${id}`);
           }
       });
   };

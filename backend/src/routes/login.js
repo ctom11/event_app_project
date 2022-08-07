@@ -32,7 +32,7 @@ router.post("/", async (req, res)=> {
             const accessToken = sign({email_address: emailAddress, user_account_id: accountId}, "q1p0w2o9e3i8r4u7t5y6");
             //allow the front end to receive the access token
             res.json(accessToken);
-            return;
+            return accountId;
         })
     } catch(err) {
         throw err;
