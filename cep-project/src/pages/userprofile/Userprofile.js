@@ -14,7 +14,9 @@ export const Userprofile = () => {
   const [userObject, setUserObject] = useState({});
   
   useEffect(() => {
-      Axios.get(`http://localhost:3001/useraccount/byId/${id}`, {headers: {accessToken: sessionStorage.getItem("accessToken")}, }) .then((Response) => {
+      Axios.get(`http://localhost:3001/useraccount/byId/${id}`, {
+        headers: {accessToken: localStorage.getItem("accessToken")}, 
+      }) .then((Response) => {
           console.log(Response)
           setUserObject(Response.data);
       });
@@ -35,7 +37,7 @@ export const Userprofile = () => {
         <Card>
           <Card.Img className="profile-picture" variant="top" src={TestImage} />
           <Card.Body>
-            <Card.Title className="profile-title">Card title</Card.Title>
+            <Card.Title className="profile-title">{userObject.first_name}</Card.Title>
             <button type="submit" className="btn btn-primary signup-button" onClick={UpdateProfilePicture}>Update Profile Picture</button>
             <Card.Text className="profile-text">
               <p>{userObject.first_name} {userObject.last_name}

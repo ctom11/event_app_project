@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginArt from '../../assets/images/loginart.png';
 import Axios from 'axios';
+import { AuthContext } from '../../components/AuthContext'; 
 
 export const Login = () => {
 
   const [email_address, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')
+  const { setAuthState } = useContext(AuthContext)
 
   /*set up for connecting to individual event page*/
   let navigate = useNavigate()
@@ -19,12 +21,16 @@ export const Login = () => {
           if (Response.data.error) {
             alert(Response.data.error);
           } else {
-          localStorage.setItem("accessToken", Response.data);
-
-        // figure out how to pass user id through here as this isnt working - navbar too
-          let id = Response.accountId;
-          navigate(`http://localhost:3001/userprofile/${id}`);
+            console.log(Response.data);
+            localStorage.setItem("accessToken", Response.data.token);
+            setAuthState({
+              firstName: Response.data.firstName, 
+              id: Response.data.id, 
+              adminStatus: Response.data.adminStatus
+            })
+            navigate(`/userprofile/${Response.data.id}`);
           }
+          window.location.reload();
       });
   };
 

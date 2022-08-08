@@ -25,7 +25,7 @@ function App() {
         if (Response.data.error) {
           setAuthState(false);
         } else {
-          setAuthState(true);
+          setAuthState({firstName: Response.data.first_name, id: Response.data.user_account_id, adminStatus: Response.data.admin_status});
         }
       })
     }, []);

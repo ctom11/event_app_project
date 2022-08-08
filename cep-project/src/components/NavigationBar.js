@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import './NavigationBar.css';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
 import { NavLink } from "react-router-dom";
 import Logo from '../assets/images/logo.png';
+import { AuthContext } from "./AuthContext";
+
 
 export const NavigationBar = () => {
     
     const accessToken = localStorage.getItem("accessToken");
+    const { setAuthState } = useContext(AuthContext);
+
+    const logout = () => {
+        localStorage.removeItem("accessToken");
+        navbarContent = <Nav className="ml-auto">
+        <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="/signup" className="nav-nav">Sign Up</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="/login" className="nav-nav">Login</Nav.Link></Nav.Item>
+        </Nav>;
+        window.location.reload();
+    }
 
     //where I left off: figure out how to pass user ID through to bring to specific profile page
 
@@ -21,7 +34,7 @@ export const NavigationBar = () => {
         navbarContent = <Nav className="ml-auto">
         <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
         <Nav.Item><Nav.Link href="/userprofile/:id" className="nav-nav">My Profile</Nav.Link></Nav.Item>
-        <Nav.Item><Nav.Link href="" className="nav-nav">Logout</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link onClick={logout} className="nav-nav">Logout</Nav.Link></Nav.Item>
     </Nav>
     }
 

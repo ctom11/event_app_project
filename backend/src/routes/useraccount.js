@@ -6,7 +6,7 @@ const {validateToken} = require("../authentication/authentication");
 
 /*get all info for a particular user*/
 router.get("/byId/:id", validateToken, (req, res)=> {
-    const id =  req.user.accountId
+    const id =  req.params.id;
 
     db.normalDb.query(
         "SELECT * FROM user_account WHERE user_account_id = ?",
