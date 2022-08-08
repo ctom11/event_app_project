@@ -64,6 +64,8 @@ export const Event = () => {
         onerror: "this.onerror=null; this.src=${defaultEventBanner}"
     };
 
+    //only allow comments if logged in
+
     const addComment = () => {
         Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: commentTimeNow},
         {

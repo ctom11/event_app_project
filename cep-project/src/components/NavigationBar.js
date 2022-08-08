@@ -11,6 +11,7 @@ export const NavigationBar = () => {
     
     const accessToken = localStorage.getItem("accessToken");
     const { setAuthState } = useContext(AuthContext);
+    
 
     const logout = () => {
         localStorage.removeItem("accessToken");
@@ -34,7 +35,7 @@ export const NavigationBar = () => {
         navbarContent = <Nav className="ml-auto">
         <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
         <Nav.Item><Nav.Link href="/userprofile/:id" className="nav-nav">My Profile</Nav.Link></Nav.Item>
-        <Nav.Item><Nav.Link onClick={logout} className="nav-nav">Logout</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link onClick={logout} href="/" className="nav-nav">Logout</Nav.Link></Nav.Item>
     </Nav>
     }
 
@@ -49,7 +50,7 @@ export const NavigationBar = () => {
                 {navbarContent}
             </Navbar.Collapse>
             <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"></input>
+                <input className="form-control me-2" type="search" placeholder="Search for Events" aria-label="Search"></input>
                 <button className="btn btn-outline-success search-btn" type="submit">Search</button>
             </form>
         </Container>

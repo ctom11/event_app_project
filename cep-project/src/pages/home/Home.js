@@ -78,8 +78,6 @@ export const Home = () => {
             )})}
         </Row>
       </div>
-  
-      <h2><Link to="/Userprofile">Link to user profile</Link></h2>
 
     </div>
 
