@@ -17,11 +17,11 @@ export const Signup = () => {
 
     /*provides validation on form input*/
     const validationSchema = Yup.object().shape({
-        firstName: Yup.string().max(100).required(), //Event name must be a string, max 100 chars and is required
-        lastName: Yup.string().max(250).required(), //Event description must be a string, max 250 chars and is required
-        emailAddress: Yup.string().email('invalid email').required(), //date is required
-        password: Yup.string().min(8).max(30).required(), //Event time must be a string and is required
-        confirmPassword: Yup.string().required().oneOf([Yup.ref('password'), null], 'Passwords must match')//Event location must be a string and is required
+        firstName: Yup.string().max(100).required().label("First name"), //Event name must be a string, max 100 chars and is required
+        lastName: Yup.string().max(250).required().label("Last name"), //Event description must be a string, max 250 chars and is required
+        emailAddress: Yup.string().email('invalid email').required().label("Email"), //date is required
+        password: Yup.string().min(8).max(30).required().label("Password"), //Event time must be a string and is required
+        confirmPassword: Yup.string().required().label("Password").oneOf([Yup.ref('password'), null], 'Passwords must match'),//Event location must be a string and is required
     })
 
     const submitRegister = (data) => {
@@ -41,31 +41,31 @@ export const Signup = () => {
                     <div className="row">
 
                         <div className="form-group col-md-6">
-                            <label htmlFor="inputFirstName">First Name</label>
+                            <label htmlFor="inputFirstName">First Name</label><br/>
                             <ErrorMessage name="firstName" component="span"/>
                             <Field type="text" className="form-control form-input-signup signup" id="inputFirstName" name="firstName" placeholder="First Name"></Field>
                         </div>
 
                         <div className="form-group col-md-6">
-                            <label htmlFor="inputLastName">Last Name</label>
+                            <label htmlFor="inputLastName">Last Name</label><br/>
                             <ErrorMessage name="lastName" component="span"/>
                             <Field type="text" className="form-control form-input-signup signup" id="inputLastName" name="lastName" placeholder="Last Name"></Field>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="inputEmail4">Email</label>
+                            <label htmlFor="inputEmail4">Email</label><br/>
                             <ErrorMessage name="emailAddress" component="span"/>
                             <Field type="email" className="form-control form-input-signup signup" id="inputEmail4" name="emailAddress" placeholder="Email"></Field>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="inputPassword4">Password</label>
+                            <label htmlFor="inputPassword4">Password</label><br/>
                             <ErrorMessage name="password" component="span"/>
                             <Field type="password" className="form-control form-input-signup signup" id="inputPassword4" name="password" placeholder="Password"></Field>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="inputConfirmPassword4">Confirm Password</label>
+                            <label htmlFor="inputConfirmPassword4">Confirm Password</label><br/>
                             <ErrorMessage name="confirmPassword" component="span"/>
                             <Field type="password" className="form-control form-input-signup signup" id="inputConfirmPassword4" name="confirmPassword" placeholder="Confirm Password"></Field>
                         </div>
@@ -74,7 +74,7 @@ export const Signup = () => {
                             <div className="form-check">
                                 <Field className="form-check-input" type="checkbox" id="gridCheck"></Field>
                                 <label className="form-check-label" htmlFor="gridCheck">
-                                Check me out
+                                I agree to Eventure's Terms and Conditions
                                 </label>
                             </div>
                         </div>

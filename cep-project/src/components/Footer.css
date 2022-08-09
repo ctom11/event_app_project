@@ -1,0 +1,36 @@
+.footer-full {
+    place-content: center;
+    background-color: #276174;
+    margin-top: 80px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.logo-footer {
+    margin-bottom: 5px;
+}
+
+hr {
+    border: 2px solid #63FD88;
+    width: 50%;
+    margin: auto;
+}
+
+.footer-contact-us {
+    margin-top: 20px;
+}
+
+.footer-info {
+    font-size: medium;
+    font-weight: 300;
+}
+
+.footer-header {
+    padding-top: 15px;
+}
+
+.footer-col {
+    margin-left: 20px;
+    margin-right: 20px;
+}

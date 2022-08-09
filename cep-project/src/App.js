@@ -7,6 +7,7 @@ import { Signup } from './pages/signup/Signup';
 import { Login } from './pages/login/Login';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
+import { Footer } from './components/Footer';
 import { Event } from './pages/event/Event';
 import { Userprofile } from './pages/userprofile/Userprofile';
 import { CreateEvent } from './pages/event/CreateEvent';
@@ -50,6 +51,7 @@ function App() {
             </Router>
           </AuthContext.Provider>
         </Layout>
+        <Footer/>
       </React.Fragment>
     );
   }
