@@ -26,6 +26,10 @@ hr {
     font-weight: 300;
 }
 
+.footer-info:hover {
+    color: white;
+}
+
 .footer-header {
     padding-top: 15px;
 }

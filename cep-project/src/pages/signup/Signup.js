@@ -1,8 +1,10 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 import './Signup.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Axios from 'axios';
+import Pdf from '../../assets/EventureTermsConditions.pdf';
 
 export const Signup = () => {
 
@@ -69,8 +71,10 @@ export const Signup = () => {
                             <ErrorMessage name="confirmPassword" component="span"/>
                             <Field type="password" className="form-control form-input-signup signup" id="inputConfirmPassword4" name="confirmPassword" placeholder="Confirm Password"></Field>
                         </div>
-
                         <div className="form-group">
+                            <div>
+                                <a href = {Pdf} target = "_blank" className='tandcs'>View Terms and Conditions</a>
+                            </div>
                             <div className="form-check">
                                 <Field className="form-check-input" type="checkbox" id="gridCheck"></Field>
                                 <label className="form-check-label" htmlFor="gridCheck">

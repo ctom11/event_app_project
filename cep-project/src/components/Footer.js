@@ -1,6 +1,7 @@
 import React from "react";
 import './Footer.css';
 import Logo from '../assets/images/logo.png';
+import Pdf from '../assets/EventureTermsConditions.pdf';
 
 export const Footer = () => {
     
@@ -16,7 +17,7 @@ export const Footer = () => {
             <div className="col-sm-3 footer-col">
                 <h4 className="footer-header">About Us</h4>
                 <h4 className="footer-info">Our Company</h4>
-                <h4 className="footer-info">Terms and Conditions</h4>
+                <a href = {Pdf} target = "_blank"><h4 className="footer-info">Terms and Conditions</h4></a>
                 <h4 className="footer-info">FAQs</h4>
             </div>
             <div className="col-sm-3 footer-col">
