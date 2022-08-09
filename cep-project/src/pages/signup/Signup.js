@@ -15,6 +15,7 @@ export const Signup = () => {
         emailAddress: "",
         password: "",
         confirmPassword: "",
+        tandc : false,
     }
 
     /*provides validation on form input*/
@@ -24,6 +25,7 @@ export const Signup = () => {
         emailAddress: Yup.string().email('invalid email').required().label("Email"), //date is required
         password: Yup.string().min(8).max(30).required().label("Password"), //Event time must be a string and is required
         confirmPassword: Yup.string().required().label("Password").oneOf([Yup.ref('password'), null], 'Passwords must match'),//Event location must be a string and is required
+        tandc: Yup.boolean().oneOf([true], "You must accept the terms and conditions")
     })
 
     const submitRegister = (data) => {
@@ -73,16 +75,16 @@ export const Signup = () => {
                         </div>
                         <div className="form-group">
                             <div>
-                                <a href = {Pdf} target = "_blank" className='tandcs'>View Terms and Conditions</a>
+                                <a href = {Pdf} target = "_blank" className='tandc'>View Terms and Conditions</a>
                             </div>
                             <div className="form-check">
-                                <Field className="form-check-input" type="checkbox" id="gridCheck"></Field>
+                                <Field className="form-check-input" name="tandc" type="checkbox" id="tandc"></Field>
                                 <label className="form-check-label" htmlFor="gridCheck">
                                 I agree to Eventure's Terms and Conditions
-                                </label>
+                                </label><br/>
+                                <ErrorMessage name="tandc" component="span"/>
                             </div>
                         </div>
-
                         <button type="submit" className="btn btn-primary eventure-btn" onClick={submitRegister}>Register</button>
                     </div>
                 </Form>
