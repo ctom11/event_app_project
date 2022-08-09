@@ -36,22 +36,25 @@ export const Home = () => {
           <img className="w-100" src={homeImage1} alt="First slide"/>
           <Carousel.Caption className="carousel-caption-1">
             <h3 className="carousel-slide-label">Trying to plan a fun day out but not sure where to start? We've got you covered.</h3>
-            <p className="carousel-slide-p">Click here to get started.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img className="w-100" src={homeImage2} alt="Second slide"/>
-          <Carousel.Caption className="carousel-caption-2">
-            <h3 className="carousel-slide-label">Share your events right here.</h3>
-            <p className="carousel-slide-p">It couldn't be simpler. Log into your account now and get started.</p>
-          </Carousel.Caption>
+          <Link to="/Login">
+            <Carousel.Caption className="carousel-caption-2">
+              <h3 className="carousel-slide-label">Share your events right here.</h3>
+              <p className="carousel-slide-p">It couldn't be simpler. Log into your account now and get started.</p>
+            </Carousel.Caption>
+          </Link>
         </Carousel.Item>
         <Carousel.Item>
           <img className="w-100" src={homeImage3} alt="Third slide"/>
-          <Carousel.Caption className="carousel-caption-3">
-            <h3 className="carousel-slide-label">Want to keep up to date with the latest events? Create your account now.</h3>
-            <p className="carousel-slide-p">Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-          </Carousel.Caption>
+          <Link to="/Signup">
+            <Carousel.Caption className="carousel-caption-3">
+              <h3 className="carousel-slide-label">Want to keep up to date with the latest events? Create your account now.</h3>
+            </Carousel.Caption>
+          </Link>
+        
         </Carousel.Item>
       </Carousel>
 
@@ -68,9 +71,9 @@ export const Home = () => {
                   <Card.Body className="home-card-body">
                     <Card.Title>{value.event_name}</Card.Title>
                     <Card.Text>
-                      <p>{formatDate}</p>
-                      <p>{value.event_time}</p>
-                      <p>{value.event_location}</p>
+                      <p className="featured-event-info">{formatDate}</p>
+                      <p className="featured-event-info">{value.event_time}</p>
+                      <p className="featured-event-info">{value.event_location}</p>
                     </Card.Text>
                   </Card.Body>
                 </Card>

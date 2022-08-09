@@ -78,6 +78,7 @@ export const Event = () => {
                 console.log(Response.data.error);
             } else {
                 setNewComment([...commentObject, newComment]);
+                window.location.reload();
             }
         })
         
