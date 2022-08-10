@@ -8,9 +8,21 @@
 }
 
 .create-event-form {
+    width: 80%;
 }
 
 .create-input {
     margin-bottom: 30px;
     min-width: -webkit-fill-available;
+}
+
+.long-input {
+    border: 2px solid #276174;
+}
+
+.file-upload {
+    margin-top: 10px;
+}
+
+.create-check {
 }

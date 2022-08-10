@@ -10,18 +10,10 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export const CreateEvent = () => {
-
-    const [event_name, setEventName] = useState('')
-    const [event_description_intro, setEventDescriptionIntro] = useState('')
-    const [event_description_body, setEventDescriptionBody] = useState('')
-    const [event_time, setEventTime] = useState('')
-    const [event_location, setEventLocation] = useState('')
-    const [event_img, setEventImage] = useState('')
-    const [event_free, setEventFree] = useState('')
-    const [event_ticket_link, setEventTicketLink] = useState('')
   
     /*for date input*/
     const [selectedDate, setSelectedDate] = useState(null);
+
     /*have to create initial values for Formik*/
     const initialValues = {
         name: "",
@@ -49,11 +41,8 @@ export const CreateEvent = () => {
     })
 
     const onSubmit = (data) => {
-        Axios.post('http://localhost:3001/event/createevent', {
-            eventName: event_name, eventDate: selectedDate, eventTime: event_time, eventLocation: event_location, eventDescriptionIntro: event_description_intro, eventDescriptionBody: event_description_body, eventFree: event_free, eventTicketLink: event_ticket_link, eventImage: event_img
-        }).then(() => {
-            /*navigate to home after creating event - change*/
-            navigate(`/home`)
+        Axios.post('http://localhost:3001/event/createevent', data).then(() => {
+            console.log(data)
         });
     }
 
@@ -65,82 +54,62 @@ export const CreateEvent = () => {
             
                 
                 <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                    <form className="form-container form-group create-event-form">
+                    <Form className="form-container form-group create-event-form">
 
-                            <div>
-                                <label>Event Name</label><br/>
+                            <div>                      
+                                <label htmlFor="inputEventName">Event Name</label><br/>
                                 <ErrorMessage name="name" component="span"/>
-                                <Field id="input-event-name" className="form-input-signup signup create-input" name="name"
-                                onChange={(e) => {
-                                    setEventName(e.target.value);
-                                }}
-                                />
+                                <Field type="text" id="input-event-name" className="form-input-signup signup create-input" name="name"></Field>
                             </div>
                             <div>
-                                 <label>Description Header</label><br/>
-                                <ErrorMessage name="description" component="span"/>
-                                <Field id="input-event-description" className="form-input-signup signup create-input" name="descriptionintro"
-                                onChange={(e) => {
-                                    setEventDescriptionIntro(e.target.value);
-                                }}/>
+                                 <label htmlFor="inputEventDescriptionIntro">Please provide an introduction to your event, no more than 1000 characters.</label><br/>
+                                <ErrorMessage name="descriptionintro" component="span"/>
+                                <Field component="textarea" rows="4" id="input-event-description" className="form-input-signup signup create-input long-input" name="descriptionintro"></Field>
                             </div>
                             <div>
-                                <label>Description Body</label><br/>
-                                <ErrorMessage name="description" component="span"/>
-                                <Field id="input-event-description" className="form-input-signup signup create-input" name="descriptionbody"
-                                onChange={(e) => {
-                                    setEventDescriptionBody(e.target.value);
-                                }}/>
+                                <label htmlFor="inputEventDescriptionBody">Please provide any additional information you wish to share about your event, no more than 5000 characters.</label><br/>
+                                <ErrorMessage name="descriptionintro" component="span"/>
+                                <Field component="textarea" rows="6" id="input-event-description" className="form-input-signup signup create-input long-input" name="descriptionbody"></Field>
                             </div>
                             <div>
-                                <label>Date</label><br/>
+                                <label htmlFor="inputEventDate">Date</label><br/>
                                 <ErrorMessage name="date" component="span"/>
                                 <DatePicker name="date" className="form-input-signup signup create-input" selected={selectedDate} onChange={date => setSelectedDate(date)} />
                             </div>
                             <div>
-                                <label>Time</label><br/>
+                                <label htmlFor="inputEventTime">Time</label><br/>
                                 <ErrorMessage name="time" component="span"/>
-                                <Field id="input-event-time" className="form-input-signup signup create-input" name="time" 
-                                onChange={(e) => {
-                                    setEventTime(e.target.value);
-                                }}/>
+                                <Field type="text" id="input-event-time" className="form-input-signup signup create-input" name="time"></Field>
                             </div>
                             <div>
                                 <label>Location</label><br/>
                                 <ErrorMessage name="location" component="span"/>
-                                <Field id="input-event-location" className="form-input-signup signup create-input" name="location"
-                                onChange={(e) => {
-                                    setEventLocation(e.target.value);
-                                }}/>
+                                <Field type="text" id="input-event-location" className="form-input-signup signup create-input" name="location"></Field>
                             </div>      
                             <div>
-                                <label>Image</label><br/>
-                                <Field type="text" id="input-event-image" className="form-input-signup signup create-input" name="image"
-                                onChange={(e) => {
-                                    setEventImage(e.target.value);
-                                }}/>
+                                <label htmlFor="inputEventImg">Image</label><br/>
+                                <ErrorMessage name="image" component="span"/>
+                                <input type="file" id="input-event-image" className="create-input file-upload" name="image"></input>
                             </div>
-                            <div id="my-radio-group">Picked</div>
+                            <label id="my-radio-group">Is your event ticketed?</label>
                             <div role="group" aria-labelledby="my-radio-group" className="create-input">
                                 <label>
-                                    <Field type="radio" name="ticket" value="One"/>
-                                    Ticket Required
+                                    <Field type="radio" name="ticket" value="One" className="create-check"/>
+                                    Yes
                                 </label>
                                 <label>
-                                    <Field type="radio" name="ticket" value="Two"/>
-                                    No Ticket required
+                                    <Field type="radio" name="ticket" value="Two" className="create-check"/>
+                                    No
                                 </label>
                             </div>
                             <div>
-                                <label>Please provide the link to your event ticket provider</label><br/>
-                                <Field type="text" id="input-event-image" className="form-input-signup signup create-input" name="image"
-                                onChange={(e) => {
-                                    setEventImage(e.target.value);
-                                }}/>
+                                <label htmlFor="inputEventTicketLink">Please provide the link to your event ticket provider</label><br/>
+                                <ErrorMessage name="ticketlink" component="span"/>
+                                <Field type="text" id="input-event-ticketlink" className="form-input-signup signup create-input" name="ticketlink"></Field>
                             </div>
                             <button type="submit" className="btn btn-primary eventure-btn" onClick={onSubmit}>Create Event</button>
                         
-                    </form>
+                    </Form>
                 </Formik>
 
             
