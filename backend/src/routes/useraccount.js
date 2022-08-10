@@ -44,17 +44,16 @@ router.get("/", (req, res)=> {
 });
 
 //update profile pic
-router.post("/updateprofilepic", (req, res)=> {
+
+router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
 
     console.log(req);
     const userProfilePicture = req.body.userProfilePicture
-    const userAccountId = req.body.userAccountId
-
-    console.log(userAccountId);
+    const id =  req.params.id;
 
     db.normalDb.query(
         "UPDATE user_account SET user_profile_picture = ? WHERE user_account_id= ?",
-        [userProfilePicture, userAccountId],
+        [userProfilePicture, id],
         (err, result) => {
             if (err) {
                 res.send({err: err});
