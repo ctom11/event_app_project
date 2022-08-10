@@ -121,7 +121,7 @@ router.get("/comments/:id", (req, res)=> {
 });
 
 /*create new event*/
-router.post("/createevent", (req, res)=> {
+router.post("/createevent", validateToken, (req, res)=> {
 
     console.log(req.body)
     const eventName = req.body.eventName
@@ -133,12 +133,11 @@ router.post("/createevent", (req, res)=> {
     const eventTime = req.body.eventTime
     const eventLocation = req.body.eventLocation
     const eventImage = req.body.eventImage
-    const eventFeatured = req.body.eventFeatured
 
     console.log(eventName)
 
-    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, event_featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, eventFeatured], (err, result) => {
+    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage], (err, result) => {
         if(err){
             console.log(err);
         }
@@ -168,5 +167,20 @@ router.post("/addcomment", validateToken, (req, res)=> {
         res.send(result)
     })
 });
+
+/*delete comment*/
+router.delete("/comment/:commentId", validateToken, async (req, res) => {
+    const commentId = req.params.commentId
+
+    const sqlDelete = "DELETE FROM `comments` WHERE comment_id = ?"
+    db.normalDb.query(sqlDelete, [commentId], (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        console.log(result);
+        res.send(result)
+    })
+
+})
 
 module.exports = router;

@@ -84,6 +84,11 @@ export const Event = () => {
         
     }
 
+    const deleteComment = () => {
+
+        <div></div>
+    }
+
     return (
 
         <div className="event-full">

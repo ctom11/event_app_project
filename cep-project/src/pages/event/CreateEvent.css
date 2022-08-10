@@ -1,0 +1,16 @@
+.create-event {
+   width: 60%;
+   align-items: center;
+}
+
+.create-event-header {
+    margin: 30px;
+}
+
+.create-event-form {
+}
+
+.create-input {
+    margin-bottom: 30px;
+    min-width: -webkit-fill-available;
+}

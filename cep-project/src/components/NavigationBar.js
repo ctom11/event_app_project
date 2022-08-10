@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import './NavigationBar.css';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
@@ -11,6 +11,8 @@ export const NavigationBar = () => {
     
     const accessToken = localStorage.getItem("accessToken");
     const { setAuthState } = useContext(AuthContext);
+
+    const [searchInput, setSearchInput] = useState('')
     
 
     const logout = () => {
@@ -22,8 +24,6 @@ export const NavigationBar = () => {
         </Nav>;
         window.location.reload();
     }
-
-    //where I left off: figure out how to pass user ID through to bring to specific profile page
 
     let navbarContent = <Nav className="ml-auto">
     <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
@@ -51,7 +51,9 @@ export const NavigationBar = () => {
             </Navbar.Collapse>
             <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search for Events" aria-label="Search"></input>
-                <button className="btn btn-outline-success search-btn" type="submit">Search</button>
+                <button className="btn btn-outline-success search-btn" type="submit"onChange={(e) => {
+                    setSearchInput(e.target.value);
+                  }}>Search</button>
             </form>
         </Container>
     </Navbar>
