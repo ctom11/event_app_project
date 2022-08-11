@@ -19,7 +19,9 @@ export const Userprofile = () => {
 
   let { id } = useParams();
   const [userObject, setUserObject] = useState({});
+  const [myEventsObject, setMyEventsObject] = useState({});
   
+  //get all user info
   useEffect(() => {
       Axios.get(`http://localhost:3001/useraccount/byId/${id}`, {
         headers: {accessToken: localStorage.getItem("accessToken")}, 
@@ -29,6 +31,7 @@ export const Userprofile = () => {
       });
   }, [])
 
+  //update user profile picture
   const UpdateProfilePicture = () => {
       Axios.post(`http://localhost:3001/updateprofilepic/${id}`,{
         headers: {accessToken: localStorage.getItem("accessToken")}, 
@@ -38,6 +41,16 @@ export const Userprofile = () => {
           alert("profile picture successfully updated");
       });
   };
+
+  //get list of user's events they are interested in
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/useraccount/myevents/${id}`, {
+      headers: {accessToken: localStorage.getItem("accessToken")}, 
+    }) .then((Response) => {
+        console.log(Response)
+        setMyEventsObject(Response.data);
+    });
+}, [])
 
   let profilePicture = {TestImage};
   if (userObject.user_profile_picture != null) {

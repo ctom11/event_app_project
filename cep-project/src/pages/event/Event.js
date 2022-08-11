@@ -16,7 +16,7 @@ export const Event = () => {
     const { authState } = useContext(AuthContext);
 
     //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
-    const formatDate = Moment().format("Do MMMM YYYY");
+    var formatDate = Moment().format("Do MMMM YYYY");
     //for passing time of comment through to db
     var commentTimeNow = Moment().format();
 
@@ -89,7 +89,9 @@ export const Event = () => {
         })
     }
 
-    //only allow comments if logged in
+    //add to interested events
+    const [buttonText, setButtonText] = useState('I am Interested');
+
     const addToInterested = () => {
         Axios.post(`http://localhost:3001/useraccount/addToInterested`, {eventId: eventObject.event_id},
         {
@@ -101,8 +103,7 @@ export const Event = () => {
             if (Response.data.error) {
                 console.log(Response.data.error);
             } else {
-                //setNewComment([...commentObject, newComment]);
-                window.location.reload();
+                setButtonText('I am Interested');
             }
         })
     }
@@ -142,7 +143,7 @@ export const Event = () => {
                             </div>
                         </Card>
                         <div className="user-event-status">
-                            <Button className="event-status-btn" onClick={addToInterested}>Click Here to Show Your Interest</Button>
+                            <Button className="event-status-btn" onClick={addToInterested}>{buttonText}</Button>
                         </div>
 
                     </Col>

@@ -90,6 +90,27 @@ router.post("/addToInterested", validateToken, (req, res)=> {
 
 });
 
+//get user's interested events
+router.get("/myevents/:id", validateToken, (req, res)=> {
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "SELECT * FROM `user_events_interested` WHERE user_account_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"This user isn't interested in any events"})
+            }
+        });
+
+});
+
 
 
 module.exports = router;

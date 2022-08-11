@@ -90,6 +90,13 @@ a:hover {
     border-color: #276174;
 }
 
+.event-status-btn:focus {
+    color: white;
+    background-color: #276174;
+    border-color: #276174;
+    --bs-btn-focus-shadow-rgb: none;
+}
+
 .event-status-btn:hover {
     background-color: white;
     color: #276174;
