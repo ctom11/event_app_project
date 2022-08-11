@@ -10,10 +10,9 @@ import { AuthContext } from "./AuthContext";
 export const NavigationBar = () => {
     
     const accessToken = localStorage.getItem("accessToken");
-    const { setAuthState } = useContext(AuthContext);
+    const { authState } = useContext(AuthContext);
 
     const [searchInput, setSearchInput] = useState('')
-    
 
     const logout = () => {
         localStorage.removeItem("accessToken");
@@ -34,7 +33,7 @@ export const NavigationBar = () => {
     if (accessToken) {
         navbarContent = <Nav className="ml-auto">
         <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
-        <Nav.Item><Nav.Link href="/userprofile/:id" className="nav-nav">My Profile</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href={"/userprofile/" + authState.id} className="nav-nav">My Profile</Nav.Link></Nav.Item>
         <Nav.Item><Nav.Link onClick={logout} href="/" className="nav-nav">Logout</Nav.Link></Nav.Item>
     </Nav>
     }

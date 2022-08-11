@@ -43,6 +43,8 @@ export const CreateEvent = () => {
     const onSubmit = (data) => {
         Axios.post('http://localhost:3001/event/createevent', data).then(() => {
             console.log(data)
+                navigate('/neweventsubmitted');
+                window.location.reload();
         });
     }
 

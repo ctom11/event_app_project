@@ -11,6 +11,7 @@ import { Footer } from './components/Footer';
 import { Event } from './pages/event/Event';
 import { Userprofile } from './pages/userprofile/Userprofile';
 import { CreateEvent } from './pages/event/CreateEvent';
+import { NewEventSubmitted } from './pages/event/NewEventSubmitted';
 import { AuthContext } from './components/AuthContext'; 
 import { useState, useEffect } from "react";
 import Axios from "axios";
@@ -26,7 +27,7 @@ function App() {
         if (Response.data.error) {
           setAuthState(false);
         } else {
-          setAuthState({firstName: Response.data.first_name, id: Response.data.user_account_id, adminStatus: Response.data.admin_status});
+          setAuthState({firstName: Response.data.email_address, id: Response.data.user_account_id, adminStatus: true});
         }
       })
     }, []);
@@ -35,22 +36,23 @@ function App() {
     return (
       /*react fragment allows you to group multiple elements*/
       <React.Fragment>
-        <NavigationBar/>
-        <Layout>
-          <AuthContext.Provider value={{ authState, setAuthState }}>
-            <Router>
-              <Routes>
-                <Route exact path ='/' element = {<Home/>}/>
-                <Route path ='/whatson' element = {<Whatson/>}/>
-                <Route path ='/signup' element = {<Signup/>}/>
-                <Route path ='/login' element = {<Login/>}/>
-                <Route path ='/event/:id' element = {<Event/>}/>
-                <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
-                <Route path ='/createEvent' element = {<CreateEvent/>}/>
-              </Routes>
-            </Router>
-          </AuthContext.Provider>
-        </Layout>
+        <AuthContext.Provider value={{ authState, setAuthState }}>
+          <NavigationBar/>
+          <Layout>
+              <Router>
+                <Routes>
+                  <Route exact path ='/' element = {<Home/>}/>
+                  <Route path ='/whatson' element = {<Whatson/>}/>
+                  <Route path ='/signup' element = {<Signup/>}/>
+                  <Route path ='/login' element = {<Login/>}/>
+                  <Route path ='/event/:id' element = {<Event/>}/>
+                  <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
+                  <Route path ='/createEvent' element = {<CreateEvent/>}/>
+                  <Route path ='/neweventsubmitted' element = {<NewEventSubmitted/>}/>
+                </Routes>
+              </Router>
+          </Layout>
+        </AuthContext.Provider>
         <Footer/>
       </React.Fragment>
     );

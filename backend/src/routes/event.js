@@ -33,7 +33,7 @@ router.get("/byId/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows.length){
+            if(rows){
                 res.send(rows[0])
             }
             else {
@@ -73,7 +73,7 @@ router.get("/free", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows.length > 0){
+            if(rows){
                 res.send(rows)
             }
             else {
@@ -90,12 +90,15 @@ router.get("/featured", (req, res)=> {
         (err, rows) => {
             if (err) {
                 res.send({err: err});
+                return;
             }
-            if(rows.length > 0){
+            if(rows){
                 res.send(rows)
+                return;
             }
             else {
                 res.send({message:"No featured events"})
+                return;
             }
         });
 });

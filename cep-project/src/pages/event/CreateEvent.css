@@ -25,4 +25,14 @@
 }
 
 .create-check {
+    margin-left: 20px;
+}
+
+.create-event-h2 {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.back-to-home:hover {
+    font-style: italic;
 }

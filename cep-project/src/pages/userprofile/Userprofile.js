@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 import './Userprofile.css';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button } from "react-bootstrap";
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import TestImage from '../../assets/images/profile-pic-logo.png';
 import { useParams } from "react-router-dom";
 import Axios from 'axios';
 
 export const Userprofile = () => {
+
+  const accessToken = localStorage.getItem("accessToken");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -26,12 +30,32 @@ export const Userprofile = () => {
   }, [])
 
   const UpdateProfilePicture = () => {
-      Axios.post('http://localhost:3001/updateprofilepic', {
-          userProfilePicture: userObject.user_profile_picture, userAccountId: userObject.user_account_id
+      Axios.post(`http://localhost:3001/updateprofilepic/${id}`,{
+        headers: {accessToken: localStorage.getItem("accessToken")}, 
+      }, {
+          userProfilePicture: userObject.user_profile_picture
       }).then(() => {
           alert("profile picture successfully updated");
       });
   };
+
+  let profilePicture = {TestImage};
+  if (userObject.user_profile_picture != null) {
+    profilePicture = userObject.user_profile_picture
+  }
+
+
+  const changepicpopover = (
+    <Popover id="popover-basic">
+      <Popover.Header as="h3">Popover right</Popover.Header>
+      <Popover.Body>
+        <form action="/" enctype="multipart/form-data" method="post">
+          <input type="file" name="image" accept='image/*' />
+          <input type="submit" value="Upload"/>
+        </form>
+      </Popover.Body>
+    </Popover>
+  );
 
   return (
 
@@ -39,8 +63,12 @@ export const Userprofile = () => {
       <Row xs={1} md={1} className="g-4">
         <Col className="col-md-3 profile-left">
           <Card>
-            <Card.Img className="profile-picture" variant="top" src={TestImage} />
-            <button type="submit" className="btn btn-primary change-prof-pic" onClick={UpdateProfilePicture}>Update Profile Picture</button>
+            <Card.Img className="profile-picture" variant="top" src={profilePicture} />
+
+            <OverlayTrigger trigger="click" placement="right" overlay={changepicpopover}>
+              <Button variant="success" type="submit" className="btn btn-primary change-prof-pic" onClick={UpdateProfilePicture}>Update Profile Picture</Button>
+            </OverlayTrigger>
+
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>
@@ -55,8 +83,12 @@ export const Userprofile = () => {
                   <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body className="account-settings-body">
-                  Some text as placeholder. In real life you can have the elements you
-                  have chosen. Like, text, images, lists, etc.
+                  <h1>Account Settings</h1>
+                  <div className="account-settings-option">
+                  <h2>Change my name</h2>
+                  <h2>Change my password</h2>
+                  <h2>Delete my account</h2>
+                  </div>
                 </Offcanvas.Body>
               </Offcanvas>
     

@@ -1,7 +1,8 @@
 .profile-picture {
+    max-height: 300px;
     border: 4px solid #ff5147;
     border-radius: 50%;
-    max-width: 70%;
+    max-width: 80%;
     margin-top: 20px;
     align-self: center;
 }
@@ -51,7 +52,9 @@
 }
 
 .account-settings-body {
+    margin-top: 30%;
     color: #276174;
+    text-align: center;
 }
 
 .account-settings-btn {
@@ -69,4 +72,8 @@
     --bs-btn-disabled-color: #276174;
     --bs-btn-disabled-bg: none;
     --bs-btn-disabled-border-color: none;
+}
+
+.account-settings-option {
+    margin-top: 20%;
 }
