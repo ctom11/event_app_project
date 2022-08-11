@@ -68,4 +68,28 @@ router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
 
 });
 
+//add event to user's 'events you're interested in'
+router.post("/addToInterested", validateToken, (req, res)=> {
+
+    const eventId = req.body.eventId
+    const userId = req.user.user_account_id;
+
+    console.log(req);
+
+    db.normalDb.query(
+        "INSERT INTO `user_events_interested` (`user_account_id`, `event_id`) VALUES (?, ?);",
+        [userId, eventId],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            } else {
+                res.send(rows)
+            }
+        }
+    );
+
+});
+
+
+
 module.exports = router;

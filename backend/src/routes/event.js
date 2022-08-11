@@ -2,7 +2,7 @@ const { application } = require('express');
 const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
-const { validateToken } = require("../authentication/authentication")
+const { validateToken } = require("../authentication/authentication");
 
 /*get all info about an event*/
 router.get("/", (req, res)=> {

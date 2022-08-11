@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import './Event.css';
 //banner used if event image has not been provided
 import defaultEventBanner from '../../assets/images/default-event-banner.png';
-import { Card, Row, Col, Accordion, Toast } from "react-bootstrap";
+import { Card, Row, Col, Accordion, Toast, Button} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Moment from "moment";
 import moment from "moment";
+import { AuthContext } from "../../components/AuthContext";
 
 export const Event = () => {
+
+    //for accessing user ID
+    const accessToken = localStorage.getItem("accessToken");
+    const { authState } = useContext(AuthContext);
 
     //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
     const formatDate = Moment().format("Do MMMM YYYY");
@@ -21,6 +26,7 @@ export const Event = () => {
     const [commentObject, setCommentObject] = useState({});
     const [newComment, setNewComment] = useState("");
 
+    //get event info by id
     useEffect(() => {
         Axios.get(`http://localhost:3001/event/byId/${id}`).then((Response) => {
             console.log(Response)
@@ -28,6 +34,7 @@ export const Event = () => {
         });
     }, [])
 
+    //get event comments
     useEffect(() => {
         Axios.get(`http://localhost:3001/event/comments/${id}`).then((Response) => {
             console.log(Response)
@@ -65,7 +72,6 @@ export const Event = () => {
     };
 
     //only allow comments if logged in
-
     const addComment = () => {
         Axios.post(`http://localhost:3001/event/addcomment`, {commentBody: newComment, commentEventId: id, commentTime: commentTimeNow},
         {
@@ -81,12 +87,24 @@ export const Event = () => {
                 window.location.reload();
             }
         })
-        
     }
 
-    const deleteComment = () => {
-
-        <div></div>
+    //only allow comments if logged in
+    const addToInterested = () => {
+        Axios.post(`http://localhost:3001/useraccount/addToInterested`, {eventId: eventObject.event_id},
+        {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+            },
+        }
+        ).then ((Response) => {
+            if (Response.data.error) {
+                console.log(Response.data.error);
+            } else {
+                //setNewComment([...commentObject, newComment]);
+                window.location.reload();
+            }
+        })
     }
 
     return (
@@ -115,18 +133,18 @@ export const Event = () => {
                     <Col xs lg="8" className="event-description">
                         <p className="event-p">{eventObject.event_description_intro}</p>
                         <p className="event-p">{eventObject.event_description_body}</p>
-                        <button className="event-option-btn">I am Going</button>
-                        <button className="event-option-btn">I am Interested</button>
                     </Col>
                     <Col xs lg="4">
                         <Card className="event-stats">
                             <div>
-                                <h1>{eventObject.event_going}</h1>
-                                <p>Going to this event</p>
                                 <h1>{eventObject.event_interested}</h1>
                                 <p>Interested in this event</p>
                             </div>
                         </Card>
+                        <div className="user-event-status">
+                            <Button className="event-status-btn" onClick={addToInterested}>Click Here to Show Your Interest</Button>
+                        </div>
+
                     </Col>
                 </Row>
                 <Accordion defaultActiveKey="0">

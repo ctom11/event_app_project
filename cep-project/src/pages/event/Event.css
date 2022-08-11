@@ -79,33 +79,21 @@ a:hover {
     color: #276174;
 }
 
-.event-option-btn {
-    font-weight: 600;
-    max-width: fit-content;
-    border-radius: 10px;
-    margin-left: 40px;
-    margin-bottom: 30px;
-    width: -webkit-fill-available !important;
-    padding: 10px;
+.user-event-status {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.event-status-btn {
+    background-color: white;
     color: #276174;
-    background-color: #63FD88;
-    border-color: #63FD88;
+    border-color: #276174;
 }
 
-.event-option-btn:hover {
-    color:#276174;
-    background-color: #33C58E;
-    border-color: #33C58E;
-}
-
-.event-option-btn:focus {
-    box-shadow: #276174;
-}
-
-.event-option-btn:active {
+.event-status-btn:hover {
+    background-color: white;
     color: #276174;
-    background-color: #63FD88;
-    border-color: #33C58E;
+    border: 3px solid #276174;
 }
 
 .accordion {

@@ -98,15 +98,6 @@ export const Userprofile = () => {
         <Col className="col-md-9 profile-right">
           <Card>
             <Card.Body>
-              <Card.Title className="profile-title">Your upcoming events..</Card.Title>
-              <Card.Text className="profile-text">
-                
-                <Row xs={1} md={3} className="g-4">
-                  <Col>
-                  </Col>
-                </Row>
-
-              </Card.Text>
               <Card.Title className="profile-title">Events you're interested in..</Card.Title>
                 
                 <Row xs={1} md={3} className="g-4">
