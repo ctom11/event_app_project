@@ -6,10 +6,13 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import TestImage from '../../assets/images/profile-pic-logo.png';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Axios from 'axios';
 
 export const Userprofile = () => {
+
+  //set up for connecting to individual event page
+  let navigate = useNavigate()
 
   const accessToken = localStorage.getItem("accessToken");
 
@@ -19,7 +22,7 @@ export const Userprofile = () => {
 
   let { id } = useParams();
   const [userObject, setUserObject] = useState({});
-  const [myEventsObject, setMyEventsObject] = useState({});
+  const [myEventsObject, setMyEventsObject] = useState([]);
   
   //get all user info
   useEffect(() => {
@@ -109,15 +112,19 @@ export const Userprofile = () => {
           </Card>
         </Col>
         <Col className="col-md-9 profile-right">
-          <Card>
+          <Card className="interested-card">
             <Card.Body>
               <Card.Title className="profile-title">Events you're interested in..</Card.Title>
-                
-                <Row xs={1} md={3} className="g-4">
-                  <Col>
-                  </Col>
-                </Row>
 
+              <div xs={1} md={3} className="row g-4">
+                {myEventsObject.map((value, key) => { 
+                  return(               
+                    <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                      <p><b>{value.event_name}</b> {value.event_date} {value.event_time}</p>  
+                    </div>
+                  )
+                })}
+              </div>
             </Card.Body>
           </Card>
           <Card>

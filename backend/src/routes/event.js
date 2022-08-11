@@ -42,6 +42,24 @@ router.get("/byId/:id", (req, res)=> {
         });
 });
 
+/*get all info for a particular event*/
+router.get("/sortaz", (req, res)=> {
+
+    db.normalDb.query(
+        "SELECT * FROM event ORDER BY event_name ASC;",
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"Couldn't sort"})
+            }
+        });
+});
+
 
 /*get all events in particular genre*/
 router.get("/byGenre/:id", (req, res)=> {

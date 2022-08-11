@@ -44,4 +44,34 @@ router.get('/auth', validateToken, (req, res) => {
     res.json(req.user)
 })
 
+/*update password 
+router.post("/updatepassword", validateToken, (req, res)=> {
+
+    const id =  req.params.id
+    const attemptedPassword = req.body.password
+ 
+    try {
+        const [rows, fields] = await db.promiseDb.query("SELECT * FROM user_account WHERE user_account_id = ?",[id]);
+        if(rows.length <= 0){
+            res.send({error: "no users"})
+            return;
+        }
+        let password = rows[0].password;
+        
+        bcrypt.compare(attemptedPassword, password).then((match) => {
+            if(!match){
+                res.send({error: "Incorrect password"})
+                return;
+            }
+
+            const accessToken = sign({email_address: emailAddress, user_account_id: accountId}, "q1p0w2o9e3i8r4u7t5y6");
+            //allow the front end to receive the access token
+            res.json({token: accessToken, firstName: rows[0].first_name, id: rows[0].user_account_id, adminStatus: rows[0].admin_status});
+            return accountId;
+        })
+    } catch(err) {
+        throw err;
+    }
+});*/
+
 module.exports = router;

@@ -95,7 +95,7 @@ router.get("/myevents/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
     db.normalDb.query(
-        "SELECT * FROM `user_events_interested` WHERE user_account_id = ?",
+        "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event JOIN user_events_interested ON user_events_interested.event_id = event.event_id WHERE user_account_id = ?",
         [id],
         (err, rows) => {
             if (err) {
@@ -110,7 +110,6 @@ router.get("/myevents/:id", validateToken, (req, res)=> {
         });
 
 });
-
 
 
 module.exports = router;

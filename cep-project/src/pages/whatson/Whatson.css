@@ -22,6 +22,24 @@
     --bs-btn-hover-bg: #ff5147;
 }
 
+.sort-btn {
+    background-color: whitesmoke;
+    color: #276174;
+    font-size: larger;
+    font-weight: 600;
+    min-width: -webkit-fill-available;
+}
+
+.sort-btn:hover {
+    background-color:#276174;
+    color: whitesmoke;
+}
+
+.sort-btn:focus {
+    background-color:#276174;
+    color: whitesmoke;
+}
+
 /*individual event cards*/
 .whatson-card {
     background-color: whitesmoke;

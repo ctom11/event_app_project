@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
 import './Whatson.css';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Moment from "moment";
+import Dropdown from 'react-bootstrap/Dropdown';
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
 export const Whatson = () => {
@@ -41,12 +41,12 @@ export const Whatson = () => {
         });
     }
 
-    //create options to choose from for filter at top
-    const sortOptions = [
-        { value: 1, label: 'A-Z' },
-        { value: 2, label: 'Newest' },
-        { value: 3, label: 'Oldest' }
-        ]
+    const SortEventAZ = () => {
+        Axios.get("http://localhost:3001/event/sortaz").then((Response) => {
+            console.log(Response)
+            setListOfEvents(Response.data);
+        });
+    }
 
     return (
   
@@ -94,7 +94,14 @@ export const Whatson = () => {
                                 <Button className="free-events-btn" onClick={() => FilterFreeEvents()}>Free Events</Button>
                             </Col>
                             <Col class="col-md-10 sort-events">
-                                <Select options={sortOptions}  placeholder={'Sort Events'} clearable={false}/>
+                                <Dropdown>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic" className="sort-btn">Sort by</Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href={SortEventAZ()}>A-Z</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-2">Newest</Dropdown.Item>
+                                        <Dropdown.Item href="#/action-3">Oldest</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </Col>
                         </Row>
                     </Row>
