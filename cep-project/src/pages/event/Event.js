@@ -115,6 +115,8 @@ export const Event = () => {
                     <Col xs lg="8" className="event-description">
                         <p className="event-p">{eventObject.event_description_intro}</p>
                         <p className="event-p">{eventObject.event_description_body}</p>
+                        <button className="event-option-btn">I am Going</button>
+                        <button className="event-option-btn">I am Interested</button>
                     </Col>
                     <Col xs lg="4">
                         <Card className="event-stats">
