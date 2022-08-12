@@ -144,7 +144,7 @@ router.get("/comments/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT comment_id, event_comment_body, event_comment_time, first_name, last_name FROM comments JOIN user_account ON comments.user_account_id = user_account.user_account_id WHERE comments.comment_event_id = ?",
+        "SELECT comment_id, event_comment_body, event_comment_time, first_name, last_name, user_profile_picture FROM comments JOIN user_account ON comments.user_account_id = user_account.user_account_id WHERE comments.comment_event_id = ?",
         [id],
         (err, rows) => {
             if (err) {

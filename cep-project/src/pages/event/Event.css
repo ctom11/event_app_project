@@ -166,6 +166,16 @@ a:hover {
     
 }
 
+.comment-user-pic {
+    width: 80px;
+    height: 80px;
+}
+
+.comment-user-name {
+    font-size: larger;
+    margin-left: 20px;
+}
+
 /*space out bottom of event page*/
 .event-bottom-card {
     margin-bottom: 50px;

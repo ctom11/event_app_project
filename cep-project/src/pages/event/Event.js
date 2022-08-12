@@ -6,6 +6,7 @@ import { Card, Row, Col, Accordion, Toast, Button} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Moment from "moment";
+import TestImage from '../../assets/images/profile-pic-logo.png';
 import { AuthContext } from "../../components/AuthContext";
 
 export const Event = () => {
@@ -42,14 +43,20 @@ export const Event = () => {
     let commentblock = <Toast className="comments-toast"></Toast>;
     if(Array.isArray(commentObject)){
         commentblock = commentObject.map((value, key) => { 
+            //set default profile picture
+            let profilePicture = TestImage;
+            if (value.user_profile_picture) {
+                profilePicture = value.user_profile_picture
+            }
             //for displaying comment time for now
             var date = Moment().format(value.event_comment_time);
             const fromNow = Moment(date).fromNow();
             return(
                 <Toast className="comments-toast">
+                    
                     <Toast.Header>
-                        <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                        <strong className="me-auto">{value.first_name} {value.last_name}</strong>
+                        <img src={profilePicture} className="rounded me-2 comment-user-pic" alt="" />
+                        <strong className="me-auto comment-user-name">{value.first_name} {value.last_name}</strong>
                         <small>{fromNow}</small>
                     </Toast.Header>
                     <Toast.Body>{value.event_comment_body}</Toast.Body>
