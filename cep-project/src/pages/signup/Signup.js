@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,6 +7,9 @@ import Axios from 'axios';
 import Pdf from '../../assets/EventureTermsConditions.pdf';
 
 export const Signup = () => {
+
+    /*set up for connecting to individual event page*/
+    let navigate = useNavigate()
 
     /*have to create initial values for Formik*/
     const initialValues = {
@@ -31,7 +34,11 @@ export const Signup = () => {
     const submitRegister = (data) => {
         Axios.post('http://localhost:3001/signup', data).then(() => {
             console.log(data)
-        });       
+            alert("Registration successful!")
+            navigate(`/login`);
+            window.location.reload();
+        });    
+           
     };
 
     return (

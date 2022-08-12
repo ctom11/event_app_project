@@ -10,12 +10,11 @@ import TestImage from '../../assets/images/profile-pic-logo.png';
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from 'axios';
 
+
 export const Userprofile = () => {
 
   //set up for connecting to individual event page
   let navigate = useNavigate()
-
-  const accessToken = localStorage.getItem("accessToken");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -35,6 +34,18 @@ export const Userprofile = () => {
       });
   }, [])
 
+  //find out if user is an admin
+  let adminTaskLink = ""
+  let adminStatus = 0;
+  if (userObject.admin_status = 1) {
+    adminStatus = 1
+  }
+  if (adminStatus = 1) {
+    adminTaskLink = <Button>View Admin Tasks</Button>
+  } else {
+    adminTaskLink = null
+  }
+
   //update user profile picture
   const UpdateProfilePicture = () => {
       Axios.post(`http://localhost:3001/updateprofilepic/${id}`,{
@@ -46,6 +57,16 @@ export const Userprofile = () => {
       });
   };
 
+  //update user bio
+  const [userBio, setUserBio] = useState("");
+  const UpdateBio = () => {
+    Axios.post(`http://localhost:3001/useraccount/updatebio/${id}`, {
+        userBio: userBio
+    }).then(() => {
+        alert("bio successfully updated");
+    });
+  };
+
   //get list of user's events they are interested in
   useEffect(() => {
     Axios.get(`http://localhost:3001/useraccount/myevents/${id}`, {
@@ -54,19 +75,15 @@ export const Userprofile = () => {
         console.log(Response)
         setMyEventsObject(Response.data);
     });
-}, [])
-
+  }, [])
 
   //set default profile picture
   let profilePicture = TestImage;
   if (userObject.user_profile_picture) {
     profilePicture = userObject.user_profile_picture
   }
-
-
   const changepicpopover = (
     <Popover id="popover-basic">
-      <Popover.Header as="h3">Popover right</Popover.Header>
       <Popover.Body>
         <form action="/" enctype="multipart/form-data" method="post">
           <input type="file" name="image" accept='image/*' />
@@ -75,6 +92,23 @@ export const Userprofile = () => {
       </Popover.Body>
     </Popover>
   );
+
+  //show bio text box only if user has not added a bio yet
+  let bioDisplay =  <div>
+                      <h2 className="update-bio">Update your account bio:</h2>
+                      <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing..." onChange={(e) => {setUserBio(e.target.value)}}></textarea>
+                      <button className="add-comment-btn" onClick={UpdateBio}>Add Bio</button>
+                    </div>
+  if (userObject.user_bio) {
+    bioDisplay = <div className="user-bio">{userObject.user_bio}</div>
+  }
+
+  //logout shortcut
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    navigate("/")
+    window.location.reload();
+  }
 
   return (
 
@@ -92,21 +126,21 @@ export const Userprofile = () => {
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>
                 <p>{userObject.email_address}</p>
+                {bioDisplay}
               </Card.Text>
               
               <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Account Settings</Button>
-              <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Logout</Button>
+              <Button className="account-settings-btn" variant="primary" onClick={logout}>Logout</Button>
 
-              <Offcanvas show={show} onHide={handleClose}>
+              <Offcanvas show={show} onHide={handleClose} className="account-settings-offcanvas">
                 <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body className="account-settings-body">
                   <h1>Account Settings</h1>
-                  <div className="account-settings-option">
-                  <h2>Change my name</h2>
-                  <h2>Change my password</h2>
-                  <h2>Delete my account</h2>
+                  <div className="account-settings-options">
+                    <h2 className="settings-option" onClick={() => {navigate(`/changename/${userObject.user_account_id}`)}}>Change My Name</h2>
+                    <h2 className="settings-option" onClick={() => {navigate(`/changepassword/${userObject.user_account_id}`)}}>Change My Password</h2>
+                    <h2 className="settings-option" onClick={() => {navigate(`/deleteaccount/${userObject.user_account_id}`)}}>Delete My Account</h2>
                   </div>
                 </Offcanvas.Body>
               </Offcanvas>

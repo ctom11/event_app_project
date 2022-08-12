@@ -8,7 +8,7 @@
 }
 
 .profile-page-full {
-    width: auto;
+    max-width: 90%;
     margin: auto;
 }
 
@@ -53,8 +53,12 @@
     --bs-btn-active-bg: #ff5147 !important;
 }
 
+.account-settings-offcanvas {
+    border: 4px solid #276174;
+}
+
 .account-settings-body {
-    margin-top: 30%;
+    margin-top: 40%;
     color: #276174;
     text-align: center;
 }
@@ -76,8 +80,13 @@
     --bs-btn-disabled-border-color: none;
 }
 
-.account-settings-option {
+.account-settings-options {
     margin-top: 20%;
+}
+
+.settings-option:hover {
+    color:#ff5147;
+    cursor: pointer;
 }
 
 .interested-card {
@@ -93,4 +102,40 @@
     padding-top: 5px;
     margin: 0.5%;
     cursor: pointer;
+}
+
+.update-bio {
+    padding-bottom: 10px;
+    font-size: medium !important;
+}
+
+.user-bio {
+    padding: 20px 40px 40px 40px;
+    font-style: italic;
+}
+
+.change-name-div {
+    width: 40%;
+    margin: auto;
+    margin-top: 5%;
+    align-items: center;
+}
+
+.change-title {
+    color: #276174;
+    margin-top: 30px;
+}
+
+.change-label {
+    color: #276174;
+    float: left;
+}
+
+.change-input {
+    width: 100%;
+}
+
+.change-btn {
+    max-width: min-content;
+    margin-bottom: 30px;
 }

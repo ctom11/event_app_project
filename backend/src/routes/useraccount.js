@@ -4,6 +4,9 @@ const db = require("../config/db");
 const router = express.Router();
 const {validateToken} = require("../authentication/authentication");
 
+// for comparing input password with hashed password in db
+const bcrypt = require("bcrypt");
+
 /*get all info for a particular user*/
 router.get("/byId/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
@@ -44,7 +47,6 @@ router.get("/", (req, res)=> {
 });
 
 //update profile pic
-
 router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
 
     console.log(req);
@@ -65,8 +67,95 @@ router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
             }
         }
     );
-
 });
+
+//update bio
+router.post("/updatebio/:id", validateToken, (req, res)=> {
+
+    console.log(req);
+    const userBio = req.body.userBio
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "UPDATE user_account SET user_bio = ? WHERE user_account_id= ?",
+        [userBio, id],
+        (err, result) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if (result.affectedRows) {
+                res.send({message: "success"})
+            } else {
+                res.send(result)
+            }
+        }
+    );
+});
+
+//update name
+router.post("/changename/:id", validateToken, (req, res)=> {
+
+    console.log(req);
+    const updatedFirstName = req.body.updatedFirstName
+    const updatedLastName = req.body.updatedLastName
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "UPDATE user_account SET first_name = ?, last_name = ? WHERE user_account_id= ?",
+        [updatedFirstName, updatedLastName, id],
+        (err, result) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if (result.affectedRows) {
+                res.send({message: "success"})
+            } else {
+                res.send(result)
+            }
+        }
+    );
+});
+
+//update password
+/*router.post("/changepassword/:id", validateToken, (req, res)=> {
+
+    console.log(req);
+    const currentPassword = req.body.currentPassword
+    const updatedPassword = req.body.updatedPassword
+    const id =  req.params.id;
+    try {
+        const [rows, fields] = await db.promiseDb.query("SELECT * FROM user_account WHERE user_account_id = ?",[id]);
+        if(rows.length <= 0){
+            res.send({error: "Incorrect email"})
+            return;
+        }
+        let password = rows[0].password;
+        
+        bcrypt.compare(currentPassword, password).then((match) => {
+            if(!match){
+                res.send({error: "This is not your registered password"})
+                return;
+            } else {
+                db.normalDb.query(
+                    "UPDATE user_account SET password = ? WHERE user_account_id= ?",
+                    [updatedPassword, updatedLastName, id],
+                    (err, result) => {
+                        if (err) {
+                            res.send({err: err});
+                        }
+                        if (result.affectedRows) {
+                            res.send({message: "success"})
+                        } else {
+                            res.send(result)
+                        }
+                    }
+                );
+            }
+           })
+    } catch(err) {
+        throw err;
+    }
+});*/
 
 //add event to user's 'events you're interested in'
 router.post("/addToInterested", validateToken, (req, res)=> {

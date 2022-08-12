@@ -10,6 +10,9 @@ import { NavigationBar } from './components/NavigationBar';
 import { Footer } from './components/Footer';
 import { Event } from './pages/event/Event';
 import { Userprofile } from './pages/userprofile/Userprofile';
+import { ChangeName } from './pages/userprofile/ChangeName';
+import { ChangePassword } from './pages/userprofile/ChangePassword';
+import { DeleteAccount } from './pages/userprofile/DeleteAccount';
 import { CreateEvent } from './pages/event/CreateEvent';
 import { NewEventSubmitted } from './pages/event/NewEventSubmitted';
 import { AuthContext } from './components/AuthContext'; 
@@ -49,6 +52,9 @@ function App() {
                   <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
                   <Route path ='/createEvent' element = {<CreateEvent/>}/>
                   <Route path ='/neweventsubmitted' element = {<NewEventSubmitted/>}/>
+                  <Route path ='/changename/:id' element = {<ChangeName/>}/>
+                  <Route path ='/changepassword/:id' element = {<ChangePassword/>}/>
+                  <Route path ='/deleteaccount/:id' element = {<DeleteAccount/>}/>
                 </Routes>
               </Router>
           </Layout>
