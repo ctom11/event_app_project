@@ -101,10 +101,10 @@ export const Whatson = () => {
                         <Row>
                             <Col class="col-md-10">
                                 <Dropdown className="sort-events">
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic" className="sort-btn">Sort by</Dropdown.Toggle>
+                                    <Dropdown.Toggle variant="success" id="dropdown-basic" className="sort-btn">Sort by   </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item onClick={() => SortEventAZ()}>A-Z</Dropdown.Item>
-                                        <Dropdown.Item onClick={() => SortEventByDate()}>Date</Dropdown.Item>
+                                        <Dropdown.Item className="sort-dropdown-item" onClick={() => SortEventAZ()}>A-Z</Dropdown.Item>
+                                        <Dropdown.Item className="sort-dropdown-item" onClick={() => SortEventByDate()}>Date</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>

@@ -105,6 +105,12 @@ export const Event = () => {
         })
     }
 
+    //only link to tickets if they exist
+    let ticketOptions = "Tickets not needed"
+    if (eventObject.event_ticket_link) {
+        ticketOptions = <a className="tickets-text" href={eventObject.event_ticket_link}><h1 className="tickets-text">Get Tickets</h1></a>
+    }
+
     return (
 
         <div className="event-full">
@@ -117,12 +123,12 @@ export const Event = () => {
                 <Row className="justify-content-md-center">
                     <Col xs lg="8">
                         <h1 className="event-p event-title">{eventObject.event_name}</h1>
-                        <h2 className="event-p event-name-h2">{Moment(eventObject.event_date).format("Do MMMM YYYY")} - {eventObject.event_location}</h2>
+                        <h2 className="event-p event-name-h2">{eventObject.event_location} - {Moment(eventObject.event_date).format("Do MMMM YYYY")}, {eventObject.event_time}</h2>
                     </Col>
                     <Col xs lg="4">
                             <Card className="tickets-card">
                                 <div>
-                                    <a className="tickets-text" href={eventObject.event_ticket_link}><h1 className="tickets-text">Get Tickets</h1></a>
+                                    {ticketOptions}
                                 </div>
                             </Card>
                     </Col>
@@ -146,16 +152,13 @@ export const Event = () => {
                     </Col>
                 </Row>
                 <Accordion defaultActiveKey="0">
-                    <Accordion.Item eventKey="0">
-                        <Accordion.Header className="event-p">More Information</Accordion.Header>
-                        <Accordion.Body>
-                            <h2 className="event-p event-name-h2">{eventObject.event_time}</h2>
-                        </Accordion.Body>
-                    </Accordion.Item>
                     <Accordion.Item eventKey="1">
                         <Accordion.Header  className="event-p">Location</Accordion.Header>
                         <Accordion.Body>
                             <h2 className="event-p event-name-h2">{eventObject.event_location}</h2>
+                            <iframe className="event-map" width="1000" height="400" loading="lazy" allowFullScreen referrerpolicy="no-referrer-when-downgrade"
+                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDQgQktcZ2zNRGdvaxuUaXY3Y2it9G4cfY&q=${eventObject.event_location}`}></iframe>
+                            
                         </Accordion.Body>
                     </Accordion.Item>
 

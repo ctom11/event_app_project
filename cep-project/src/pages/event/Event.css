@@ -56,6 +56,11 @@
     padding-left: 40px;
 }
 
+.event-map {
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
 /*displaying where to get tickets on event page*/
 .tickets-card {
     margin: 50px 30px 0px 50px;

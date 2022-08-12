@@ -19,7 +19,8 @@
     color: #276174;
     font-size: larger;
     font-weight: 600;
-    min-width: -webkit-fill-available;
+    min-width: 50%;
+    margin-left: 45%;
 }
 
 .sort-btn:hover {
@@ -30,6 +31,10 @@
 .sort-btn:focus {
     background-color:#276174;
     color: whitesmoke;
+}
+
+.sort-dropdown-item {
+    color: #276174;
 }
 
 /*individual event cards*/
