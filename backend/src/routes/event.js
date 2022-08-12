@@ -42,11 +42,29 @@ router.get("/byId/:id", (req, res)=> {
         });
 });
 
-/*get all info for a particular event*/
+/*sort events a-z*/
 router.get("/sortaz", (req, res)=> {
 
     db.normalDb.query(
         "SELECT * FROM event ORDER BY event_name ASC;",
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if(rows){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"Couldn't sort"})
+            }
+        });
+});
+
+/*sort events a-z*/
+router.get("/sortdate", (req, res)=> {
+
+    db.normalDb.query(
+        "SELECT * FROM event ORDER BY event_date",
         (err, rows) => {
             if (err) {
                 res.send({err: err});

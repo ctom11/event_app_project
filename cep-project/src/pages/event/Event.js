@@ -6,7 +6,6 @@ import { Card, Row, Col, Accordion, Toast, Button} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 import Moment from "moment";
-import moment from "moment";
 import { AuthContext } from "../../components/AuthContext";
 
 export const Event = () => {
@@ -15,8 +14,6 @@ export const Event = () => {
     const accessToken = localStorage.getItem("accessToken");
     const { authState } = useContext(AuthContext);
 
-    //for displaying date in Do MMMM YYYY formart rather than YYYY/MM/DD
-    var formatDate = Moment().format("Do MMMM YYYY");
     //for passing time of comment through to db
     var commentTimeNow = Moment().format();
 
@@ -46,7 +43,7 @@ export const Event = () => {
     if(Array.isArray(commentObject)){
         commentblock = commentObject.map((value, key) => { 
             //for displaying comment time for now
-            var date = moment().format(value.event_comment_time);
+            var date = Moment().format(value.event_comment_time);
             const fromNow = Moment(date).fromNow();
             return(
                 <Toast className="comments-toast">
@@ -120,7 +117,7 @@ export const Event = () => {
                 <Row className="justify-content-md-center">
                     <Col xs lg="8">
                         <h1 className="event-p event-title">{eventObject.event_name}</h1>
-                        <h2 className="event-p event-name-h2">{formatDate} - {eventObject.event_location}</h2>
+                        <h2 className="event-p event-name-h2">{Moment(eventObject.event_date).format("Do MMMM YYYY")} - {eventObject.event_location}</h2>
                     </Col>
                     <Col xs lg="4">
                             <Card className="tickets-card">

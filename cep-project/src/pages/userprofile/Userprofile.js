@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Userprofile.css';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button } from "react-bootstrap";
+import Moment from "moment";
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -120,7 +121,7 @@ export const Userprofile = () => {
                 {myEventsObject.map((value, key) => { 
                   return(               
                     <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                      <p><b>{value.event_name}</b> {value.event_date} {value.event_time}</p>  
+                      <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
                     </div>
                   )
                 })}

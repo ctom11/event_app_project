@@ -14,14 +14,6 @@
     height: max-content;
 }
 
-.free-events-btn {
-    background-color: #ff5147;
-    font-size: larger;
-    font-weight: 600;
-    min-width: -webkit-fill-available;
-    --bs-btn-hover-bg: #ff5147;
-}
-
 .sort-btn {
     background-color: whitesmoke;
     color: #276174;
@@ -45,14 +37,14 @@
     background-color: whitesmoke;
     width: 90%;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 20px; padding-bottom: 10px;
 }
 
 .card-title {
     color: #276174;
     font-weight: 700;
     font-size: xx-large;
-    height: 120px;
+    height: 45%;
 }
 
 /*entire column of event cards*/

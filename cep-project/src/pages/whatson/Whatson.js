@@ -9,9 +9,6 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 export const Whatson = () => {
 
-    //for displaying date in Do MMMM YYYY format rather than YYYY/MM/DD
-    const formatDate = Moment().format("Do MMMM YYYY");
-
     //get the data from API to fill the event cards
     const [listOfEvents, setListOfEvents] = useState([]);
 
@@ -41,8 +38,17 @@ export const Whatson = () => {
         });
     }
 
+    //sort events A-Z
     const SortEventAZ = () => {
         Axios.get("http://localhost:3001/event/sortaz").then((Response) => {
+            console.log(Response)
+            setListOfEvents(Response.data);
+        });
+    }
+
+    //sort events by date
+    const SortEventByDate = () => {
+        Axios.get("http://localhost:3001/event/sortdate").then((Response) => {
             console.log(Response)
             setListOfEvents(Response.data);
         });
@@ -57,6 +63,9 @@ export const Whatson = () => {
                 <div id="wrapper" className="toggled whatson-div">
                     <div id="sidebar-wrapper">
                         <ul className="sidebar-nav">
+                        <li>
+                                <Button onClick={() => FilterFreeEvents()} className='sidemenu-items'>Free Events</Button>
+                            </li>
                             <li>
                                 <Button onClick={() => FilterEventByGenre(16)} className='sidemenu-items'>Music</Button>
                             </li>
@@ -91,15 +100,11 @@ export const Whatson = () => {
                     <Row className="whatson-filter">
                         <Row>
                             <Col class="col-md-10">
-                                <Button className="free-events-btn" onClick={() => FilterFreeEvents()}>Free Events</Button>
-                            </Col>
-                            <Col class="col-md-10 sort-events">
-                                <Dropdown>
+                                <Dropdown className="sort-events">
                                     <Dropdown.Toggle variant="success" id="dropdown-basic" className="sort-btn">Sort by</Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href={SortEventAZ()}>A-Z</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Newest</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">Oldest</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => SortEventAZ()}>A-Z</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => SortEventByDate()}>Date</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Col>
@@ -115,7 +120,7 @@ export const Whatson = () => {
                                     <Card.Body className="event-card-body">
                                         <Card.Title>{value.event_name}</Card.Title>
                                         <Card.Text>
-                                            <p className="event-pa">{formatDate}</p>
+                                            <p className="event-pa">{Moment(value.event_date).format("Do MMMM YYYY")}</p>
                                             <p className="event-pa">{value.event_time}</p>
                                             <p className="event-pa">{value.event_location}</p>
                                         </Card.Text>
