@@ -56,8 +56,10 @@ export const Userprofile = () => {
     });
 }, [])
 
-  let profilePicture = {TestImage};
-  if (userObject.user_profile_picture != null) {
+
+  //set default profile picture
+  let profilePicture = TestImage;
+  if (userObject.user_profile_picture) {
     profilePicture = userObject.user_profile_picture
   }
 

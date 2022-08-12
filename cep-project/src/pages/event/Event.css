@@ -120,6 +120,44 @@ a:hover {
     --bs-accordion-active-bg: white;
 }
 
+.accordion-button {
+    color: #276174;
+    background-color: var(--bs-accordion-active-bg);
+    font-size: larger;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #ff5147;
+    font-size: larger;
+}
+
+.leave-comment-here {
+    text-align: left;
+    margin-left: 30px;
+}
+
+.add-comment-container {
+    text-align: -webkit-center;
+}
+
+.comment-form {
+    width: 90%;
+}
+
+.add-comment-btn {
+    width: 50%;
+    margin: 20px;
+    color: #276174;
+    background-color: #63FD88;
+    border-color: #63FD88;
+}
+
+.add-comment-btn:hover {
+    color: #276174;
+    background-color: #33C58E;
+    border-color: #33C58E;
+}
+
 /*comment formatting*/
 .comments-toast {
     margin: auto;

@@ -106,10 +106,20 @@ export const Event = () => {
     }
 
     //only link to tickets if they exist
-    let ticketOptions = "Tickets not needed"
+    let ticketOptions = <h1 className="tickets-text">Tickets Not Required</h1>
     if (eventObject.event_ticket_link) {
         ticketOptions = <a className="tickets-text" href={eventObject.event_ticket_link}><h1 className="tickets-text">Get Tickets</h1></a>
     }
+
+     //only let users comment if they are logged in
+     let displayCommentBox = ""
+     if (accessToken) {
+        displayCommentBox = <div className="add-comment-container">
+        <h2 className="leave-comment-here">Leave a comment here:</h2>
+        <textarea className="form-control comment-form" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing..." onChange={(e) => {setNewComment(e.target.value)}}></textarea>
+        <button className="add-comment-btn" onClick={addComment}>Add Comment</button>
+    </div>
+     }
 
     return (
 
@@ -163,15 +173,9 @@ export const Event = () => {
                     </Accordion.Item>
 
                     <Accordion.Item eventKey="2">
-                        <Accordion.Header  className="event-p">Comments</Accordion.Header>
+                        <Accordion.Header className="event-p">Comments</Accordion.Header>
                         <Accordion.Body>
-
-                            <div className="add-comment-container">
-                                <h2>{eventObject.event_name} </h2>
-                                <h2>Leave a comment here:</h2>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing.." onChange={(e) => {setNewComment(e.target.value)}}></textarea>
-                                <button className="eventure-btn" onClick={addComment}>Add Comment</button>
-                            </div>
+                            {displayCommentBox}
                             <div>
                                 {
                                 commentblock
