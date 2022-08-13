@@ -126,11 +126,6 @@ export const Userprofile = () => {
         <Col className="col-md-3 profile-left">
           <Card>
             <Card.Img className="profile-picture" variant="top" src={profilePicture} />
-
-            <OverlayTrigger trigger="click" placement="right" overlay={changepicpopover}>
-              <Button variant="success" type="submit" className="btn btn-primary change-prof-pic" onClick={UpdateProfilePicture}>Update Profile Picture</Button>
-            </OverlayTrigger>
-
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>
@@ -147,6 +142,8 @@ export const Userprofile = () => {
                 <Offcanvas.Body className="account-settings-body">
                   <h1>Account Settings</h1>
                   <div className="account-settings-options">
+                    <h2 className="settings-option">Update Profile Picture</h2>
+                    <h2 className="settings-option">Update Bio</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/changename/${userObject.user_account_id}`)}}>Change My Name</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/changepassword/${userObject.user_account_id}`)}}>Change My Password</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/deleteaccount/${userObject.user_account_id}`)}}>Delete My Account</h2>
