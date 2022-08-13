@@ -61,9 +61,18 @@ export const Userprofile = () => {
   const [userBio, setUserBio] = useState("");
   const UpdateBio = () => {
     Axios.post(`http://localhost:3001/useraccount/updatebio/${id}`, {
-        userBio: userBio
-    }).then(() => {
-        alert("bio successfully updated");
+      userBio: userBio },
+       {
+        headers: {
+            accessToken: localStorage.getItem("accessToken"),
+        }
+    }).then((Response) => {
+      if (Response.data.error) {
+        alert(Response.data.error);
+      } else {
+      alert("bio successfully updated" + userBio);
+      window.location.reload();
+      }
     });
   };
 
@@ -165,7 +174,6 @@ export const Userprofile = () => {
             </Card.Body>
           </Card>
           <Card>
-            <Card.Img variant="top" src="holder.js/100px160" />
             <Card.Body>
               <Card.Title className="profile-title">Posted Events</Card.Title>
               <Card.Text className="profile-text">

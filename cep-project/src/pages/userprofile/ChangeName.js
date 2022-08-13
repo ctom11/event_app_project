@@ -19,8 +19,7 @@ export const ChangeName = () => {
                 headers: {
                     accessToken: localStorage.getItem("accessToken"),
                 },
-            }
-        ).then((Response) => {
+            }).then((Response) => {
             if (Response.data.error) {
               alert(Response.data.error);
             } else {

@@ -126,6 +126,12 @@
     margin-top: 30px;
 }
 
+.change-title-password {
+    color: #276174;
+    margin-top: 30px;
+    margin-bottom: 5%;
+}
+
 .change-label {
     color: #276174;
     float: left;
