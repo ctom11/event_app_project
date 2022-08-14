@@ -1,0 +1,28 @@
+.about-us-card {
+    margin: auto;
+    width: 70%;
+    margin-top: 7.5%;
+    text-align: center;
+}
+
+.about-us-title {
+    color: #276174;
+    margin-top: 2.5%;
+    font-size: xxx-large;
+}
+
+.about-us-text {
+    color: #276174;
+    padding-bottom: 5%;
+    margin: auto;
+    width: 75%;
+}
+
+.about-us-question {
+    margin-top: 5%;
+    font-weight: 900;
+}
+
+.company-info {
+    margin-top: 3%;
+}

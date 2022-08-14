@@ -8,6 +8,8 @@ import { Login } from './pages/login/Login';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Footer } from './components/Footer';
+import { OurCompany } from './components/OurCompany';
+import { FAQs} from './components/FAQs';
 import { Event } from './pages/event/Event';
 import { Userprofile } from './pages/userprofile/Userprofile';
 import { ChangeName } from './pages/userprofile/ChangeName';
@@ -55,6 +57,8 @@ function App() {
                   <Route path ='/changename/:id' element = {<ChangeName/>}/>
                   <Route path ='/changepassword/:id' element = {<ChangePassword/>}/>
                   <Route path ='/deleteaccount/:id' element = {<DeleteAccount/>}/>
+                  <Route path ='/ourcompany' element = {<OurCompany/>}/>
+                  <Route path ='/faqs' element = {<FAQs/>}/>
                 </Routes>
               </Router>
           </Layout>

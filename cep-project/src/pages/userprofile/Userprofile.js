@@ -132,6 +132,8 @@ export const Userprofile = () => {
                 <p>{userObject.email_address}</p>
                 {bioDisplay}
               </Card.Text>
+
+              <button className="admin-tasks-btn">View My Admin Tasks</button><br/>
               
               <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Account Settings</Button>
               <Button className="account-settings-btn" variant="primary" onClick={logout}>Logout</Button>

@@ -1,7 +1,10 @@
 .footer-full {
+    left:0;
+    bottom:0;
+    right:0;
     place-content: center;
     background-color: #276174;
-    margin-top: 80px;
+    margin-top: 6%;
     padding-top: 20px;
     padding-bottom: 10px;
     text-align: center;
@@ -24,6 +27,7 @@ hr {
 .footer-info {
     font-size: medium;
     font-weight: 300;
+    cursor: pointer;
 }
 
 .footer-info:hover {
