@@ -8,6 +8,7 @@
     padding-top: 20px;
     padding-bottom: 10px;
     text-align: center;
+    min-width: max-content;
 }
 
 .logo-footer {

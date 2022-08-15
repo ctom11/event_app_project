@@ -20,6 +20,8 @@ export const Home = () => {
   
   //set up for connecting to individual event page
   let navigate = useNavigate()
+
+  //get featured events
   useEffect(() => {
       Axios.get('http://localhost:3001/event/featured').then((Response) => {
           console.log(Response)

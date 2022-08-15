@@ -12,6 +12,7 @@ import { OurCompany } from './components/OurCompany';
 import { FAQs} from './components/FAQs';
 import { Event } from './pages/event/Event';
 import { Userprofile } from './pages/userprofile/Userprofile';
+import { AdminTasks } from './pages/userprofile/AdminTasks';
 import { ChangeName } from './pages/userprofile/ChangeName';
 import { ChangePassword } from './pages/userprofile/ChangePassword';
 import { DeleteAccount } from './pages/userprofile/DeleteAccount';
@@ -52,6 +53,7 @@ function App() {
                   <Route path ='/login' element = {<Login/>}/>
                   <Route path ='/event/:id' element = {<Event/>}/>
                   <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
+                  <Route path ='/admintasks' element = {<AdminTasks/>}/>
                   <Route path ='/createEvent' element = {<CreateEvent/>}/>
                   <Route path ='/neweventsubmitted' element = {<NewEventSubmitted/>}/>
                   <Route path ='/changename/:id' element = {<ChangeName/>}/>

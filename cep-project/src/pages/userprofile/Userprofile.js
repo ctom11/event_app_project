@@ -3,7 +3,6 @@ import './Userprofile.css';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button } from "react-bootstrap";
 import Moment from "moment";
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import TestImage from '../../assets/images/profile-pic-logo.png';
@@ -21,8 +20,12 @@ export const Userprofile = () => {
   const handleShow = () => setShow(true);
 
   let { id } = useParams();
+  //user's account information
   const [userObject, setUserObject] = useState({});
+  //events user is interested in
   const [myEventsObject, setMyEventsObject] = useState([]);
+  //events user has posted
+  const [postedEventsObject, setPostedEventsObject] = useState([]);
   
   //get all user info
   useEffect(() => {
@@ -35,14 +38,11 @@ export const Userprofile = () => {
   }, [])
 
   //find out if user is an admin
-  let adminTaskLink = ""
-  let adminStatus = 0;
-  if (userObject.admin_status = 1) {
-    adminStatus = 1
-  }
-  if (adminStatus = 1) {
-    adminTaskLink = <Button>View Admin Tasks</Button>
-  } else {
+  let adminStatus = userObject.admin_status;
+  let adminTaskLink = <></>
+  if (adminStatus === 1) {
+    adminTaskLink = <Button className="admin-tasks-btn" onClick={() => {navigate(`/admintasks`)}}>View My Admin Tasks</Button>
+  } else {  
     adminTaskLink = null
   }
 
@@ -85,6 +85,16 @@ export const Userprofile = () => {
         setMyEventsObject(Response.data);
     });
   }, [])
+
+    //get list of user's events they have posted
+    useEffect(() => {
+      Axios.get(`http://localhost:3001/useraccount/postedevents/${id}`, {
+        headers: {accessToken: localStorage.getItem("accessToken")}, 
+      }) .then((Response) => {
+          console.log(Response)
+          setPostedEventsObject(Response.data);
+      });
+    }, [])
 
   //set default profile picture
   let profilePicture = TestImage;
@@ -133,7 +143,8 @@ export const Userprofile = () => {
                 {bioDisplay}
               </Card.Text>
 
-              <button className="admin-tasks-btn">View My Admin Tasks</button><br/>
+              {userObject.admin_status}
+              {adminTaskLink}<br/>
               
               <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Account Settings</Button>
               <Button className="account-settings-btn" variant="primary" onClick={logout}>Logout</Button>
@@ -160,7 +171,6 @@ export const Userprofile = () => {
           <Card className="interested-card">
             <Card.Body>
               <Card.Title className="profile-title">Events you're interested in..</Card.Title>
-
               <div xs={1} md={3} className="row g-4">
                 {myEventsObject.map((value, key) => { 
                   return(               
@@ -175,9 +185,15 @@ export const Userprofile = () => {
           <Card>
             <Card.Body>
               <Card.Title className="profile-title">Posted Events</Card.Title>
-              <Card.Text className="profile-text">
-                Here will be information on user's own events.
-              </Card.Text>
+              <div xs={1} md={3} className="row g-4">
+                {postedEventsObject.map((value, key) => { 
+                  return(               
+                    <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                      <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
+                    </div>
+                  )
+                })}
+              </div>
                 <Link to="/CreateEvent">
                   <Button variant="primary">Create Event</Button>
                 </Link>

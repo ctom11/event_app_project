@@ -160,7 +160,7 @@ router.get("/comments/:id", (req, res)=> {
 });
 
 /*create new event*/
-router.post("/createevent", validateToken, (req, res)=> {
+router.post("/createevent", (req, res)=> {
 
     console.log(req.body)
     const eventName = req.body.eventName
@@ -172,11 +172,12 @@ router.post("/createevent", validateToken, (req, res)=> {
     const eventTime = req.body.eventTime
     const eventLocation = req.body.eventLocation
     const eventImage = req.body.eventImage
+    const userId = req.body.userId
 
     console.log(eventName)
 
-    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage], (err, result) => {
+    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
+    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId], (err, result) => {
         if(err){
             console.log(err);
         }
@@ -221,5 +222,26 @@ router.delete("/comment/:commentId", validateToken, async (req, res) => {
     })
 
 })
+
+/*get all events requiring admin approval*/
+router.get("/awaitingapproval", (req, res)=> {
+
+    db.normalDb.query(
+        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.admin_approved = 0",
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+                return;
+            }
+            else {
+                res.send({message:"No events currently awaiting approval"})
+                return;
+            }
+        });
+});
 
 module.exports = router;

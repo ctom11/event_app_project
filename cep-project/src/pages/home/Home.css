@@ -4,7 +4,7 @@
 
 .carousel-inner {
     height: 50vh;
-    min-height: 880px;
+    min-height: 980px;
     min-width: auto;
 }
 
@@ -61,6 +61,7 @@
     max-width: 1600px;
     margin: 50px;
     border: 2px solid #ff5147;
+    position: sticky;
 }
 
 .h1-featured {

@@ -143,11 +143,11 @@ export const Event = () => {
                         <h2 className="event-p event-name-h2">{eventObject.event_location} - {Moment(eventObject.event_date).format("Do MMMM YYYY")}, {eventObject.event_time}</h2>
                     </Col>
                     <Col xs lg="4">
-                            <Card className="tickets-card">
-                                <div>
-                                    {ticketOptions}
-                                </div>
-                            </Card>
+                        <Card className="tickets-card">
+                            <div>
+                                {ticketOptions}
+                            </div>
+                        </Card>
                     </Col>
                 </Row>
                 <Row className="justify-content-md-center">
@@ -165,7 +165,6 @@ export const Event = () => {
                         <div className="user-event-status">
                             <Button className="event-status-btn" onClick={addToInterested}>{buttonText}</Button>
                         </div>
-
                     </Col>
                 </Row>
                 <Accordion defaultActiveKey="0">
@@ -174,19 +173,15 @@ export const Event = () => {
                         <Accordion.Body>
                             <h2 className="event-p event-name-h2">{eventObject.event_location}</h2>
                             <iframe className="event-map" width="1000" height="400" loading="lazy" allowFullScreen referrerpolicy="no-referrer-when-downgrade"
-                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDQgQktcZ2zNRGdvaxuUaXY3Y2it9G4cfY&q=${eventObject.event_location}`}></iframe>
-                            
+                                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDQgQktcZ2zNRGdvaxuUaXY3Y2it9G4cfY&q=${eventObject.event_location}`}></iframe> 
                         </Accordion.Body>
                     </Accordion.Item>
-
                     <Accordion.Item eventKey="2">
                         <Accordion.Header className="event-p">Comments</Accordion.Header>
                         <Accordion.Body>
                             {displayCommentBox}
                             <div>
-                                {
-                                commentblock
-                                }
+                                {commentblock}
                             </div>
                         </Accordion.Body>
                     </Accordion.Item>
