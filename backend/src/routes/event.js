@@ -10,7 +10,7 @@ router.get("/", (req, res)=> {
     console.log(req);
 
     db.normalDb.query(
-        "SELECT * FROM event",
+        "SELECT * FROM event WHERE admin_approved = 1",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -46,7 +46,7 @@ router.get("/byId/:id", (req, res)=> {
 router.get("/sortaz", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT * FROM event ORDER BY event_name ASC;",
+        "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_name ASC;",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -64,7 +64,7 @@ router.get("/sortaz", (req, res)=> {
 router.get("/sortdate", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT * FROM event ORDER BY event_date",
+        "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_date",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -84,7 +84,7 @@ router.get("/byGenre/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event_genre.genre_id = ?",
+        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event_genre.genre_id = ? AND WHERE admin_approved = 1",
         [id],
         (err, rows) => {
             if (err) {
@@ -104,7 +104,7 @@ router.get("/byGenre/:id", (req, res)=> {
 router.get("/free", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event.event_free = 1",
+        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event.event_free = 1 AND WHERE admin_approved = 1",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -122,7 +122,7 @@ router.get("/free", (req, res)=> {
 router.get("/featured", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1",
+        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1 AND WHERE admin_approved = 1",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -242,6 +242,48 @@ router.get("/awaitingapproval", (req, res)=> {
                 return;
             }
         });
+});
+
+//approve event
+router.post("/approveevent/:id", validateToken, (req, res)=> {
+
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "UPDATE event SET admin_approved = 1 WHERE event_id= ?",
+        [id],
+        (err, result) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if (result) {
+                res.send({message: "success"})
+            } else {
+                res.send(result)
+            }
+        }
+    );
+});
+
+//decline event
+router.delete("/deleteevent/:id", validateToken, (req, res)=> {
+
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "DELETE FROM event WHERE event_id= ?",
+        [id],
+        (err, result) => {
+            if (err) {
+                res.send({err: err});
+            }
+            if (result) {
+                res.send({message: "success"})
+            } else {
+                res.send(result)
+            }
+        }
+    );
 });
 
 module.exports = router;

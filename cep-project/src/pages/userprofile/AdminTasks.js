@@ -118,6 +118,43 @@ export const AdminTasks = () => {
     window.location.reload();
   }
 
+  //approve event
+  const approveEvent = (eventId) => {
+        Axios.post(`http://localhost:3001/event/approveevent/${eventId}`,
+        {},
+        {
+         headers: {
+             accessToken: localStorage.getItem("accessToken"),
+         }
+     }).then((Response) => {
+          if (Response.data.error) {
+            alert(Response.data.error);
+          } else {
+          navigate("/admintasks")
+          alert("event approved");
+          window.location.reload();
+          }
+        });
+    };
+
+  //decline event
+  const declineEvent = (eventId) => {
+    Axios.delete(`http://localhost:3001/event/deleteevent/${eventId}`,
+           {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+            }
+        }).then((Response) => {
+          if (Response.data.error) {
+            alert(Response.data.error);
+          } else {
+          navigate("/admintasks")
+          alert("event deleted");
+          window.location.reload();
+          }
+        });
+  }
+
   return (
 
     <div className="profile-page-full">
@@ -163,6 +200,8 @@ export const AdminTasks = () => {
                 {awaitingApprovalList.map((value, key) => { 
                   return(               
                     <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                        <Button className="approve-event" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
+                        <Button className="reject-event" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
                       <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
                     </div>
                   )

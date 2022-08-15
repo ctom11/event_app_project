@@ -42,8 +42,8 @@ export const CreateEvent = () => {
               alert(Response.data.error);
             } else {
               console.log(Response.data);
-                navigate('/neweventsubmitted');
-                window.location.reload();
+              navigate('/neweventsubmitted');
+                //window.location.reload();
             }
         });
     }
