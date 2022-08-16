@@ -43,7 +43,6 @@ export const CreateEvent = () => {
             } else {
               console.log(Response.data);
               navigate('/neweventsubmitted');
-                //window.location.reload();
             }
         });
     }
@@ -54,7 +53,7 @@ export const CreateEvent = () => {
             <h1 className='create-event-header'>Create Your Own Event</h1>
             <h2>Have an event coming up that you'd like to promote? We can help you with that, free of charge.</h2>
 
-            <form className="form-container form-group create-event-form"> 
+            <div className="form-container form-group create-event-form"> 
             <div>                      
                 <label htmlFor="inputEventName">Event Name</label><br/>
                 <input type="text" id="input-event-name" className="form-input-signup signup create-input" name="name"
@@ -124,7 +123,7 @@ export const CreateEvent = () => {
                     }}></input>
                 </div>
                 <button type="submit" className="btn btn-primary eventure-btn create-event-btn" onClick={onSubmit}>Create Event</button>
-            </form>
+            </div>
             
         </Card>
 

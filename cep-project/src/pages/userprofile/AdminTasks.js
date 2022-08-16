@@ -131,7 +131,6 @@ export const AdminTasks = () => {
             alert(Response.data.error);
           } else {
           navigate("/admintasks")
-          alert("event approved");
           window.location.reload();
           }
         });
@@ -149,7 +148,6 @@ export const AdminTasks = () => {
             alert(Response.data.error);
           } else {
           navigate("/admintasks")
-          alert("event deleted");
           window.location.reload();
           }
         });
@@ -198,11 +196,13 @@ export const AdminTasks = () => {
               <Card.Title className="profile-title">Events awaiting approval..</Card.Title>
               <div xs={1} md={3} className="row g-4">
                 {awaitingApprovalList.map((value, key) => { 
-                  return(               
-                    <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                  return(     
+                    <div>          
                         <Button className="approve-event" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
                         <Button className="reject-event" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
-                      <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
+                        <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}> 
+                            <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
+                        </div>
                     </div>
                   )
                 })}
