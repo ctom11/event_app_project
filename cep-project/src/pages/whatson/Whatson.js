@@ -60,7 +60,7 @@ export const Whatson = () => {
 
     //add to featured events
     const addToFeatured = (eventId) => {
-        Axios.delete(`http://localhost:3001/event/addtofeatured/${eventId}`,
+        Axios.post(`http://localhost:3001/event/addtofeatured/${eventId}`, {},
         {headers: {accessToken: localStorage.getItem("accessToken"),}
             }).then((Response) => {
             if (Response.data.error) {

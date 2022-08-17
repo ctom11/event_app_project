@@ -168,7 +168,7 @@ export const AdminTasks = () => {
 
   //remove event from featured events
   const removeFromFeatured = (eventId) => {
-    Axios.delete(`http://localhost:3001/event/removefromfeatured/${eventId}`,
+    Axios.post(`http://localhost:3001/event/removefromfeatured/${eventId}`, {},
       {headers: {accessToken: localStorage.getItem("accessToken"),}
         }).then((Response) => {
           if (Response.data.error) {
