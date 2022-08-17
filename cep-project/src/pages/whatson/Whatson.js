@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import './Whatson.css';
 import { Col, Row, Card, Button } from "react-bootstrap";
 import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Moment from "moment";
 import Dropdown from 'react-bootstrap/Dropdown';
+import { AuthContext } from "../../components/AuthContext";
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
 
 export const Whatson = () => {
+
+    //for accessing user ID
+    const { authState } = useContext(AuthContext);
 
     //get the data from API to fill the event cards
     const [listOfEvents, setListOfEvents] = useState([]);
@@ -51,6 +55,20 @@ export const Whatson = () => {
         Axios.get("http://localhost:3001/event/sortdate").then((Response) => {
             console.log(Response)
             setListOfEvents(Response.data);
+        });
+    }
+
+    //add to featured events
+    const addToFeatured = (eventId) => {
+        Axios.delete(`http://localhost:3001/event/addtofeatured/${eventId}`,
+        {headers: {accessToken: localStorage.getItem("accessToken"),}
+            }).then((Response) => {
+            if (Response.data.error) {
+                alert(Response.data.error);
+            } else {
+                navigate("/admintasks")
+                window.location.reload();
+            }
         });
     }
 
@@ -112,17 +130,24 @@ export const Whatson = () => {
                     </Row>
                     <Row xs={1} md={3} className="g-4">
                         {listOfEvents.map((value, key) => { 
+                            let adminBtn = null
+                            if (authState.adminStatus === 1) {
+                                adminBtn = <Button onClick={() => addToFeatured(value.event_id)}>Make Featured Event</Button>
+                            } else {
+                                adminBtn = null
+                            }
                         return(
                             //<Col key={key}>
                             <Col>
                                 <Card className="whatson-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
                                     <Card.Img className="event-img" variant="top" src={value.event_img}/>                                
                                     <Card.Body className="event-card-body">
-                                        <Card.Title>{value.event_name}</Card.Title>
+                                        <Card.Title className="event-name-title">{value.event_name}</Card.Title>
                                         <Card.Text>
                                             <p className="event-pa">{Moment(value.event_date).format("Do MMMM YYYY")}</p>
                                             <p className="event-pa">{value.event_time}</p>
                                             <p className="event-pa">{value.event_location}</p>
+                                            {adminBtn}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>

@@ -33,7 +33,7 @@ router.get("/byId/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows){
+            else if(rows){
                 res.send(rows[0])
             }
             else {
@@ -51,7 +51,7 @@ router.get("/sortaz", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows){
+            else if(rows){
                 res.send(rows)
             }
             else {
@@ -60,7 +60,7 @@ router.get("/sortaz", (req, res)=> {
         });
 });
 
-/*sort events a-z*/
+/*sort events by date*/
 router.get("/sortdate", (req, res)=> {
 
     db.normalDb.query(
@@ -69,7 +69,7 @@ router.get("/sortdate", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows){
+            else if(rows){
                 res.send(rows)
             }
             else {
@@ -84,13 +84,13 @@ router.get("/byGenre/:id", (req, res)=> {
     const id =  req.params.id
 
     db.normalDb.query(
-        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event_genre.genre_id = ? AND WHERE admin_approved = 1",
+        "SELECT genre_id, event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE genre_id = ? AND admin_approved = 1",
         [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
             }
-            if(rows){
+            else if(rows){
                 res.send(rows)
             }
             else {
@@ -104,7 +104,7 @@ router.get("/byGenre/:id", (req, res)=> {
 router.get("/free", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event INNER JOIN event_genre ON event.event_id=event_genre.event_id WHERE event.event_free = 1 AND WHERE admin_approved = 1",
+        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_free = 1 AND admin_approved = 1",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -138,6 +138,53 @@ router.get("/featured", (req, res)=> {
             }
         });
 });
+
+/*add to featured events*/
+router.post("/addtofeatured/:id", validateToken, (req, res)=> {
+
+    const id =  req.params.id
+
+    db.normalDb.query(
+        "UPDATE event SET event_featured = 1 WHERE event_id = ?", [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+                return;
+            }
+            else {
+                res.send({message:"No featured events"})
+                return;
+            }
+        });
+});
+
+/*stop event from being a featured event*/
+router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
+
+    const id =  req.params.id
+
+    db.normalDb.query(
+        "UPDATE event SET event_featured = 0 WHERE event_id = ?", [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+                return;
+            }
+            else {
+                res.send({message:"No featured events"})
+                return;
+            }
+        });
+});
+
 
 /*get all event comments*/
 router.get("/comments/:id", (req, res)=> {
@@ -173,17 +220,19 @@ router.post("/createevent", (req, res)=> {
     const eventLocation = req.body.eventLocation
     const eventImage = req.body.eventImage
     const userId = req.body.userId
+    const genreId = req.body.genreId
 
     console.log(eventName)
 
-    const sqlInsert = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)"
-    db.normalDb.query(sqlInsert, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId], (err, result) => {
+    const sqlInsertEvent = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id, genre_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    db.normalDb.query(sqlInsertEvent, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId, genreId], (err, result) => {
         if(err){
             console.log(err);
         }
         console.log(result);
-        res.send(result)
+        res.send(result);
     })
+
 });
 
 /*add new event comment*/
@@ -227,7 +276,7 @@ router.delete("/comment/:commentId", validateToken, async (req, res) => {
 router.get("/awaitingapproval", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.admin_approved = 0",
+        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img, genre_id FROM event WHERE event.admin_approved = 0",
         (err, rows) => {
             if (err) {
                 res.send({err: err});

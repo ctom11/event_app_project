@@ -33,7 +33,7 @@ function App() {
         if (Response.data.error) {
           setAuthState(false);
         } else {
-          setAuthState({firstName: Response.data.email_address, id: Response.data.user_account_id, adminStatus: true});
+          setAuthState({firstName: Response.data.email_address, id: Response.data.user_account_id, adminStatus: Response.data.admin_status});
         }
       })
     }, []);

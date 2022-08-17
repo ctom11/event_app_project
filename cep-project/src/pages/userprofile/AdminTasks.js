@@ -118,7 +118,7 @@ export const AdminTasks = () => {
   let bioDisplay =  <div>
                       <h2 className="update-bio">Update your account bio:</h2>
                       <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing..." onChange={(e) => {setUserBio(e.target.value)}}></textarea>
-                      <button className="add-comment-btn" onClick={UpdateBio}>Add Bio</button>
+                      <button className="add-comment-btn bio-btn" onClick={UpdateBio}>Add Bio</button>
                     </div>
   if (userObject.user_bio) {
     bioDisplay = <div className="user-bio">{userObject.user_bio}</div>
@@ -166,6 +166,20 @@ export const AdminTasks = () => {
         });
   }
 
+  //remove event from featured events
+  const removeFromFeatured = (eventId) => {
+    Axios.delete(`http://localhost:3001/event/removefromfeatured/${eventId}`,
+      {headers: {accessToken: localStorage.getItem("accessToken"),}
+        }).then((Response) => {
+          if (Response.data.error) {
+            alert(Response.data.error);
+          } else {
+            navigate("/admintasks")
+            window.location.reload();
+          }
+      });
+  }
+
   return (
 
     <div className="profile-page-full">
@@ -201,48 +215,60 @@ export const AdminTasks = () => {
         </Col>
 
         <Col className="col-md-9 profile-right">
-          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
-            <Tab eventKey="home" title="Events Awaiting Approval">
-              <Card className="interested-card">
-                <Card.Body>
+          <Card className="">
+            <Card.Body>
+              <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 admin-tabs">
+                <Tab eventKey="home" title="Events Awaiting Approval"> 
+                <div className="approval-page">            
                   <div xs={1} md={3} className="row g-4">
                     {awaitingApprovalList.map((value, key) => { 
                       return(     
                         <div>          
-                          <Button className="approve-event" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
-                          <Button className="reject-event" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
-                          <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}> 
-                            <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
-                          </div>
+                          <Card className="admin-view-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                            <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
+                            <Card.Body className="home-card-body">
+                              <Card.Text>
+                                <p className="admin-event-info">{value.event_name}</p>
+                                <p className="admin-event-info">{formatDate}</p>
+                                <p className="admin-event-info">{value.event_time}</p>
+                                <p className="admin-event-info">{value.event_location}</p>
+                              </Card.Text>
+                              <Button className="approve-event admin-event-btn" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
+                              <Button className="reject-event admin-event-btn" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
+                            </Card.Body>
+                          </Card>
                         </div>
                       )
                     })}
                   </div>
-                </Card.Body>
-              </Card>
-            </Tab>
-            <Tab eventKey="profile" title="Featured Events">
-            <Row xs={1} md={2} className="g-4 home-event-cards">
-              {featuredEvents.map((value, key) => { 
-              return(
-                //<Col key={key}>
-                <Col className="featured-card-size">
-                  <Card className="featured-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                    <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
-                    <Card.Body className="home-card-body">
-                      <Card.Title>{value.event_name}</Card.Title>
-                      <Card.Text>
-                        <p className="featured-event-info">{formatDate}</p>
-                        <p className="featured-event-info">{value.event_time}</p>
-                        <p className="featured-event-info">{value.event_location}</p>
-                      </Card.Text>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              )})}
-            </Row>
-            </Tab>
-          </Tabs>
+                  </div>   
+                </Tab>
+                <Tab eventKey="profile" title="Featured Events" className="admin-tabs">
+                  <Button className="approve-event admin-event-btn" type="submit" href="/whatson">Add Featured Events</Button>
+                  <Row xs={1} md={2} className="g-4 home-event-cards">
+                    {featuredEvents.map((value, key) => { 
+                      return(
+                        <Col className="">
+                          <Card className="admin-view-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                            <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
+                            <Card.Body className="home-card-body">
+                              <Card.Text>
+                                <p className="admin-event-info">{value.event_name}</p>
+                                <p className="admin-event-info">{formatDate}</p>
+                                <p className="admin-event-info">{value.event_time}</p>
+                                <p className="admin-event-info">{value.event_location}</p>
+                              </Card.Text>
+                              <Button className="reject-event admin-event-btn" type="submit" onClick={() => removeFromFeatured(value.event_id)}>Remove From Featured</Button>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      )
+                    })}
+                  </Row>
+                </Tab>
+              </Tabs>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </div>

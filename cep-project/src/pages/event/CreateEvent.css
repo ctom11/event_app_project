@@ -4,16 +4,17 @@
 }
 
 .create-event-header {
-    margin: 30px;
+    margin-top: 5%;
+    margin-bottom: 2%;
 }
 
 .create-event-form {
-    width: 80%;
+    width: 90%;
 }
 
 .create-input {
-    margin-bottom: 30px;
-    min-width: -webkit-fill-available;
+    margin-bottom: 50px;
+    min-width: 90%;
 }
 
 .long-input {
@@ -38,6 +39,17 @@
 }
 
 .create-event-btn {
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    width: 80% !important;
+    font-size: x-large;
+}
+
+.genre-check {
+    margin-top: 20px;
+}
+
+.create-label {
+    width: 90%;
+    font-weight: 600;
 }

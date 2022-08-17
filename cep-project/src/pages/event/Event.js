@@ -172,7 +172,7 @@ export const Event = () => {
                         <Accordion.Header  className="event-p">Location</Accordion.Header>
                         <Accordion.Body>
                             <h2 className="event-p event-name-h2">{eventObject.event_location}</h2>
-                            <iframe className="event-map" width="1000" height="400" loading="lazy" allowFullScreen referrerpolicy="no-referrer-when-downgrade"
+                            <iframe className="event-map" width="1000" height="400" loading="lazy" allowFullScreen referrerPolicy="no-referrer-when-downgrade"
                                 src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDQgQktcZ2zNRGdvaxuUaXY3Y2it9G4cfY&q=${eventObject.event_location}`}></iframe> 
                         </Accordion.Body>
                     </Accordion.Item>

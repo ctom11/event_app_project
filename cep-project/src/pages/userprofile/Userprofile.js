@@ -70,7 +70,6 @@ export const Userprofile = () => {
       if (Response.data.error) {
         alert(Response.data.error);
       } else {
-      alert("bio successfully updated" + userBio);
       window.location.reload();
       }
     });

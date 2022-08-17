@@ -112,6 +112,12 @@
 .user-bio {
     padding: 20px 40px 40px 40px;
     font-style: italic;
+    font-size: x-large;
+    color: #ff5147;
+}
+
+.bio-btn {
+    margin-top: 10%;
 }
 
 .change-name-div {
@@ -155,4 +161,47 @@
     margin-top: 5%;
     margin-bottom: 5%;
     font-size: larger;
+}
+
+.admin-view-card {
+    max-width: min-content;
+    height: 90% !important;
+    border-radius: 20px;
+    border: 2px solid #276174;
+    background-color: #276174;
+}
+
+.admin-event-name {
+    height: 1%;
+}
+
+.admin-event-info {
+    margin: auto;
+    color: white;
+}
+
+.admin-event-btn {
+    font-weight: 500;
+    margin-top: 2%;
+    margin: 1%;
+    color: white;
+    background-color: #ff5147;
+    border-radius: 10px;
+    padding: 1% 5% 1% 5%;
+    border: #ff5147;
+    font-size: large;
+}
+
+.admin-event-btn:hover {
+    color: #ff5147;
+    background-color: white;
+}
+
+.admin-tabs {
+
+}
+
+.approval-page {
+    margin-top: 3%;
+    margin-left: 5%;
 }
