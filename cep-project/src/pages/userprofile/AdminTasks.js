@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './Userprofile.css';
 import { Link } from 'react-router-dom';
-import { Card, Row, Col, Button } from "react-bootstrap";
+import { Tabs, Tab, Card, Row, Col, Button } from "react-bootstrap";
 import Moment from "moment";
 import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -11,6 +11,9 @@ import Axios from 'axios';
 
 
 export const AdminTasks = () => {
+
+  //for displaying date in Do MMMM YYYY format rather than YYYY/MM/DD
+  const formatDate = Moment().format("Do MMMM YYYY");
 
   //set up for connecting to individual event page
   let navigate = useNavigate()
@@ -24,6 +27,8 @@ export const AdminTasks = () => {
   const [userObject, setUserObject] = useState({});
   //events awaiting approval
   const [awaitingApprovalList, setAwaitingApprovalList] = useState([]);
+  //featured events
+  const [featuredEvents, setFeaturedEvents] = useState([]);
 
   //get all user info
   useEffect(() => {
@@ -47,13 +52,21 @@ export const AdminTasks = () => {
     adminTaskLink = null
   }
 
-    //get events awaiting admin approval
-    useEffect(() => {
-        Axios.get('http://localhost:3001/event/awaitingapproval').then((Response) => {
-            console.log(Response)
-            setAwaitingApprovalList(Response.data)
+  //get events awaiting admin approval
+  useEffect(() => {
+    Axios.get('http://localhost:3001/event/awaitingapproval').then((Response) => {
+      console.log(Response)
+      setAwaitingApprovalList(Response.data)
     });
-    }, []);
+  }, []);
+
+  //get featured events
+  useEffect(() => {
+    Axios.get('http://localhost:3001/event/featured').then((Response) => {
+      console.log(Response)
+      setFeaturedEvents(Response.data)
+    });
+  }, []);
 
   //update user profile picture
   const UpdateProfilePicture = () => {
@@ -166,12 +179,9 @@ export const AdminTasks = () => {
                 <p>{userObject.email_address}</p>
                 {bioDisplay}
               </Card.Text>
-
               <button className="admin-tasks-btn" onClick={() => {navigate(`/admintasks`)}}>View My Admin Tasks</button><br/>
-              
               <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Account Settings</Button>
               <Button className="account-settings-btn" variant="primary" onClick={logout}>Logout</Button>
-
               <Offcanvas show={show} onHide={handleClose} className="account-settings-offcanvas">
                 <Offcanvas.Header closeButton>
                 </Offcanvas.Header>
@@ -186,30 +196,53 @@ export const AdminTasks = () => {
                   </div>
                 </Offcanvas.Body>
               </Offcanvas>
-    
             </Card.Body>
           </Card>
         </Col>
+
         <Col className="col-md-9 profile-right">
-          <Card className="interested-card">
-            <Card.Body>
-              <Card.Title className="profile-title">Events awaiting approval..</Card.Title>
-              <div xs={1} md={3} className="row g-4">
-                {awaitingApprovalList.map((value, key) => { 
-                  return(     
-                    <div>          
-                        <Button className="approve-event" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
-                        <Button className="reject-event" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
-                        <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}> 
+          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+            <Tab eventKey="home" title="Events Awaiting Approval">
+              <Card className="interested-card">
+                <Card.Body>
+                  <div xs={1} md={3} className="row g-4">
+                    {awaitingApprovalList.map((value, key) => { 
+                      return(     
+                        <div>          
+                          <Button className="approve-event" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
+                          <Button className="reject-event" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
+                          <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}> 
                             <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
+                          </div>
                         </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </Card.Body>
-          </Card>
-     
+                      )
+                    })}
+                  </div>
+                </Card.Body>
+              </Card>
+            </Tab>
+            <Tab eventKey="profile" title="Featured Events">
+            <Row xs={1} md={2} className="g-4 home-event-cards">
+              {featuredEvents.map((value, key) => { 
+              return(
+                //<Col key={key}>
+                <Col className="featured-card-size">
+                  <Card className="featured-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                    <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
+                    <Card.Body className="home-card-body">
+                      <Card.Title>{value.event_name}</Card.Title>
+                      <Card.Text>
+                        <p className="featured-event-info">{formatDate}</p>
+                        <p className="featured-event-info">{value.event_time}</p>
+                        <p className="featured-event-info">{value.event_location}</p>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              )})}
+            </Row>
+            </Tab>
+          </Tabs>
         </Col>
       </Row>
     </div>

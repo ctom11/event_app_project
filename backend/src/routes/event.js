@@ -122,7 +122,7 @@ router.get("/free", (req, res)=> {
 router.get("/featured", (req, res)=> {
 
     db.normalDb.query(
-        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1 AND WHERE admin_approved = 1",
+        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1 AND event.admin_approved = 1",
         (err, rows) => {
             if (err) {
                 res.send({err: err});
