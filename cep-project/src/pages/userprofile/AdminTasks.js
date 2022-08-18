@@ -244,7 +244,7 @@ export const AdminTasks = () => {
                   </div>   
                 </Tab>
                 <Tab eventKey="profile" title="Featured Events" className="admin-tabs">
-                  <Button className="approve-event admin-event-btn" type="submit" href="/whatson">Add Featured Events</Button>
+                  <Button className="approve-event add-featured-btn" type="submit" href="/whatson">Add Featured Events</Button>
                   <Row xs={1} md={2} className="g-4 home-event-cards">
                     {featuredEvents.map((value, key) => { 
                       return(

@@ -1,0 +1,12 @@
+.search-results-card {
+    margin: auto;
+    width: 80%;
+    margin-top: 5%;
+    text-align: center;
+}
+
+.search-results-header {
+    padding: 2.5%;
+    color: #276174;
+    text-align: left;
+}

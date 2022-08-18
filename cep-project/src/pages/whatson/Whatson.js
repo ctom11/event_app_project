@@ -64,7 +64,7 @@ export const Whatson = () => {
         {headers: {accessToken: localStorage.getItem("accessToken"),}
             }).then((Response) => {
             if (Response.data.error) {
-                alert(Response.data.error);
+                console.log(Response);
             } else {
                 navigate("/admintasks")
                 window.location.reload();

@@ -18,13 +18,16 @@ import { ChangePassword } from './pages/userprofile/ChangePassword';
 import { DeleteAccount } from './pages/userprofile/DeleteAccount';
 import { CreateEvent } from './pages/event/CreateEvent';
 import { NewEventSubmitted } from './pages/event/NewEventSubmitted';
+import { SearchResults } from './pages/search/SearchResults';
 import { AuthContext } from './components/AuthContext'; 
+import { SearchContext } from './components/SearchContext'; 
 import { useState, useEffect } from "react";
 import Axios from "axios";
 
 function App() {
 
     const[authState, setAuthState] = useState({firstName: "", id: 0, adminStatus: 0});
+    const[searchState, setSearchState] = useState([]);
 
     useEffect(() => {
       Axios.get('http://localhost:3001/login/auth', { headers: {
@@ -43,9 +46,9 @@ function App() {
       /*react fragment allows you to group multiple elements*/
       <React.Fragment>
         <AuthContext.Provider value={{ authState, setAuthState }}>
+          <SearchContext.Provider value={{ searchState, setSearchState }}>
           <NavigationBar/>
           <Layout>
-              <Router>
                 <Routes>
                   <Route exact path ='/' element = {<Home/>}/>
                   <Route path ='/whatson' element = {<Whatson/>}/>
@@ -61,9 +64,10 @@ function App() {
                   <Route path ='/deleteaccount/:id' element = {<DeleteAccount/>}/>
                   <Route path ='/ourcompany' element = {<OurCompany/>}/>
                   <Route path ='/faqs' element = {<FAQs/>}/>
+                  <Route path ='/searchresults' element = {<SearchResults/>}/>
                 </Routes>
-              </Router>
           </Layout>
+          </SearchContext.Provider>
         </AuthContext.Provider>
         <Footer/>
       </React.Fragment>

@@ -46,27 +46,26 @@ export const Login = () => {
         {/*login form*/}
         <div className="col-md-5">          
           <div className="card-body">
-                <div className="mb-3">
-                  <h1 className="SignIn-header">Sign In</h1>
-                  <label htmlFor="inputemail" className="form-label">Email address</label>
-                  <input type="email" className="form-control login" id="inputemail" aria-describedby="emailHelp"
-                  onChange={(e) => {
-                    setEmailAddress(e.target.value);
-                  }}></input>
-                  <div id="emailHelp" className="form-text"></div>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="inputpassword" className="form-label">Password</label>
-                  <input type="password" className="form-control login" id="inputpassword"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}></input>
-                </div>
-                <div className="mb-3 form-check">
-                  <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
-                  <label className="form-check-label" htmlFor="exampleCheck1">Keep me logged in</label>
-                </div>
-                <button type="submit" className="btn btn-primary eventure-btn" onClick={login}>Login</button>
+            <div className="mb-3">
+              <h1 className="SignIn-header">Sign In</h1>d
+              <label htmlFor="inputemail" className="form-label">Email address</label>
+              <input type="email" className="form-control login" id="inputemail" aria-describedby="emailHelp"
+              onChange={(e) => {
+                setEmailAddress(e.target.value);
+              }}></input>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="inputpassword" className="form-label">Password</label>
+              <input type="password" className="form-control login" id="inputpassword"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}></input>
+            </div>
+            <div className="mb-3 form-check">
+              <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
+              <label className="form-check-label" htmlFor="exampleCheck1">Keep me logged in</label>
+            </div>
+            <button type="submit" className="btn btn-primary eventure-btn" onClick={login}>Login</button>
           </div>
         </div>
       </div>

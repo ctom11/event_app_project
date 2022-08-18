@@ -1,18 +1,35 @@
 import React, { useContext, useState } from "react";
 import './NavigationBar.css';
 import { Nav, Navbar, Container } from 'react-bootstrap';
-import NavbarToggle from "react-bootstrap/esm/NavbarToggle";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 import Logo from '../assets/images/logo.png';
 import { AuthContext } from "./AuthContext";
+import { SearchContext } from "./SearchContext";
 
 
 export const NavigationBar = () => {
+
+    /*set up for connecting to individual event page*/
+    let navigate = useNavigate()
     
     const accessToken = localStorage.getItem("accessToken");
     const { authState } = useContext(AuthContext);
+    const { setSearchState } = useContext(SearchContext);
 
-    const [searchInput, setSearchInput] = useState('')
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    //setSearchState([]);
+
+    const search = () => {
+        Axios.get('http://localhost:3001/search/sse').then((Response) => {
+                console.log("Search Response");
+                console.log(Response);
+                setSearchState(Response.data);
+                navigate(`/searchresults`);
+                window.location.reload();
+        });
+    }
 
     const logout = () => {
         localStorage.removeItem("accessToken");
@@ -48,12 +65,15 @@ export const NavigationBar = () => {
             <Navbar.Collapse id="basic-navbar-nav">
                 {navbarContent}
             </Navbar.Collapse>
-            <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search for Events" aria-label="Search"></input>
-                <button className="btn btn-outline-success search-btn" type="submit"onChange={(e) => {
-                    setSearchInput(e.target.value);
-                  }}>Search</button>
-            </form>
+            <div className="search">
+                <form className="d-flex" role="search">
+                    <input className="form-control me-2" type="search" placeholder="Search for Events" aria-label="Search"
+                    onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                    }}></input>
+                    <button className="btn btn-outline-success search-btn" type="submit" onClick={search}>Search</button>
+                </form>
+            </div>
         </Container>
     </Navbar>
     )

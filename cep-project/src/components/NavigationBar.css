@@ -19,7 +19,7 @@ nav {
     font-weight: 600;
 }
 
-/* spaces the search bar slightly to the left */
+/* spaces the search bar slightly to the left*/
 .d-flex {
     padding-right: 10px;
     padding-left: 10px;
@@ -52,6 +52,7 @@ body {
     --bs-btn-disabled-border-color: #276174;
 }
 
+
 .search-btn {
     --bs-btn-padding-x: 1rem;
 }
@@ -62,4 +63,8 @@ body {
 
 .navbar-expand-lg .navbar-collapse {
     place-content: center;
+}
+
+.search-input {
+
 }
