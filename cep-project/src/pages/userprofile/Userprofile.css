@@ -10,22 +10,64 @@
 .profile-page-full {
     max-width: 90%;
     margin: auto;
+    margin-top: 2.5%;
 }
 
 .profile-user-details {
     padding-top: 40px;
 }
 
+.profile-event-card {
+    border-radius: 10px;
+    border: 2px solid #276174;
+}
+
 .profile-title {
     height: 5%;
     text-align: left;
     color: #276174;
-    font-weight: 500;
-    padding-bottom: 40px;
+    font-size: xx-large;
+    font-weight: 700;
+    padding: 2.5% 0% 0% 5%;
 }
 
-.profile-text {
-    color: #276174;
+.event-carousel {
+    width: 80%;
+    height: 500px;
+}
+
+.event-carousel-img {
+    height: 55vh;
+    border-radius: 10px;
+}
+
+.event-carousel-h3 {
+    color: white;
+    /*https://stackoverflow.com/questions/4772906/css-is-it-possible-to-add-a-black-outline-around-each-character-in-text*/
+    text-shadow: #276174 3px 0px 0px, #276174 2.83487px 0.981584px 0px, #276174 2.35766px 1.85511px 0px, #276174 1.62091px 2.52441px 0px, #276174 0.705713px 2.91581px 0px, #276174 -0.287171px 2.98622px 0px, #276174 -1.24844px 2.72789px 0px, #276174 -2.07227px 2.16926px 0px, #276174 -2.66798px 1.37182px 0px, #276174 -2.96998px 0.42336px 0px, #276174 -2.94502px -0.571704px 0px, #276174 -2.59586px -1.50383px 0px, #276174 -1.96093px -2.27041px 0px, #276174 -1.11013px -2.78704px 0px, #276174 -0.137119px -2.99686px 0px, #276174 0.850987px -2.87677px 0px, #276174 1.74541px -2.43999px 0px, #276174 2.44769px -1.73459px 0px, #276174 2.88051px -0.838247px 0px;
+}
+
+.event-carousel-p {
+    color: white;
+    /*https://stackoverflow.com/questions/4772906/css-is-it-possible-to-add-a-black-outline-around-each-character-in-text*/
+    text-shadow: #276174 3px 0px 0px, #276174 2.83487px 0.981584px 0px, #276174 2.35766px 1.85511px 0px, #276174 1.62091px 2.52441px 0px, #276174 0.705713px 2.91581px 0px, #276174 -0.287171px 2.98622px 0px, #276174 -1.24844px 2.72789px 0px, #276174 -2.07227px 2.16926px 0px, #276174 -2.66798px 1.37182px 0px, #276174 -2.96998px 0.42336px 0px, #276174 -2.94502px -0.571704px 0px, #276174 -2.59586px -1.50383px 0px, #276174 -1.96093px -2.27041px 0px, #276174 -1.11013px -2.78704px 0px, #276174 -0.137119px -2.99686px 0px, #276174 0.850987px -2.87677px 0px, #276174 1.74541px -2.43999px 0px, #276174 2.44769px -1.73459px 0px, #276174 2.88051px -0.838247px 0px;
+}
+
+.profile-create-event-btn {
+    width: 60% !important;
+    margin-bottom: 2.5%;
+    --bs-btn-color: #276174 !important;
+    --bs-btn-bg: #63FD88 !important;
+    --bs-btn-border-color: #63FD88 !important;
+    --bs-btn-hover-color: #276174 !important;
+    --bs-btn-hover-bg: #33C58E !important;
+    --bs-btn-hover-border-color: #33C58E !important;
+    --bs-btn-focus-shadow: #276174 !important;
+    --bs-btn-active-color: #276174 !important;
+    --bs-btn-active-bg: #63FD88 !important;
+    --bs-btn-active-border-color: #33C58E !important;
+    --bs-btn-disabled-color: #63FD88 !important;
+    --bs-btn-disabled-border-color: #276174 !important;
 }
 
 .user-name-profile {
@@ -35,11 +77,13 @@
 
 .profile-left {
     padding: 0px;
-
+    border: 2px solid #276174;
+    border-radius: 10px;
 }
 
 .profile-right {
     padding: 0px;
+    text-align: -webkit-center;
 }
 
 .change-prof-pic {
@@ -87,11 +131,6 @@
 .settings-option:hover {
     color:#ff5147;
     cursor: pointer;
-}
-
-.interested-card {
-    padding-left: 5%;
-    font-size: larger;
 }
 
 .interested-event-info {
@@ -213,10 +252,6 @@
 .admin-event-btn:hover {
     color: #ff5147;
     background-color: white;
-}
-
-.admin-tabs {
-
 }
 
 .approval-page {

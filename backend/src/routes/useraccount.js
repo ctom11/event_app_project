@@ -139,6 +139,28 @@ router.post("/changepassword/:id", validateToken, (req, res)=> {
         })
 });
 
+//get user's interested events
+router.get("/myevents/:id", validateToken, (req, res)=> {
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event JOIN user_events_interested on user_events_interested.event_id = event.event_id WHERE user_events_interested.user_account_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"This user isn't interested in any events"})
+            }
+        });
+
+});
+
 //get user's posted events
 router.get("/postedevents/:id", validateToken, (req, res)=> {
     const id =  req.params.id;

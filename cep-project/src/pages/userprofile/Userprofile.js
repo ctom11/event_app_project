@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import './Userprofile.css';
 import { Link } from 'react-router-dom';
 import { Card, Row, Col, Button } from "react-bootstrap";
+import Carousel from 'react-bootstrap/Carousel';
 import Moment from "moment";
 import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -167,35 +168,41 @@ export const Userprofile = () => {
           </Card>
         </Col>
         <Col className="col-md-9 profile-right">
-          <Card className="interested-card">
+          <Card className="profile-event-card">
+            <Card.Title className="profile-title">Events you're interested in..</Card.Title>
             <Card.Body>
-              <Card.Title className="profile-title">Events you're interested in..</Card.Title>
-              <div xs={1} md={3} className="row g-4">
+              <Carousel slide={false} className="event-carousel">
                 {myEventsObject.map((value, key) => { 
-                  return(               
-                    <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                      <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
-                    </div>
+                  return(    
+                    <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                      <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"/>
+                      <Carousel.Caption>
+                        <h3 className="event-carousel-h3">{value.event_name}</h3>
+                        <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+                      </Carousel.Caption>
+                    </Carousel.Item>
                   )
                 })}
-              </div>
+              </Carousel>
             </Card.Body>
           </Card>
-          <Card>
+          <Card className="profile-event-card">
+            <Card.Title className="profile-title">Events you've created..</Card.Title>
             <Card.Body>
-              <Card.Title className="profile-title">Posted Events</Card.Title>
-              <div xs={1} md={3} className="row g-4">
+              <Link to="/CreateEvent"><Button className="profile-create-event-btn">Create Event</Button></Link>
+              <Carousel slide={false} className="event-carousel">
                 {postedEventsObject.map((value, key) => { 
-                  return(               
-                    <div className="row interested-event-info" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                      <p><b>{value.event_name}</b> {Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>  
-                    </div>
+                  return(    
+                    <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
+                      <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"/>
+                      <Carousel.Caption>
+                        <h3 className="event-carousel-h3">{value.event_name}</h3>
+                        <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+                      </Carousel.Caption>
+                    </Carousel.Item>
                   )
                 })}
-              </div>
-                <Link to="/CreateEvent">
-                  <Button variant="primary">Create Event</Button>
-                </Link>
+              </Carousel>
             </Card.Body>
           </Card>
         </Col>
