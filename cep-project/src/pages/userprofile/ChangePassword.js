@@ -19,7 +19,7 @@ export const ChangePassword = () => {
     /*provides validation on form input*/
     const validationSchema = Yup.object().shape({  
     updatedPassword: Yup.string().min(8).max(30).required().label("Password"), //Event time must be a string and is required
-    updatedPasswordReenter: Yup.string().required().label("Password").oneOf([Yup.ref('password'), null], 'Passwords must match'),//Event location must be a string and is required
+    updatedPasswordReenter: Yup.string().required().label("Password").oneOf([Yup.ref('updatedPassword'), null], 'Passwords must match'),//Event location must be a string and is required
     })
 
 
