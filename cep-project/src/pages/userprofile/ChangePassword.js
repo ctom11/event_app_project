@@ -8,12 +8,12 @@ export const ChangePassword = () => {
 
     let navigate = useNavigate()
 
-    const [newPassword, setNewPassword] = useState('')
+    const [updatedPassword, setUpdatedPassword] = useState('')
     let { id } = useParams();
 
     const changePassword = () => {
         Axios.post(`http://localhost:3001/useraccount/changepassword/${id}`, {
-            updatedPassword: newPassword},
+            updatedPassword: updatedPassword},
             {
                 headers: {
                     accessToken: localStorage.getItem("accessToken"),
@@ -23,6 +23,7 @@ export const ChangePassword = () => {
               alert(Response.data.error);
             } else {
               console.log(Response.data);
+              alert("Password successfully changed")
               navigate(`/userprofile/${id}`);
             }
             window.location.reload();
@@ -34,12 +35,11 @@ export const ChangePassword = () => {
         <Card className="change-name-div">
             <h1 className="change-title-password">Change Your Password</h1>
             <div className="mb-3">
-                <label htmlFor="inputcurrentpassword" className="form-label change-label">Current Password</label>
-                <input type="password" className="form-control login change-input" id="inputcurrentpassword"></input>
-            </div>
-            <div className="mb-3">
                 <label htmlFor="inputcurrentpassword" className="form-label change-label">New Password</label>
-                <input type="password" className="form-control login change-input" id="inputcurrentpassword"></input>
+                <input type="password" className="form-control login change-input" id="inputcurrentpassword"
+                onChange={(e) => {
+                    setUpdatedPassword(e.target.value);
+                  }}></input>
             </div>
             <div className="mb-3">
                 <label htmlFor="inputreenterpassword" className="form-label change-label">Re-enter Password:</label>

@@ -223,3 +223,47 @@
     margin-top: 3%;
     margin-left: 5%;
 }
+
+.delete-account-div {
+    color: #276174;
+    width: 40%;
+    margin: auto;
+    margin-top: 5%;
+    align-items: center;
+}
+
+.delete-account-header {
+    text-align: center;
+    padding: 5%;
+}
+
+.delete-account-h2 {
+    text-align: center;
+}
+
+.delete-account-btn {
+    font-size: larger;
+    font-weight: 600;
+    margin-bottom: 2%;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 50%;
+    --bs-btn-color: #276174 !important;
+    --bs-btn-bg: #63FD88 !important;
+    --bs-btn-border-color: #63FD88 !important;
+    --bs-btn-hover-color: #276174 !important;
+    --bs-btn-hover-bg: #33C58E !important;
+    --bs-btn-hover-border-color: #33C58E !important;
+    --bs-btn-focus-shadow: #276174 !important;
+    --bs-btn-active-color: #276174 !important;
+    --bs-btn-active-bg: #63FD88 !important;
+    --bs-btn-active-border-color: #33C58E !important;
+    --bs-btn-disabled-color: #63FD88 !important;
+    --bs-btn-disabled-border-color: #276174 !important;
+}
+
+.delete-account-btns {
+    margin-bottom: 5%;
+    width: -webkit-fill-available;
+    text-align: center;
+}

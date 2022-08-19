@@ -21,7 +21,6 @@ router.get("/", (req, res)=> {
     );
 });
 
-
 /*get all info for a particular event*/
 router.get("/byId/:id", (req, res)=> {
     const id =  req.params.id
@@ -98,7 +97,6 @@ router.get("/byGenre/:id", (req, res)=> {
             }
         });
 });
-
 
 /*get all free events*/
 router.get("/free", (req, res)=> {

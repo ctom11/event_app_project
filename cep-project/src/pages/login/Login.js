@@ -47,7 +47,7 @@ export const Login = () => {
         <div className="col-md-5">          
           <div className="card-body">
             <div className="mb-3">
-              <h1 className="SignIn-header">Sign In</h1>d
+              <h1 className="SignIn-header">Sign In</h1>
               <label htmlFor="inputemail" className="form-label">Email address</label>
               <input type="email" className="form-control login" id="inputemail" aria-describedby="emailHelp"
               onChange={(e) => {

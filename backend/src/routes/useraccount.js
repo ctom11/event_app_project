@@ -117,88 +117,26 @@ router.post("/changename/:id", validateToken, (req, res)=> {
 });
 
 //update password
-/*router.post("/changepassword/:id", validateToken, (req, res)=> {
+router.post("/changepassword/:id", validateToken, (req, res)=> {
 
     console.log(req);
-    const currentPassword = req.body.currentPassword
     const updatedPassword = req.body.updatedPassword
     const id =  req.params.id;
-    try {
-        const [rows, fields] = await db.promiseDb.query("SELECT * FROM user_account WHERE user_account_id = ?",[id]);
-        if(rows.length <= 0){
-            res.send({error: "Incorrect email"})
-            return;
-        }
-        let password = rows[0].password;
-        
-        bcrypt.compare(currentPassword, password).then((match) => {
-            if(!match){
-                res.send({error: "This is not your registered password"})
-                return;
-            } else {
-                db.normalDb.query(
-                    "UPDATE user_account SET password = ? WHERE user_account_id= ?",
-                    [updatedPassword, updatedLastName, id],
-                    (err, result) => {
-                        if (err) {
-                            res.send({err: err});
-                        }
-                        if (result.affectedRows) {
-                            res.send({message: "success"})
-                        } else {
-                            res.send(result)
-                        }
-                    }
-                );
-            }
-           })
-    } catch(err) {
-        throw err;
-    }
-});*/
 
-//add event to user's 'events you're interested in'
-router.post("/addToInterested", validateToken, (req, res)=> {
+        /*bcrypt hashes new passwords as they are added to the db*/
+        bcrypt.hash(updatedPassword, 10).then((hash) => {
 
-    const eventId = req.body.eventId
-    const userId = req.user.user_account_id;
+    
+            const sqlUpdate = "UPDATE user_account SET password = ? WHERE user_account_id = ?"
 
-    console.log(req);
-
-    db.normalDb.query(
-        "INSERT INTO `user_events_interested` (`user_account_id`, `event_id`) VALUES (?, ?);",
-        [userId, eventId],
-        (err, rows) => {
-            if (err) {
-                res.send({err: err});
-            } else {
-                res.send(rows)
-            }
-        }
-    );
-
-});
-
-//get user's interested events
-router.get("/myevents/:id", validateToken, (req, res)=> {
-    const id =  req.params.id;
-
-    db.normalDb.query(
-        "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event JOIN user_events_interested ON user_events_interested.event_id = event.event_id WHERE user_events_interested.user_account_id = ?",
-        [id],
-        (err, rows) => {
-            if (err) {
-                res.send({err: err});
-                return;
-            }
-            if(rows){
-                res.send(rows)
-            }
-            else {
-                res.send({message:"This user isn't interested in any events"})
-            }
-        });
-
+            db.normalDb.query(sqlUpdate, [hash, id], (err, result) => {
+                if(err){
+                    console.log(err);
+                }
+                console.log(result);
+                res.send(result)
+            })
+        })
 });
 
 //get user's posted events
@@ -218,6 +156,28 @@ router.get("/postedevents/:id", validateToken, (req, res)=> {
             }
             else {
                 res.send({message:"This user isn't interested in any events"})
+            }
+        });
+
+});
+
+//delete user account
+router.delete("/deleteaccount/:id", validateToken, (req, res)=> {
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "DELETE FROM `user_account` WHERE user_account_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"Can't delete account"})
             }
         });
 
