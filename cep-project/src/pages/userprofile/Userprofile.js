@@ -134,7 +134,7 @@ export const Userprofile = () => {
     <div className="profile-page-full">
       <Row xs={1} md={1} className="g-4">
         <Col className="col-md-3 profile-left">
-          <Card>
+          <Card className="profile-left-info">
             <Card.Img className="profile-picture" variant="top" src={profilePicture} />
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
@@ -191,6 +191,7 @@ export const Userprofile = () => {
             <Card.Body>
               <Link to="/CreateEvent"><Button className="profile-create-event-btn">Create Event</Button></Link>
               <Carousel slide={false} className="event-carousel">
+                if (postedEventsObject) 
                 {postedEventsObject.map((value, key) => { 
                   return(    
                     <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
