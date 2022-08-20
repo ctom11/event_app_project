@@ -16,6 +16,7 @@ import { AdminTasks } from './pages/userprofile/AdminTasks';
 import { ChangeName } from './pages/userprofile/ChangeName';
 import { ChangePassword } from './pages/userprofile/ChangePassword';
 import { DeleteAccount } from './pages/userprofile/DeleteAccount';
+import { DeleteEvent } from './pages/userprofile/DeleteEvent';
 import { CreateEvent } from './pages/event/CreateEvent';
 import { NewEventSubmitted } from './pages/event/NewEventSubmitted';
 import { SearchResults } from './pages/search/SearchResults';
@@ -62,6 +63,7 @@ function App() {
                   <Route path ='/changename/:id' element = {<ChangeName/>}/>
                   <Route path ='/changepassword/:id' element = {<ChangePassword/>}/>
                   <Route path ='/deleteaccount/:id' element = {<DeleteAccount/>}/>
+                  <Route path ='/deleteevent/:id' element = {<DeleteEvent/>}/>
                   <Route path ='/ourcompany' element = {<OurCompany/>}/>
                   <Route path ='/faqs' element = {<FAQs/>}/>
                   <Route path ='/searchresults' element = {<SearchResults/>}/>

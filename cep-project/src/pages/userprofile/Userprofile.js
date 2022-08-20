@@ -133,7 +133,7 @@ export const Userprofile = () => {
 
     <div className="profile-page-full">
       <Row xs={1} md={1} className="g-4">
-        <Col className="col-md-3 profile-left">
+        <Col className="col-md-4 profile-left">
           <Card className="profile-left-info">
             <Card.Img className="profile-picture" variant="top" src={profilePicture} />
             <Card.Body className="profile-user-details">
@@ -167,7 +167,7 @@ export const Userprofile = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col className="col-md-9 profile-right">
+        <Col className="col-md-8 profile-right">
           <Card className="profile-event-card">
             <Card.Title className="profile-title">Events you're interested in..</Card.Title>
             <Card.Body>
@@ -194,11 +194,12 @@ export const Userprofile = () => {
                 if (postedEventsObject) 
                 {postedEventsObject.map((value, key) => { 
                   return(    
-                    <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                      <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"/>
+                    <Carousel.Item>
+                      <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
                       <Carousel.Caption>
                         <h3 className="event-carousel-h3">{value.event_name}</h3>
                         <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+                        <Link to={`/DeleteEvent/${value.event_id}`}><Button className="profile-create-event-btn">Delete This Event</Button></Link>
                       </Carousel.Caption>
                     </Carousel.Item>
                   )

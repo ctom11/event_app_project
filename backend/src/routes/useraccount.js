@@ -205,5 +205,27 @@ router.delete("/deleteaccount/:id", validateToken, (req, res)=> {
 
 });
 
+//delete user's event
+router.delete("/deleteevent/:id", validateToken, (req, res)=> {
+    const id =  req.params.id;
+
+    db.normalDb.query(
+        "DELETE FROM `event` WHERE event_id = ?",
+        [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});   
+                return;
+            }
+            if(rows){
+                res.send(rows)
+            }
+            else {
+                res.send({message:"Can't delete event"})
+            }
+        });
+
+});
+
 
 module.exports = router;

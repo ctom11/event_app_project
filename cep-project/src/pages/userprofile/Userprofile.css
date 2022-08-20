@@ -1,5 +1,5 @@
 .profile-left-info {
-    height: 168vh;
+    height: 159vh;
 }
 
 .profile-picture {
@@ -7,12 +7,12 @@
     border: 6px solid #276174;
     border-radius: 50%;
     max-width: 85%;
-    margin-top: 30%;
+    margin-top: 20%;
     align-self: center;
 }
 
 .profile-page-full {
-    max-width: 90%;
+    max-width: 80%;
     margin: auto;
     margin-top: 2.5%;
 }
@@ -38,13 +38,13 @@
 
 .event-carousel {
     width: 80%;
-    margin-top: 2.5%;
     height: 500px;
 }
 
 .event-carousel-img {
     height: 55vh;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .event-carousel-h3 {
@@ -70,9 +70,10 @@
 .profile-create-event-btn {
     width: 40% !important;
     margin-bottom: 2.5%;
+    font-weight: 600;
     --bs-btn-color: #276174 !important;
     --bs-btn-bg: #63FD88 !important;
-    --bs-btn-border-color: #63FD88 !important;
+    --bs-btn-border-color: #276174 !important;
     --bs-btn-hover-color: #276174 !important;
     --bs-btn-hover-bg: #33C58E !important;
     --bs-btn-hover-border-color: #33C58E !important;
