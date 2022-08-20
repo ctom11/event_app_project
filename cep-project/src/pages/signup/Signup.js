@@ -27,7 +27,7 @@ export const Signup = () => {
         lastName: Yup.string().max(250).required().label("Last name"), //Event description must be a string, max 250 chars and is required
         emailAddress: Yup.string().email('invalid email').required().label("Email"), //date is required
         password: Yup.string().min(8).max(30).required().label("Password"), //Event time must be a string and is required
-        confirmPassword: Yup.string().required().label("Password").oneOf([Yup.ref('password'), null], 'Passwords must match'),//Event location must be a string and is required
+        confirmPassword: Yup.string().required().label("Password").oneOf([Yup.ref('password'), null], 'Passwords must match'),//Location must be a string and is required
         tandc: Yup.boolean().oneOf([true], "You must accept the terms and conditions")
     })
 

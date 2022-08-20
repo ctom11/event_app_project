@@ -22,9 +22,9 @@ export const Footer = () => {
             </div>
             <div className="col-sm-3 footer-col">
                 <h4 className="footer-header">Social</h4>
-                <h4 className="footer-info">Facebook</h4>
-                <h4 className="footer-info">Twitter</h4>
-                <h4 className="footer-info">Instagram</h4>
+                <a href="http://www.facebook.com"><h4 className="footer-info">Facebook</h4></a>
+                <a href="http://www.twitter.com"><h4 className="footer-info">Twitter</h4></a>
+                <a href="http://www.instagram.com"><h4 className="footer-info">Instagram</h4></a>
             </div>
         </div>
     )
