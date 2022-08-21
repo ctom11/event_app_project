@@ -23,11 +23,11 @@ router.get("/", (req, res)=> {
 
 /*get all info for a particular event*/
 router.get("/byId/:id", (req, res)=> {
+
     const id =  req.params.id
 
-    db.normalDb.query(
-        "SELECT * FROM event WHERE event_id = ?",
-        [id],
+    const getEventInfo = "SELECT * FROM event WHERE event_id = ?";
+    db.normalDb.query(getEventInfo, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -44,8 +44,8 @@ router.get("/byId/:id", (req, res)=> {
 /*sort events a-z*/
 router.get("/sortaz", (req, res)=> {
 
-    db.normalDb.query(
-        "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_name ASC;",
+    const getSortAZ = "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_name ASC;";
+    db.normalDb.query(getSortAZ,
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -62,8 +62,8 @@ router.get("/sortaz", (req, res)=> {
 /*sort events by date*/
 router.get("/sortdate", (req, res)=> {
 
-    db.normalDb.query(
-        "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_date",
+    const getSortDate = "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_date";
+    db.normalDb.query(getSortDate,
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -80,11 +80,11 @@ router.get("/sortdate", (req, res)=> {
 
 /*get all events in particular genre*/
 router.get("/byGenre/:id", (req, res)=> {
+
     const id =  req.params.id
 
-    db.normalDb.query(
-        "SELECT genre_id, event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE genre_id = ? AND admin_approved = 1",
-        [id],
+    const getGenre = "SELECT genre_id, event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE genre_id = ? AND admin_approved = 1";
+    db.normalDb.query(getGenre, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -101,8 +101,8 @@ router.get("/byGenre/:id", (req, res)=> {
 /*get all free events*/
 router.get("/free", (req, res)=> {
 
-    db.normalDb.query(
-        "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_free = 1 AND admin_approved = 1",
+    const getFreeEvents = "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_free = 1 AND admin_approved = 1";
+    db.normalDb.query(getFreeEvents,
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -119,8 +119,8 @@ router.get("/free", (req, res)=> {
 /*get all featured events*/
 router.get("/featured", (req, res)=> {
 
-    db.normalDb.query(
-        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1 AND event.admin_approved = 1",
+    const getFeaturedEvents = "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1 AND event.admin_approved = 1";
+    db.normalDb.query(getFeaturedEvents,
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -142,8 +142,8 @@ router.post("/addtofeatured/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id
 
-    db.normalDb.query(
-        "UPDATE event SET event_featured = 1 WHERE event_id = ?", [id],
+    const postFeaturedEvents = "UPDATE event SET event_featured = 1 WHERE event_id = ?";
+    db.normalDb.query(postFeaturedEvents, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -165,8 +165,8 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id
 
-    db.normalDb.query(
-        "UPDATE event SET event_featured = 0 WHERE event_id = ?", [id],
+    const postRemoveFeaturedEvents = "UPDATE event SET event_featured = 0 WHERE event_id = ?";
+    db.normalDb.query(postRemoveFeaturedEvents, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -188,9 +188,8 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
 router.get("/comments/:id", (req, res)=> {
     const id =  req.params.id
 
-    db.normalDb.query(
-        "SELECT comment_id, event_comment_body, event_comment_time, first_name, last_name, user_profile_picture FROM comments JOIN user_account ON comments.user_account_id = user_account.user_account_id WHERE comments.comment_event_id = ?",
-        [id],
+    const getAllEventComments = "SELECT comment_id, event_comment_body, event_comment_time, first_name, last_name, user_profile_picture FROM comments JOIN user_account ON comments.user_account_id = user_account.user_account_id WHERE comments.comment_event_id = ?";
+    db.normalDb.query(getAllEventComments, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -222,8 +221,8 @@ router.post("/createevent", (req, res)=> {
 
     console.log(eventName)
 
-    const sqlInsertEvent = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id, genre_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    db.normalDb.query(sqlInsertEvent, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId, genreId], (err, result) => {
+    const postInsertEvent = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id, genre_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    db.normalDb.query(postInsertEvent, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId, genreId], (err, result) => {
         if(err){
             console.log(err);
         }
@@ -245,8 +244,8 @@ router.post("/addcomment", validateToken, (req, res)=> {
 
     console.log(commentBody)
 
-    const sqlInsert = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id, user_account_id) VALUES (?, ?, ?, ?)"
-    db.normalDb.query(sqlInsert, [commentBody, commentTime, commentEventId, userId], (err, result) => {
+    const postEventComment = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id, user_account_id) VALUES (?, ?, ?, ?)"
+    db.normalDb.query(postEventComment, [commentBody, commentTime, commentEventId, userId], (err, result) => {
         if(err){
             console.log(err);
         }
@@ -259,8 +258,8 @@ router.post("/addcomment", validateToken, (req, res)=> {
 router.delete("/comment/:commentId", validateToken, async (req, res) => {
     const commentId = req.params.commentId
 
-    const sqlDelete = "DELETE FROM `comments` WHERE comment_id = ?"
-    db.normalDb.query(sqlDelete, [commentId], (err, result) => {
+    const deleteEventComment = "DELETE FROM `comments` WHERE comment_id = ?"
+    db.normalDb.query(deleteEventComment, [commentId], (err, result) => {
         if(err){
             console.log(err);
         }
@@ -273,8 +272,8 @@ router.delete("/comment/:commentId", validateToken, async (req, res) => {
 /*get all events requiring admin approval*/
 router.get("/awaitingapproval", (req, res)=> {
 
-    db.normalDb.query(
-        "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img, genre_id FROM event WHERE event.admin_approved = 0",
+    const getEventsAwaitingApproval = "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img, genre_id FROM event WHERE event.admin_approved = 0";
+    db.normalDb.query(getEventsAwaitingApproval,
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -296,9 +295,8 @@ router.post("/approveevent/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "UPDATE event SET admin_approved = 1 WHERE event_id= ?",
-        [id],
+    const postApproveEvent = "UPDATE event SET admin_approved = 1 WHERE event_id= ?";
+    db.normalDb.query(postApproveEvent, [id],
         (err, result) => {
             if (err) {
                 res.send({err: err});
@@ -317,9 +315,8 @@ router.delete("/deleteevent/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "DELETE FROM event WHERE event_id= ?",
-        [id],
+    const deleteEvent = "DELETE FROM event WHERE event_id= ?";
+    db.normalDb.query(deleteEvent, [id],
         (err, result) => {
             if (err) {
                 res.send({err: err});

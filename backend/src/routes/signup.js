@@ -15,8 +15,8 @@ router.post("/", (req, res)=> {
 
         console.log(firstName);
 
-        const sqlInsert = "INSERT INTO user_account (first_name, last_name, email_address, password) VALUES (?, ?, ?, ?)"
-        db.normalDb.query(sqlInsert, [firstName, lastName, emailAddress, hash], (err, result) => {
+        const postRegistration = "INSERT INTO user_account (first_name, last_name, email_address, password) VALUES (?, ?, ?, ?)"
+        db.normalDb.query(postRegistration, [firstName, lastName, emailAddress, hash], (err, result) => {
             if(err){
                 console.log(err);
             }

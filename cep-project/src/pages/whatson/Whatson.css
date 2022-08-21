@@ -108,3 +108,22 @@
 .event-pa {
     margin-bottom: 0rem;
 }
+
+.feature-event-btn {
+    color: #276174;
+    background-color: #63FD88;
+    margin-top: 5%;
+    margin-bottom: 50px;
+    width: 80% !important;
+    font-size: x-large;
+    font-weight: 600;
+}
+
+.feature-event-btn:hover {
+    color: #276174;
+    background-color: #33C58E;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    width: 80% !important;
+    font-size: x-large;
+}

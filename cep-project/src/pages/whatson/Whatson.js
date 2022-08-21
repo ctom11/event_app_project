@@ -132,7 +132,7 @@ export const Whatson = () => {
                         {listOfEvents.map((value, key) => { 
                             let adminBtn = null
                             if (authState.adminStatus === 1) {
-                                adminBtn = <Button onClick={() => addToFeatured(value.event_id)}>Make Featured Event</Button>
+                                adminBtn = <Button className="feature-event-btn" onClick={() => addToFeatured(value.event_id)}>Make Featured Event</Button>
                             } else {
                                 adminBtn = null
                             }

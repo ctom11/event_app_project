@@ -11,9 +11,8 @@ const bcrypt = require("bcrypt");
 router.get("/byId/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "SELECT * FROM user_account WHERE user_account_id = ?",
-        [id],
+    const getUserInfo = "SELECT * FROM user_account WHERE user_account_id = ?";
+    db.normalDb.query(getUserInfo, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -33,8 +32,8 @@ router.get("/", (req, res)=> {
 
     console.log(req);
 
-    db.normalDb.query(
-        "SELECT first_name, last_name, email_address, password, user_profile_picture, admin_status FROM user_account",
+    const getAccountInfo = "SELECT first_name, last_name, email_address, password, user_profile_picture, admin_status FROM user_account";
+    db.normalDb.query(getAccountInfo,
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -53,9 +52,8 @@ router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
     const userProfilePicture = req.body.userProfilePicture
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "UPDATE user_account SET user_profile_picture = ? WHERE user_account_id= ?",
-        [userProfilePicture, id],
+    const postProfilePic = "UPDATE user_account SET user_profile_picture = ? WHERE user_account_id= ?";
+    db.normalDb.query(postProfilePic, [userProfilePicture, id],
         (err, result) => {
             if (err) {
                 res.send({err: err});
@@ -76,9 +74,8 @@ router.post("/updatebio/:id", validateToken, (req, res)=> {
     const userBio = req.body.userBio
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "UPDATE user_account SET user_bio = ? WHERE user_account_id= ?",
-        [userBio, id],
+    const postUpdateBio = "UPDATE user_account SET user_bio = ? WHERE user_account_id= ?";
+    db.normalDb.query(postUpdateBio, [userBio, id],
         (err, result) => {
             if (err) {
                 res.send({err: err});
@@ -100,9 +97,8 @@ router.post("/changename/:id", validateToken, (req, res)=> {
     const updatedLastName = req.body.updatedLastName
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "UPDATE user_account SET first_name = ?, last_name = ? WHERE user_account_id= ?",
-        [updatedFirstName, updatedLastName, id],
+    const postUpdateName = "UPDATE user_account SET first_name = ?, last_name = ? WHERE user_account_id= ?";
+    db.normalDb.query(postUpdateName, [updatedFirstName, updatedLastName, id],
         (err, result) => {
             if (err) {
                 res.send({err: err});
@@ -123,29 +119,26 @@ router.post("/changepassword/:id", validateToken, (req, res)=> {
     const updatedPassword = req.body.updatedPassword
     const id =  req.params.id;
 
-        /*bcrypt hashes new passwords as they are added to the db*/
-        bcrypt.hash(updatedPassword, 10).then((hash) => {
+    /*bcrypt hashes new passwords as they are added to the db*/
+    bcrypt.hash(updatedPassword, 10).then((hash) => {
 
-    
-            const sqlUpdate = "UPDATE user_account SET password = ? WHERE user_account_id = ?"
-
-            db.normalDb.query(sqlUpdate, [hash, id], (err, result) => {
-                if(err){
-                    console.log(err);
-                }
-                console.log(result);
-                res.send(result)
-            })
+        const postUpdatePassword = "UPDATE user_account SET password = ? WHERE user_account_id = ?"
+        db.normalDb.query(postUpdatePassword, [hash, id], (err, result) => {
+            if(err){
+                console.log(err);
+            }
+            console.log(result);
+            res.send(result)
         })
+    })
 });
 
 //get user's interested events
 router.get("/myevents/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event JOIN user_events_interested on user_events_interested.event_id = event.event_id WHERE user_events_interested.user_account_id = ?",
-        [id],
+    const getInterestedEvents = "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event JOIN user_events_interested on user_events_interested.event_id = event.event_id WHERE user_events_interested.user_account_id = ?";
+    db.normalDb.query(getInterestedEvents, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -165,9 +158,8 @@ router.get("/myevents/:id", validateToken, (req, res)=> {
 router.get("/postedevents/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event WHERE user_account_id = ?",
-        [id],
+    const getPostedEvents = "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event WHERE user_account_id = ?";
+    db.normalDb.query(getPostedEvents, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -187,9 +179,8 @@ router.get("/postedevents/:id", validateToken, (req, res)=> {
 router.delete("/deleteaccount/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "DELETE FROM `user_account` WHERE user_account_id = ?",
-        [id],
+    const deleteUserAccount = "DELETE FROM `user_account` WHERE user_account_id = ?";
+    db.normalDb.query(deleteUserAccount, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});
@@ -209,9 +200,8 @@ router.delete("/deleteaccount/:id", validateToken, (req, res)=> {
 router.delete("/deleteevent/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    db.normalDb.query(
-        "DELETE FROM `event` WHERE event_id = ?",
-        [id],
+    const deleteUserEvent = "DELETE FROM `event` WHERE event_id = ?";
+    db.normalDb.query(deleteUserEvent, [id],
         (err, rows) => {
             if (err) {
                 res.send({err: err});   
