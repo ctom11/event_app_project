@@ -217,5 +217,29 @@ router.delete("/deleteevent/:id", validateToken, (req, res)=> {
 
 });
 
+/*add to interested events*/
+router.post("/addtointerested/:id", validateToken, (req, res)=> {
+
+    const id =  req.params.id
+    const eventId = req.body.eventId
+
+    const postInterestedEvents = "INSERT INTO user_events_interested(user_account_id, event_id) VALUES (?, ?)";
+    db.normalDb.query(postInterestedEvents, [id, eventId],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+                return;
+            }
+            else {
+                res.send({message:"Can't add interested event"})
+                return;
+            }
+        });
+});
+
 
 module.exports = router;

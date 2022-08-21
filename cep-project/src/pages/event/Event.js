@@ -159,7 +159,7 @@ export const Event = () => {
                         <Card className="event-stats">
                             <div>
                                 <h1>{eventObject.event_interested}</h1>
-                                <p>Interested in this event</p>
+                                <p>people interested in this event</p>
                             </div>
                         </Card>
                         <div className="user-event-status">
