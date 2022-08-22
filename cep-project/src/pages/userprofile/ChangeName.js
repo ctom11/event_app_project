@@ -45,7 +45,10 @@ export const ChangeName = () => {
                 <input type="text" className="form-control login change-input" id="inputlastname"
                 onChange={(e) => {setNewLastName(e.target.value);}}></input>
             </div>
-            <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={changeName}>Save</button>
+            <div className="change-options">
+                <button className="btn btn-primary eventure-btn change-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>Cancel</button>
+                <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={changeName}>Save</button>
+            </div>
         </Card> 
     )
 

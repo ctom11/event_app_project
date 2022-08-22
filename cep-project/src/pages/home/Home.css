@@ -1,11 +1,8 @@
-.home-page-full{
-    text-align: -webkit-center;
-}
+/*overall page*/
 
-.carousel-inner {
-    height: 50vh;
-    min-height: 980px;
-    min-width: auto;
+.home-page-full{
+    width: 220vh;
+    text-align: -webkit-center;
 }
 
 .container-fluid {
@@ -19,6 +16,13 @@
     margin-left: auto;
 }
 
+/*carousel*/
+
+.carousel-inner {
+    height: 100vh;
+    width: 100%;
+    min-width: 800px;
+}
 .carousel-caption-1 {
     padding: 40px;
     background-color:cadetblue;
@@ -53,19 +57,26 @@
     font-size: xx-large;
 }
 
+.carousel-slide-p {
+    font-size: x-large;
+}
+
+/*featured events*/
+
 .home-featured-events {
     background-color: whitesmoke;
     border-radius: 20px;
     color: #276174;
     font-weight: 600;
-    max-width: 1600px;
+    width: 70%;
+    height: auto;
     margin: 50px;
     border: 2px solid #ff5147;
     position: sticky;
 }
 
 .h1-featured {
-    padding-top: 50px;
+    padding-top: 5%;
 }
 
 .featured-event-info {
@@ -73,8 +84,10 @@
 }
 
 .home-event-cards {
-    padding: 100px;
-    display: flex;
+    width: 150vh;
+    padding-top: 5%;
+    margin-bottom: 5%;
+    place-content: center;
 }
 
 /*individual event cards*/
@@ -87,23 +100,18 @@
 }
 
 .featured-card-size {
-    margin: auto;
-    width: 38%;
+    width: 40%;
 }
 
 .home-card-body{
-    height: 250px;
-    width: 500px;
+    height: 25vh;
+    width: 100%;
     align-self: center;
     font-size: larger;
 }
 
 .event-img-home {
-    height: 450px;
+    height: 300px;
     border-radius: 20px 20px 0px 0px;
     border: 3px solid #276174;
-}
-
-.carousel-slide-p {
-    font-size: x-large;
 }

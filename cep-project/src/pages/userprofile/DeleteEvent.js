@@ -33,7 +33,7 @@ export const DeleteEvent = () => {
                 <h2 className="delete-account-h2">Once you delete it, we can't get it back again. You can always create it from scratch again from your user account.</h2>
                 <div className="delete-account-btns">
                     <Button className="delete-account-btn" onClick={deleteAccount}>Yes</Button>
-                    <Button className="delete-account-btn">No</Button>
+                    <Button className="delete-account-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>No</Button>
                 </div>
             </Card> 
 

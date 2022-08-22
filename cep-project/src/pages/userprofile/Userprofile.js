@@ -111,6 +111,44 @@ export const Userprofile = () => {
     bioDisplay = <div className="user-bio">{userObject.user_bio}</div>
   }
 
+  //show my events only if there are any
+  let displayMyEvents =  <h2 className="nothing-to-show">You haven't added any events yet</h2>
+  if (myEventsObject.length >0) {
+    displayMyEvents = <Carousel slide={false} className="event-carousel">
+    {myEventsObject.map((value, key) => { 
+      return(    
+        <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
+          <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"/>
+          <Carousel.Caption>
+            <h3 className="event-carousel-h3">{value.event_name}</h3>
+            <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      )
+    })}
+  </Carousel>
+  }
+
+  //show created events only if there are any
+  let displayCreatedEvents =  <h2 className="nothing-to-show">You haven't created any events yet</h2>
+  if (postedEventsObject.length >0) {
+    displayCreatedEvents = <Carousel slide={false} className="event-carousel">
+    {postedEventsObject.map((value, key) => { 
+      return(    
+        <Carousel.Item>
+          <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
+          <Carousel.Caption>
+            <h3 className="event-carousel-h3">{value.event_name}</h3>
+            <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+            <Link to={`/DeleteEvent/${value.event_id}`}><Button className="profile-create-event-btn">Delete This Event</Button></Link>
+          </Carousel.Caption>
+        </Carousel.Item>
+      )
+    })} 
+  </Carousel>
+    }
+
+
   //logout shortcut
   const logout = () => {
     localStorage.removeItem("accessToken");
@@ -128,7 +166,7 @@ export const Userprofile = () => {
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>
-                <p>{userObject.email_address}</p>
+                <p className="profile-email">{userObject.email_address}</p>
                 {bioDisplay}
               </Card.Text>
               {adminTaskLink}<br/>
@@ -158,39 +196,15 @@ export const Userprofile = () => {
           <Card className="profile-event-card">
             <Card.Title className="profile-title">Events you're interested in..</Card.Title>
             <Card.Body>
-              <Carousel slide={false} className="event-carousel">
-                {myEventsObject.map((value, key) => { 
-                  return(    
-                    <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                      <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"/>
-                      <Carousel.Caption>
-                        <h3 className="event-carousel-h3">{value.event_name}</h3>
-                        <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                  )
-                })}
-              </Carousel>
+              {displayMyEvents}
             </Card.Body>
           </Card>
           <Card className="profile-event-card">
             <Card.Title className="profile-title">Events you've created..</Card.Title>
+            
+            <Button className="profile-create-event-btn" onClick={() => {navigate(`/createEvent`)}}>Create Event</Button>
             <Card.Body>
-              <Link to="/CreateEvent"><Button className="profile-create-event-btn">Create Event</Button></Link>
-              <Carousel slide={false} className="event-carousel">
-                {postedEventsObject.map((value, key) => { 
-                  return(    
-                    <Carousel.Item>
-                      <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
-                      <Carousel.Caption>
-                        <h3 className="event-carousel-h3">{value.event_name}</h3>
-                        <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
-                        <Link to={`/DeleteEvent/${value.event_id}`}><Button className="profile-create-event-btn">Delete This Event</Button></Link>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                  )
-                })} 
-              </Carousel>
+              {displayCreatedEvents}
             </Card.Body>
           </Card>
         </Col>

@@ -35,8 +35,11 @@ export const UpdateBio = () => {
                 <label htmlFor="inputBio" className="form-label change-label">Enter a new user bio (max. 500 characters)</label>
                 <textarea type="text" rows="4" className="form-control login change-input" id="inputBio"
                 onChange={(e) => {setUserBio(e.target.value);}}></textarea>
+            </div>   
+            <div className="change-options">
+                <button className="btn btn-primary eventure-btn change-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>Cancel</button>
+                <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={UpdateBio}>Save</button>
             </div>
-            <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={UpdateBio}>Save</button>
         </Card> 
     )
 

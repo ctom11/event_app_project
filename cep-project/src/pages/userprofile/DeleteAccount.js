@@ -34,7 +34,7 @@ export const DeleteAccount = () => {
                 <h2 className="delete-account-h2">We're sad to see you go ☹</h2>
                 <div className="delete-account-btns">
                     <Button className="delete-account-btn" onClick={deleteAccount}>Yes</Button>
-                    <Button className="delete-account-btn">No</Button>
+                    <Button className="delete-account-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>No</Button>
                 </div>
             </Card> 
 

@@ -36,7 +36,10 @@ export const UpdateProfilePicture = () => {
                 <input type="text" className="form-control login change-input" id="inputBio"
                 onChange={(e) => {setUserProfilePicture(e.target.value);}}></input>
             </div>
-            <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={UpdateProfilePicture}>Save</button>
+            <div className="change-options">
+                <button className="btn btn-primary eventure-btn change-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>Cancel</button>
+                <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={UpdateProfilePicture}>Save</button>
+            </div>
         </Card> 
     )
 
