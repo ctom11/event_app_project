@@ -42,21 +42,10 @@ export const Userprofile = () => {
   let adminStatus = userObject.admin_status;
   let adminTaskLink = <></>
   if (adminStatus === 1) {
-    adminTaskLink = <Button className="admin-tasks-btn" onClick={() => {navigate(`/admintasks`)}}>View My Admin Tasks</Button>
+    adminTaskLink = <Button className="admin-tasks-btn" onClick={() => {navigate(`/admintasks/${id}`)}}>View My Admin Tasks</Button>
   } else {  
     adminTaskLink = null
   }
-
-  //update user profile picture
-  const UpdateProfilePicture = () => {
-      Axios.post(`http://localhost:3001/updateprofilepic/${id}`,{
-        headers: {accessToken: localStorage.getItem("accessToken")}, 
-      }, {
-          userProfilePicture: userObject.user_profile_picture
-      }).then(() => {
-          alert("profile picture successfully updated");
-      });
-  };
 
   //update user bio
   const [userBio, setUserBio] = useState("");
@@ -142,8 +131,6 @@ export const Userprofile = () => {
                 <p>{userObject.email_address}</p>
                 {bioDisplay}
               </Card.Text>
-
-              {userObject.admin_status}
               {adminTaskLink}<br/>
               
               <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Account Settings</Button>
@@ -155,8 +142,8 @@ export const Userprofile = () => {
                 <Offcanvas.Body className="account-settings-body">
                   <h1>Account Settings</h1>
                   <div className="account-settings-options">
-                    <h2 className="settings-option">Update Profile Picture</h2>
-                    <h2 className="settings-option">Update Bio</h2>
+                    <h2 className="settings-option" onClick={() => {navigate(`/updateprofilepic/${userObject.user_account_id}`)}}>Update Profile Picture</h2>
+                    <h2 className="settings-option" onClick={() => {navigate(`/updatebio/${userObject.user_account_id}`)}}>Update Bio</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/changename/${userObject.user_account_id}`)}}>Change My Name</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/changepassword/${userObject.user_account_id}`)}}>Change My Password</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/deleteaccount/${userObject.user_account_id}`)}}>Delete My Account</h2>
@@ -191,7 +178,6 @@ export const Userprofile = () => {
             <Card.Body>
               <Link to="/CreateEvent"><Button className="profile-create-event-btn">Create Event</Button></Link>
               <Carousel slide={false} className="event-carousel">
-                if (postedEventsObject) 
                 {postedEventsObject.map((value, key) => { 
                   return(    
                     <Carousel.Item>
@@ -203,7 +189,7 @@ export const Userprofile = () => {
                       </Carousel.Caption>
                     </Carousel.Item>
                   )
-                })}
+                })} 
               </Carousel>
             </Card.Body>
           </Card>

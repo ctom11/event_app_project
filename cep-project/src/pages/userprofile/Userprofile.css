@@ -1,5 +1,9 @@
 .profile-left-info {
-    height: 159vh;
+    height: 158vh;
+}
+
+.admin-left-info {
+    height: 85vh;
 }
 
 .profile-picture {
@@ -12,7 +16,7 @@
 }
 
 .profile-page-full {
-    max-width: 80%;
+    max-width: 70%;
     margin: auto;
     margin-top: 2.5%;
 }
@@ -217,6 +221,11 @@
     font-size: larger;
 }
 
+.admin-tabs {
+    --bs-nav-link-hover-color: white;
+    --bs-nav-link-color: white;
+}
+
 .admin-view-card {
     max-width: min-content;
     height: 90% !important;
@@ -239,7 +248,7 @@
     margin-top: 2%;
     margin: 1%;
     color: white;
-    background-color: #ff5147;
+    background-color: #276174;
     border-radius: 10px;
     padding: 1% 5% 1% 5%;
     border: #ff5147;
@@ -265,7 +274,7 @@
 }
 
 .admin-event-btn:hover {
-    color: #ff5147;
+    color: #276174;
     background-color: white;
 }
 

@@ -15,6 +15,8 @@ import { Userprofile } from './pages/userprofile/Userprofile';
 import { AdminTasks } from './pages/userprofile/AdminTasks';
 import { ChangeName } from './pages/userprofile/ChangeName';
 import { ChangePassword } from './pages/userprofile/ChangePassword';
+import { UpdateBio } from './pages/userprofile/UpdateBio';
+import { UpdateProfilePicture } from './pages/userprofile/UpdateProfilePicture';
 import { DeleteAccount } from './pages/userprofile/DeleteAccount';
 import { DeleteEvent } from './pages/userprofile/DeleteEvent';
 import { CreateEvent } from './pages/event/CreateEvent';
@@ -57,11 +59,13 @@ function App() {
                   <Route path ='/login' element = {<Login/>}/>
                   <Route path ='/event/:id' element = {<Event/>}/>
                   <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
-                  <Route path ='/admintasks' element = {<AdminTasks/>}/>
+                  <Route path ='/admintasks/:id' element = {<AdminTasks/>}/>
                   <Route path ='/createEvent' element = {<CreateEvent/>}/>
                   <Route path ='/neweventsubmitted' element = {<NewEventSubmitted/>}/>
                   <Route path ='/changename/:id' element = {<ChangeName/>}/>
                   <Route path ='/changepassword/:id' element = {<ChangePassword/>}/>
+                  <Route path ='/updatebio/:id' element = {<UpdateBio/>}/>
+                  <Route path ='/updateprofilepic/:id' element = {<UpdateProfilePicture/>}/>
                   <Route path ='/deleteaccount/:id' element = {<DeleteAccount/>}/>
                   <Route path ='/deleteevent/:id' element = {<DeleteEvent/>}/>
                   <Route path ='/ourcompany' element = {<OurCompany/>}/>

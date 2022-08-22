@@ -3,6 +3,7 @@ import './Userprofile.css';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab, Card, Row, Col, Button } from "react-bootstrap";
 import Moment from "moment";
+import Carousel from 'react-bootstrap/Carousel';
 import Popover from 'react-bootstrap/Popover';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import TestImage from '../../assets/images/profile-pic-logo.png';
@@ -39,18 +40,6 @@ export const AdminTasks = () => {
           setUserObject(Response.data);
       });
   }, [])
-
-  //find out if user is an admin
-  let adminTaskLink = ""
-  let adminStatus = 0;
-  if (userObject.admin_status = 1) {
-    adminStatus = 1
-  }
-  if (adminStatus = 1) {
-    adminTaskLink = <Button>View Admin Tasks</Button>
-  } else {
-    adminTaskLink = null
-  }
 
   //get events awaiting admin approval
   useEffect(() => {
@@ -184,16 +173,14 @@ export const AdminTasks = () => {
 
     <div className="profile-page-full">
       <Row xs={1} md={1} className="g-4">
-        <Col className="col-md-3 profile-left">
-          <Card>
+        <Col className="col-md-4 profile-left">
+          <Card className="admin-left-info">
             <Card.Img className="profile-picture" variant="top" src={profilePicture} />
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>
                 <p>{userObject.email_address}</p>
-                {bioDisplay}
               </Card.Text>
-              <button className="admin-tasks-btn" onClick={() => {navigate(`/admintasks`)}}>View My Admin Tasks</button><br/>
               <Button className="account-settings-btn" variant="primary" onClick={handleShow}>Account Settings</Button>
               <Button className="account-settings-btn" variant="primary" onClick={logout}>Logout</Button>
               <Offcanvas show={show} onHide={handleClose} className="account-settings-offcanvas">
@@ -214,57 +201,48 @@ export const AdminTasks = () => {
           </Card>
         </Col>
 
-        <Col className="col-md-9 profile-right">
-          <Card className="">
+        <Col className="col-md-8 profile-right">
+          <Card className="profile-event-card">
             <Card.Body>
               <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 admin-tabs">
                 <Tab eventKey="home" title="Events Awaiting Approval"> 
-                <div className="approval-page">            
-                  <div xs={1} md={3} className="row g-4">
+                <div className="approval-page">
+                  <br/>
+                  <br/>
+                  <br/>
+                  <Carousel slide={false} className="event-carousel">
                     {awaitingApprovalList.map((value, key) => { 
-                      return(     
-                        <div>          
-                          <Card className="admin-view-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                            <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
-                            <Card.Body className="home-card-body">
-                              <Card.Text>
-                                <p className="admin-event-info">{value.event_name}</p>
-                                <p className="admin-event-info">{formatDate}</p>
-                                <p className="admin-event-info">{value.event_time}</p>
-                                <p className="admin-event-info">{value.event_location}</p>
-                              </Card.Text>
-                              <Button className="approve-event admin-event-btn" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
-                              <Button className="reject-event admin-event-btn" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
-                            </Card.Body>
-                          </Card>
-                        </div>
+                      return(    
+                        <Carousel.Item>
+                          <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
+                          <Carousel.Caption>
+                            <h3 className="event-carousel-h3">{value.event_name}</h3>
+                            <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+                            <Button className="approve-event admin-event-btn" type="submit" onClick={() => approveEvent(value.event_id)}>Approve</Button>
+                            <Button className="reject-event admin-event-btn" type="submit" onClick={() => declineEvent(value.event_id)}>Decline</Button>
+                          </Carousel.Caption>
+                        </Carousel.Item>
                       )
-                    })}
-                  </div>
-                  </div>   
+                    })} 
+                  </Carousel>
+                </div>   
                 </Tab>
                 <Tab eventKey="profile" title="Featured Events" className="admin-tabs">
                   <Button className="approve-event add-featured-btn" type="submit" href="/whatson">Add Featured Events</Button>
-                  <Row xs={1} md={2} className="g-4 home-event-cards">
+                  <Carousel slide={false} className="event-carousel">
                     {featuredEvents.map((value, key) => { 
-                      return(
-                        <Col className="">
-                          <Card className="admin-view-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                            <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
-                            <Card.Body className="home-card-body">
-                              <Card.Text>
-                                <p className="admin-event-info">{value.event_name}</p>
-                                <p className="admin-event-info">{formatDate}</p>
-                                <p className="admin-event-info">{value.event_time}</p>
-                                <p className="admin-event-info">{value.event_location}</p>
-                              </Card.Text>
-                              <Button className="reject-event admin-event-btn" type="submit" onClick={() => removeFromFeatured(value.event_id)}>Remove From Featured</Button>
-                            </Card.Body>
-                          </Card>
-                        </Col>
+                      return(    
+                        <Carousel.Item>
+                          <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
+                          <Carousel.Caption>
+                            <h3 className="event-carousel-h3">{value.event_name}</h3>
+                            <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
+                            <Button className="reject-event admin-event-btn" type="submit" onClick={() => removeFromFeatured(value.event_id)}>Remove From Featured</Button>
+                          </Carousel.Caption>
+                        </Carousel.Item>
                       )
-                    })}
-                  </Row>
+                    })} 
+                  </Carousel>
                 </Tab>
               </Tabs>
             </Card.Body>
