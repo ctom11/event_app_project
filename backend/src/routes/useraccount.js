@@ -241,5 +241,4 @@ router.post("/addtointerested/:id", validateToken, (req, res)=> {
         });
 });
 
-
 module.exports = router;

@@ -86,15 +86,15 @@ export const Userprofile = () => {
     });
   }, [])
 
-    //get list of user's events they have posted
-    useEffect(() => {
-      Axios.get(`http://localhost:3001/useraccount/postedevents/${id}`, {
-        headers: {accessToken: localStorage.getItem("accessToken")}, 
-      }) .then((Response) => {
-          console.log(Response)
-          setPostedEventsObject(Response.data);
-      });
-    }, [])
+  //get list of user's events they have posted
+  useEffect(() => {
+    Axios.get(`http://localhost:3001/useraccount/postedevents/${id}`, {
+      headers: {accessToken: localStorage.getItem("accessToken")}, 
+    }) .then((Response) => {
+        console.log(Response)
+        setPostedEventsObject(Response.data);
+    });
+  }, [])
 
   //set default profile picture
   let profilePicture = TestImage;

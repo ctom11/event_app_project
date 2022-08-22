@@ -3,13 +3,16 @@ import './Event.css';
 //banner used if event image has not been provided
 import defaultEventBanner from '../../assets/images/default-event-banner.png';
 import { Card, Row, Col, Accordion, Toast, Button} from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import Moment from "moment";
 import TestImage from '../../assets/images/profile-pic-logo.png';
 import { AuthContext } from "../../components/AuthContext";
 
 export const Event = () => {
+
+    //set up for connecting to individual event page
+    let navigate = useNavigate()
 
     //for accessing user ID
     const accessToken = localStorage.getItem("accessToken");
@@ -97,7 +100,7 @@ export const Event = () => {
     const [buttonText, setButtonText] = useState('I am Interested');
 
     const addToInterested = () => {
-        Axios.post(`http://localhost:3001/useraccount/addToInterested`, {eventId: eventObject.event_id},
+        Axios.post(`http://localhost:3001/useraccount/addtointerested/${authState.id}`, {eventId: eventObject.event_id},
         {
             headers: {
                 accessToken: localStorage.getItem("accessToken"),
@@ -108,6 +111,13 @@ export const Event = () => {
                 console.log(Response.data.error);
             } else {
                 setButtonText('I am Interested');
+                Axios.post(`http://localhost:3001/event/increaseinterested/${id}`,
+                ).then ((Response) => {
+                    if (Response.data.error) {
+                        console.log(Response.data.error);
+                    } 
+                    window.location.reload();
+                })
             }
         })
     }

@@ -330,4 +330,27 @@ router.delete("/deleteevent/:id", validateToken, (req, res)=> {
     );
 });
 
+/*increase number of people interested*/
+router.post("/increaseinterested/:id", (req, res)=> {
+
+    const id =  req.params.id
+
+    const postIncreaseInterested = "UPDATE event SET event_interested = event_interested + 1 WHERE event_id = ?";
+    db.normalDb.query(postIncreaseInterested, [id],
+        (err, rows) => {
+            if (err) {
+                res.send({err: err});
+                return;
+            }
+            if(rows){
+                res.send(rows)
+                return;
+            }
+            else {
+                res.send({message:"Can't add interested event"})
+                return;
+            }
+        });
+});
+
 module.exports = router;
