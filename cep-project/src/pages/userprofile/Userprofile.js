@@ -159,7 +159,7 @@ export const Userprofile = () => {
   return (
 
     <div className="profile-page-full">
-      <Row xs={1} md={1} className="g-4">
+      <Row xs={1} md={1} className="g-4 profile-row">
         <Col className="col-md-4 profile-left">
           <Card className="profile-left-info">
             <Card.Img className="profile-picture" variant="top" src={profilePicture} />

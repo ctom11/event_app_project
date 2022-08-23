@@ -35,13 +35,13 @@ export const Home = () => {
 
       <Carousel fade>
         <Carousel.Item>
-          <img className="w-100" src={homeImage1} alt="First slide"/>
+          <img className="w-100 home-carousel-image" src={homeImage1} alt="First slide"/>
           <Carousel.Caption className="carousel-caption-1">
             <h3 className="carousel-slide-label">Trying to plan a fun day out but not sure where to start? We've got you covered.</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="w-100" src={homeImage2} alt="Second slide"/>
+          <img className="w-100 home-carousel-image" src={homeImage2} alt="Second slide"/>
           <Link to="/Login">
             <Carousel.Caption className="carousel-caption-2">
               <h3 className="carousel-slide-label">Share your events right here.</h3>
@@ -50,7 +50,7 @@ export const Home = () => {
           </Link>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="w-100" src={homeImage3} alt="Third slide"/>
+          <img className="w-100 home-carousel-image" src={homeImage3} alt="Third slide"/>
           <Link to="/Signup">
             <Carousel.Caption className="carousel-caption-3">
               <h3 className="carousel-slide-label">Want to keep up to date with the latest events? Create your account now.</h3>

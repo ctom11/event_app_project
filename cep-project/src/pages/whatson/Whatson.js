@@ -74,7 +74,7 @@ export const Whatson = () => {
 
     return (
   
-        <Row>
+        <Row className="whatson-row">
         {/*This first column contains the side menu*/}
         {/*d-md-block d-sm-none prevents the side menu from being shown when screen is smaller than medium - mobile friendly*/}
             <Col className="col-md-2 d-md-block d-sm-none">
@@ -113,7 +113,7 @@ export const Whatson = () => {
                 </div>
             </Col>
             {/*This column then contains the event cards*/}
-            <Col className="col-md-10">
+            <Col className="col-md-10 whatson-card-col">
                 <div>
                     <Row className="whatson-filter">
                         <Row>

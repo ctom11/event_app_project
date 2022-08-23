@@ -4,6 +4,35 @@
     font-size: xx-large;
 }
 
+@media only screen and (max-width: 1260px) {
+    .whatson-div {
+      height: 50vh !important;
+      width: 150vh !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .sort-events {
+      width: 70vh !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+.whatson-card {
+    position: relative;
+    width: 100vh !important;
+    height: 80vh !important;
+    margin-left: 55%;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .event-name-title  {
+        position: relative;
+        height: 5vh !important;
+        }
+    }
+
 /*event filter at top of page*/
 .whatson-filter {
     padding-top: 100px;
@@ -126,4 +155,8 @@
     margin-bottom: 50px;
     width: 80% !important;
     font-size: x-large;
+}
+
+.whatson-card-col {
+
 }

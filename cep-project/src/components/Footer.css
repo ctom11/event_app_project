@@ -1,5 +1,5 @@
 .footer-full {
-    width: 222vh !important;
+    margin: 0;
     left:0ppx;
     bottom:0px;
     right:0px;
@@ -10,8 +10,13 @@
     padding-top: 20px;
     padding-bottom: 10px;
     text-align: center;
-    min-width: max-content;
 }
+
+@media only screen and (max-width: 1260px) {
+    .footer-full {
+      width: 320vw;
+    }
+  }
 
 .logo-footer {
     margin-bottom: 5px;

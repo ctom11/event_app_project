@@ -1,7 +1,6 @@
 /*overall page*/
 
 .home-page-full{
-    width: 220vh;
     text-align: -webkit-center;
 }
 
@@ -18,11 +17,18 @@
 
 /*carousel*/
 
+@media only screen and (max-width: 1260px) {
+    .carousel-inner {
+      width: 320vw;
+      height:100vh;
+    }
+  }
+
 .carousel-inner {
     height: 100vh;
-    width: 100%;
     min-width: 800px;
 }
+
 .carousel-caption-1 {
     padding: 40px;
     background-color:cadetblue;
@@ -63,16 +69,21 @@
 
 /*featured events*/
 
+@media only screen and (max-width: 1260px) {
+    .home-featured-events {
+      width: 135vh !important;
+    }
+  }
+
 .home-featured-events {
     background-color: whitesmoke;
     border-radius: 20px;
     color: #276174;
     font-weight: 600;
-    width: 70%;
+    width: 142vh;
     height: auto;
     margin: 50px;
     border: 2px solid #ff5147;
-    position: sticky;
 }
 
 .h1-featured {
@@ -84,7 +95,7 @@
 }
 
 .home-event-cards {
-    width: 150vh;
+    width: 140vh;
     padding-top: 5%;
     margin-bottom: 5%;
     place-content: center;
@@ -104,7 +115,7 @@
 }
 
 .home-card-body{
-    height: 25vh;
+    height: 10%;
     width: 100%;
     align-self: center;
     font-size: larger;
