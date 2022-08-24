@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './CreateEvent.css';
 import { Form, Card } from "react-bootstrap";
 import DatePicker from 'react-datepicker';
@@ -9,6 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../components/AuthContext";
 
 export const CreateEvent = () => {
+
+    useEffect(() => {
+        document.title = 'Create Event - Eventure';
+      });
 
     const { authState } = useContext(AuthContext);
     let navigate = useNavigate();

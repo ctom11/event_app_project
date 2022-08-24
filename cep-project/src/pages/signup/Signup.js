@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -7,6 +7,10 @@ import Axios from 'axios';
 import Pdf from '../../assets/EventureTermsConditions.pdf';
 
 export const Signup = () => {
+
+    useEffect(() => {
+        document.title = 'Sign Up - Eventure';
+      });
 
     /*set up for connecting to individual event page*/
     let navigate = useNavigate()

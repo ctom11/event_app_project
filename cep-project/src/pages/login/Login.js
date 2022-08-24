@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginArt from '../../assets/images/loginart.png';
@@ -6,6 +6,10 @@ import Axios from 'axios';
 import { AuthContext } from '../../components/AuthContext'; 
 
 export const Login = () => {
+
+  useEffect(() => {
+    document.title = 'Login - Eventure';
+  });
 
   const [email_address, setEmailAddress] = useState('')
   const [password, setPassword] = useState('')

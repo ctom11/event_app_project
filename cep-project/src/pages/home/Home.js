@@ -12,6 +12,10 @@ import Moment from "moment";
 
 export const Home = () => {
 
+  useEffect(() => {
+    document.title = 'Home - Eventure';
+  });
+
   //for displaying date in Do MMMM YYYY format rather than YYYY/MM/DD
   const formatDate = Moment().format("Do MMMM YYYY");
 

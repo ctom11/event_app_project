@@ -38,6 +38,10 @@ export const Userprofile = () => {
       });
   }, [])
 
+  useEffect(() => {
+    document.title = `${userObject.first_name} ${userObject.last_name} - Eventure`;
+  });
+
   //find out if user is an admin
   let adminStatus = userObject.admin_status;
   let adminTaskLink = <></>

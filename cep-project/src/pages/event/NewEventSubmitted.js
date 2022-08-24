@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './CreateEvent.css';
 import { Link } from 'react-router-dom';
 import { Card } from "react-bootstrap";
@@ -6,6 +6,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 import './Event.css';
 
 export const NewEventSubmitted = () => {
+
+    useEffect(() => {
+        document.title = "New Event Submitted - Eventure";
+      });
   
     return (
 

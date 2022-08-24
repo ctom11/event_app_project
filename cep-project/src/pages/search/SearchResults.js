@@ -7,6 +7,10 @@ import Axios from 'axios';
 
 export const SearchResults = () => {
 
+    useEffect(() => {
+        document.title = 'Search Results - Eventure';
+      });
+
     let navigate = useNavigate()
     const [eventsObject, setEventsObject] = useState([]);
 

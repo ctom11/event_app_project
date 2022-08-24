@@ -13,6 +13,10 @@ import Axios from 'axios';
 
 export const AdminTasks = () => {
 
+  useEffect(() => {
+    document.title = 'Your Admin Tasks - Eventure';
+  });
+
   //for displaying date in Do MMMM YYYY format rather than YYYY/MM/DD
   const formatDate = Moment().format("Do MMMM YYYY");
 

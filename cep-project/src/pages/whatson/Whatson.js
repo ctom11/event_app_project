@@ -10,6 +10,10 @@ import { AuthContext } from "../../components/AuthContext";
 
 export const Whatson = () => {
 
+    useEffect(() => {
+        document.title = `What's On - Eventure`;
+      });
+
     //for accessing user ID
     const { authState } = useContext(AuthContext);
 

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import Axios from 'axios';
 import './Userprofile.css';
 
 export const UpdateProfilePicture = () => {
+
+    useEffect(() => {
+        document.title = 'Update Your Profile Picture - Eventure';
+      });
 
     let navigate = useNavigate()
     let { id } = useParams();

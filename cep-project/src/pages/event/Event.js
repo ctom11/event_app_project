@@ -35,6 +35,10 @@ export const Event = () => {
         });
     }, [])
 
+    useEffect(() => {
+        document.title = `${eventObject.event_name} - Eventure`;
+      });
+
     //get event comments
     useEffect(() => {
         Axios.get(`http://localhost:3001/event/comments/${id}`).then((Response) => {

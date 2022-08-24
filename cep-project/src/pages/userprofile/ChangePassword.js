@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -7,6 +7,10 @@ import Axios from 'axios';
 import './Userprofile.css';
 
 export const ChangePassword = () => {
+
+    useEffect(() => {
+        document.title = 'Change Your Password - Eventure';
+      });
 
     let navigate = useNavigate()
 

@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './Userprofile.css';
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import Axios from 'axios';
 
 export const DeleteAccount = () => {
+
+    useEffect(() => {
+        document.title = 'Delete Your Account - Eventure';
+      });
 
     let navigate = useNavigate();
     let { id } = useParams();
