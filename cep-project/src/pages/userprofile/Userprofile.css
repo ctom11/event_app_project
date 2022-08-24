@@ -1,5 +1,72 @@
-.profile-row {
-    
+@media only screen and (max-width: 1260px) {
+    .profile-page-full {
+      width: 150vh !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .profile-left-info {
+      height: 150vh !important;
+      width: 135vh !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .admin-left-info {
+      height: 100vh !important;
+      width: 135vh !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .profile-picture {
+      height: 100vh !important;
+      width: 75vh !important;
+      margin-top: 5% !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .profile-event-card {
+      height: 75vh !important;
+      width: 135vh !important;
+      margin-top: 5% !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .event-carousel {
+      height: 50vh !important;
+      width: 100vh !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .event-carousel-img {
+      height: 50vh !important;
+      width: 100vh !important;
+      margin-right: 50% !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .event-carousel-h3 {
+      margin-right: 50% !important;
+    }
+}
+
+@media only screen and (max-width: 1260px) {
+    .event-carousel-p {
+      margin-right: 50% !important;
+    }
+}
+
+
+@media only screen and (max-width: 1260px) {
+    .change-name-div {
+      width: 100vh !important;
+      margin-left: 50% !important;
+    }
 }
 
 .profile-left-info {
@@ -9,6 +76,7 @@
 
 .admin-left-info {
     height: 85vh;
+    background-color: cadetblue;
 }
 
 .profile-picture {

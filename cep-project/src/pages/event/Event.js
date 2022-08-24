@@ -142,7 +142,7 @@ export const Event = () => {
 
         <div className="event-full">
             <Card className="event-img-card">
-            <div className="p-5 text-center bg-image rounded-3 no-repeat h-120" style={eventImageStyle}>
+            <div className="p-5 text-center bg-image rounded-3 no-repeat h-120 event-image-div" style={eventImageStyle}>
             </div>
             </Card>
             

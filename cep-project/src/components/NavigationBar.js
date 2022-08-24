@@ -2,10 +2,8 @@ import React, { useContext, useState } from "react";
 import './NavigationBar.css';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
 import Logo from '../assets/images/logo.png';
 import { AuthContext } from "./AuthContext";
-import { SearchContext } from "./SearchContext";
 
 
 export const NavigationBar = () => {
@@ -15,20 +13,12 @@ export const NavigationBar = () => {
     
     const accessToken = localStorage.getItem("accessToken");
     const { authState } = useContext(AuthContext);
-    const { setSearchState } = useContext(SearchContext);
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
     //setSearchState([]);
 
-    const search = () => {
-        Axios.get('http://localhost:3001/search/sse').then((Response) => {
-                console.log("Search Response");
-                console.log(Response);
-                setSearchState(Response.data);
-                navigate(`/searchresults`);
-                window.location.reload();
-        });
+    const Search = () => {
+        navigate('/searchresults/' + searchQuery);
     }
 
     const logout = () => {
@@ -71,7 +61,7 @@ export const NavigationBar = () => {
                     onChange={(e) => {
                         setSearchQuery(e.target.value);
                     }}></input>
-                    <button className="btn btn-outline-success search-btn" type="submit" onClick={search}>Search</button>
+                    <button className="btn btn-outline-success search-btn" type="submit" onClick={Search}>Search</button>
                 </form>
             </div>
         </Container>

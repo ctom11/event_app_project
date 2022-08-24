@@ -1,14 +1,26 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import './SearchResults.css';
 import { Col, Row, Card, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Moment from "moment";
-import { SearchContext } from "../../components/SearchContext";
+import Axios from 'axios';
 
 export const SearchResults = () => {
 
     let navigate = useNavigate()
-    const { searchState } = useContext(SearchContext);
+    const [eventsObject, setEventsObject] = useState([]);
+
+    let { searchQuery } = useParams();
+
+
+    useEffect(() => {
+        Axios.get(`http://localhost:3001/search/${searchQuery}`).then((Response) => {
+            console.log("Search Response");
+            console.log(Response);
+        
+            setEventsObject(Response.data);
+        });
+    }, [])
 
 
     return (
@@ -17,7 +29,9 @@ export const SearchResults = () => {
                 <h1 className="search-results-header">Your search returned the following results..</h1>
             </Card>
             <Row xs={1} md={3} className="g-4">
-                        {searchState.map((value, key) => { 
+                        {eventsObject.map((value, key) => { 
+
+                            console.log(value);
                         return(
                             //<Col key={key}>
                             <Col>

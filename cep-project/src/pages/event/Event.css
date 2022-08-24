@@ -1,3 +1,28 @@
+@media only screen and (max-width: 1260px) {
+    .event-full {
+      width: 148vh !important;
+      height: 248vh !important;
+    }
+  }
+
+@media only screen and (max-width: 1260px) {
+    .accordion {
+      width: 148vh !important;
+    }
+}
+  
+@media only screen and (max-width: 1260px) {
+    .rounded-3{
+      width: 148vh !important;
+    }
+  }
+
+@media only screen and (max-width: 1260px) {
+    .event-bottom-card{
+      height: 120vh !important;
+    }
+  }
+  
 .event-p {
     color: #276174;
     padding-left: 30px;
