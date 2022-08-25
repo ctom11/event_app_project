@@ -51,6 +51,7 @@ export const Login = () => {
         <div className="col-md-5">          
           <div className="card-body">
             <div className="mb-3">
+              <br/>
               <h1 className="SignIn-header">Sign In</h1>
               <label htmlFor="inputemail" className="form-label">Email address</label>
               <input type="email" className="form-control login" id="inputemail" aria-describedby="emailHelp"
@@ -65,10 +66,8 @@ export const Login = () => {
                 setPassword(e.target.value);
               }}></input>
             </div>
-            <div className="mb-3 form-check">
-              <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
-              <label className="form-check-label" htmlFor="exampleCheck1">Keep me logged in</label>
-            </div>
+            <br/>
+            <br/>
             <button type="submit" className="btn btn-primary eventure-btn" onClick={login}>Login</button>
           </div>
         </div>

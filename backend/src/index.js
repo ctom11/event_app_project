@@ -12,6 +12,8 @@ var signupRoute = require("./routes/signup");
 app.use("/signup", signupRoute);
 var loginRoute = require("./routes/login");
 app.use("/login", loginRoute);
+var forgotPasswordRoute = require("./routes/forgotpassword");
+app.use("/forgotpassword", forgotPasswordRoute);
 var eventRoute = require("./routes/event");
 app.use("/event", eventRoute);
 var useraccountRoute = require("./routes/useraccount");
