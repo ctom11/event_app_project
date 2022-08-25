@@ -5,6 +5,8 @@ import { Home } from './pages/home/Home.js';
 import { Whatson } from './pages/whatson/Whatson';
 import { Signup } from './pages/signup/Signup';
 import { Login } from './pages/login/Login';
+import { ForgotPassword } from './pages/login/ForgotPassword';
+import { PasswordIsReset } from './pages/login/PasswordIsReset';
 import { Layout } from './components/Layout';
 import { NavigationBar } from './components/NavigationBar';
 import { Footer } from './components/Footer';
@@ -56,6 +58,8 @@ function App() {
                   <Route path ='/whatson' element = {<Whatson/>}/>
                   <Route path ='/signup' element = {<Signup/>}/>
                   <Route path ='/login' element = {<Login/>}/>
+                  <Route path ='/forgotpassword' element = {<ForgotPassword/>}/>
+                  <Route path ='/passwordisreset' element = {<PasswordIsReset/>}/>
                   <Route path ='/event/:id' element = {<Event/>}/>
                   <Route path ='/userprofile/:id' element = {<Userprofile/>}/>
                   <Route path ='/admintasks/:id' element = {<AdminTasks/>}/>

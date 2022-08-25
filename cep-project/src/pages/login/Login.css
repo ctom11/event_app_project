@@ -86,3 +86,11 @@ h2 {
     --bs-btn-disabled-color: #63FD88 !important;
     --bs-btn-disabled-border-color: #276174 !important;
 }
+
+.forgotten-pw {
+    width:70%;
+}
+
+.input-pw-email {
+    text-align: center;
+}

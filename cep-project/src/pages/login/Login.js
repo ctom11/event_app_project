@@ -66,7 +66,9 @@ export const Login = () => {
                 setPassword(e.target.value);
               }}></input>
             </div>
-            <br/>
+            <div>
+              <a href = "/forgotpassword" target = "_blank" className='tandc'>I forgot my password</a>
+            </div>
             <br/>
             <button type="submit" className="btn btn-primary eventure-btn" onClick={login}>Login</button>
           </div>

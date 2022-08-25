@@ -1,11 +1,10 @@
 const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
-const { validateToken } = require("../authentication/authentication");
 const nodemailer = require('nodemailer');
 const bcrypt = require("bcrypt");
 
-router.post("/", validateToken, async (req, res)=> {
+router.post("/", async (req, res)=> {
 
     const emailId = req.body.emailId
     const newPassword = Math.random().toString(16).substr(2, 8); 
