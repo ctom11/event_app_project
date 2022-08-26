@@ -25,24 +25,37 @@ export const CreateEvent = () => {
     const [eventDate, setEventDate] = useState('');
     const [eventTime, setEventTime] = useState('');
     const [eventLocation, setEventLocation] = useState('');
-    const [eventImage, setEventImage] = useState('');
+    const [image, setImage] = useState({ preview: '', data: '' })
     const [genreId, setGenreId] = useState('');
     const userId = authState.id;
 
+    const handleImageChange = (e) => {
+        const img = {
+          preview: URL.createObjectURL(e.target.files[0]),
+          data: e.target.files[0],
+        }
+        setImage(img)
+      }
+
     const onSubmit = () => {
-        Axios.post(`http://localhost:3001/event/createevent` , {
-            headers: {accessToken: localStorage.getItem("accessToken")},
-            eventName: eventName,
-            eventDescriptionIntro: eventDescriptionIntro,
-            eventDescriptionBody: eventDescriptionBody,
-            eventFree: eventFree,
-            eventTicketLink: eventTicketLink,
-            eventDate: eventDate,
-            eventTime: eventTime,
-            eventLocation: eventLocation,
-            eventImage: eventImage,
-            userId: userId,
-            genreId: genreId
+        let formData = new FormData();
+        formData.append('eventName', eventName);
+        formData.append('eventDescriptionIntro', eventDescriptionIntro);
+        formData.append('eventDescriptionBody', eventDescriptionBody);
+        formData.append('eventFree', eventFree);
+        formData.append('eventTicketLink', eventTicketLink);
+        formData.append('eventDate', eventDate);
+        formData.append('eventTime', eventTime);
+        formData.append('eventLocation', eventLocation);
+        formData.append('eventImage', image.data);
+        formData.append('userId', userId);
+        formData.append('genreId', genreId);
+
+        Axios.post(`http://localhost:3001/event/createevent` , formData, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+                "Content-Type": "multipart/form-data"
+        }
         }).then((Response) => {
             if (Response.data.error) {
               alert(Response.data.error);
@@ -104,10 +117,7 @@ export const CreateEvent = () => {
                     <div className='col-md-6'>
                         <div>
                             <label htmlFor="inputEventImg" className="create-label">Image</label><br/>
-                            <input type="text" id="input-event-image" className="form-input-signup signup create-input" name="eventimage"
-                            onChange={(e) => {
-                                setEventImage(e.target.value);
-                            }}></input>
+                            <input type="file" onChange={handleImageChange} id="input-event-image" className="form-input-signup signup create-input" name="eventimage"></input>
                         </div> 
                         <label id="my-radio-group" className="create-label">Is your event free?</label>
                         <div role="group" aria-labelledby="my-radio-group" className="create-input">

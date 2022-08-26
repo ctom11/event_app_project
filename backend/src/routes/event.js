@@ -3,6 +3,22 @@ const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
 const { validateToken } = require("../authentication/authentication");
+const path = require('path');
+const multer = require('multer');
+
+//storage is where all file specifications are determined
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../event_images/images')
+    },
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+});
+
+//middleware
+const upload = multer({storage: storage})
 
 /*get all info about an event*/
 router.get("/", (req, res)=> {
@@ -204,7 +220,7 @@ router.get("/comments/:id", (req, res)=> {
 });
 
 /*create new event*/
-router.post("/createevent", (req, res)=> {
+router.post("/createevent", upload.single("eventImage"), (req, res)=> {
 
     console.log(req.body)
     const eventName = req.body.eventName
@@ -215,7 +231,7 @@ router.post("/createevent", (req, res)=> {
     const eventDate = req.body.eventDate
     const eventTime = req.body.eventTime
     const eventLocation = req.body.eventLocation
-    const eventImage = req.body.eventImage
+    const eventImage = req.file.filename
     const userId = req.body.userId
     const genreId = req.body.genreId
 

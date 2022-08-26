@@ -73,7 +73,7 @@ export const Home = () => {
               //<Col key={key}>
               <Col className="featured-card-size">
                 <Card className="featured-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                  <Card.Img className="event-img-home" variant="top" src={value.event_img}/>                                
+                  <Card.Img className="event-img-home" variant="top" src={`http://localhost:3002/${value.event_img}`}/>                                
                   <Card.Body className="home-card-body">
                     <Card.Title>{value.event_name}</Card.Title>
                     <Card.Text>

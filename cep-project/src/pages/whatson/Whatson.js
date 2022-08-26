@@ -144,7 +144,7 @@ export const Whatson = () => {
                             //<Col key={key}>
                             <Col>
                                 <Card className="whatson-card h-100" onClick={() => {navigate(`/event/${value.event_id}`)}}>
-                                    <Card.Img className="event-img" variant="top" src={value.event_img}/>                                
+                                    <Card.Img className="event-img" variant="top" src={`http://localhost:3002/${value.event_img}`}/>                                
                                     <Card.Body className="event-card-body">
                                         <Card.Title className="event-name-title">{value.event_name}</Card.Title>
                                         <Card.Text>

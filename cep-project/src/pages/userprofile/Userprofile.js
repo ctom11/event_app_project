@@ -122,7 +122,7 @@ export const Userprofile = () => {
     {myEventsObject.map((value, key) => { 
       return(    
         <Carousel.Item  onClick={() => {navigate(`/event/${value.event_id}`)}}>
-          <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"/>
+          <img className="d-block w-100 event-carousel-img" src={`http://localhost:3002/${value.event_img}`} alt="First slide"/>
           <Carousel.Caption>
             <h3 className="event-carousel-h3">{value.event_name}</h3>
             <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>
@@ -140,7 +140,7 @@ export const Userprofile = () => {
     {postedEventsObject.map((value, key) => { 
       return(    
         <Carousel.Item>
-          <img className="d-block w-100 event-carousel-img" src={value.event_img} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
+          <img className="d-block w-100 event-carousel-img" src={`http://localhost:3002/${value.event_img}`} alt="First slide"  onClick={() => {navigate(`/event/${value.event_id}`)}}/>
           <Carousel.Caption>
             <h3 className="event-carousel-h3">{value.event_name}</h3>
             <p className="event-carousel-p">{Moment(value.event_date).format("Do MMMM YYYY")} {value.event_time}</p>

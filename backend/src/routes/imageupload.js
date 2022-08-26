@@ -5,6 +5,7 @@ const router = express.Router();
 const path = require('path');
 
 const multer = require('multer');
+
 //storage is where all file specifications are determined
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -21,10 +22,7 @@ const upload = multer({storage: storage})
 
 /*upload event img to db*/
 router.post("/eventimg", upload.single("eventimage"), (req, res)=> {
-
-    db.normalDb.query(
-        
-        );
+    res.send("Image uploaded");
 });
 
 
