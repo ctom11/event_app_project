@@ -6,6 +6,16 @@ import './Userprofile.css';
 
 export const UpdateProfilePicture = () => {
 
+    const [image, setImage] = useState({ preview: '', data: '' })
+
+    const handleImageChange = (e) => {
+        const img = {
+        preview: URL.createObjectURL(e.target.files[0]),
+          data: e.target.files[0],
+        }
+        setImage(img)
+    }
+
     useEffect(() => {
         document.title = 'Update Your Profile Picture - Eventure';
       });
@@ -14,15 +24,17 @@ export const UpdateProfilePicture = () => {
     let { id } = useParams();
 
     //update user profile picture
-    const [userProfilePicture, setUserProfilePicture] = useState("");
     const UpdateProfilePicture = () => {
-        Axios.post(`http://localhost:3001/useraccount/updateprofilepic/${id}`, {
-            userProfilePicture: userProfilePicture},
-            {
-                headers: {
-                    accessToken: localStorage.getItem("accessToken"),
-                }
-            }).then((Response) => {
+
+        let formData = new FormData();
+        formData.append('userProfilePicture', image.data);
+
+        Axios.post(`http://localhost:3001/useraccount/updateprofilepic/${id}`, formData, {
+            headers: {
+                accessToken: localStorage.getItem("accessToken"),
+                "Content-Type": "multipart/form-data"
+        }
+        }).then((Response) => {
                 if (Response.data.error) {
                     alert(Response.data.error);
                 } else {
@@ -35,10 +47,9 @@ export const UpdateProfilePicture = () => {
 
         <Card className="change-name-div">
             <h1 className="change-title">Update Your Profile Picture</h1>
-            <div className="mb-3">
-                <label htmlFor="inputBio" className="form-label change-label">Choose File:</label>
-                <input type="text" className="form-control login change-input" id="inputBio"
-                onChange={(e) => {setUserProfilePicture(e.target.value);}}></input>
+            <div>
+                <label htmlFor="inputUserImg" className="create-label">Image</label><br/>
+                <input type="file" onChange={handleImageChange} id="input-user-image" className="form-input-signup signup create-input" name="userimage"></input>
             </div>
             <div className="change-options">
                 <button className="btn btn-primary eventure-btn change-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>Cancel</button>

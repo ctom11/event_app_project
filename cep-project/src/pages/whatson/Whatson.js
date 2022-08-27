@@ -70,7 +70,7 @@ export const Whatson = () => {
             if (Response.data.error) {
                 console.log(Response);
             } else {
-                navigate("/admintasks")
+                navigate("/")
                 window.location.reload();
             }
         });

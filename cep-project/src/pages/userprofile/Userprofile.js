@@ -166,7 +166,7 @@ export const Userprofile = () => {
       <Row xs={1} md={1} className="g-4 profile-row">
         <Col className="col-md-4 profile-left">
           <Card className="profile-left-info">
-            <Card.Img className="profile-picture" variant="top" src={profilePicture} />
+            <Card.Img className="profile-picture" variant="top" src={`http://localhost:3002/${profilePicture}`} />
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>

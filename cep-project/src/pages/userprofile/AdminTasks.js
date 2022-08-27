@@ -212,8 +212,6 @@ export const AdminTasks = () => {
                 <Tab eventKey="home" title="Events Awaiting Approval"> 
                 <div className="approval-page">
                   <br/>
-                  <br/>
-                  <br/>
                   <Carousel slide={false} className="event-carousel">
                     {awaitingApprovalList.map((value, key) => { 
                       return(    

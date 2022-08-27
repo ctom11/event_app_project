@@ -78,7 +78,7 @@ export const Event = () => {
         width: "1400px",
         backgroundSize: '1400px',
         backgroundRepeat: 'no-repeat',
-        backgroundImage: `url(${eventObject.event_img}), url(${defaultEventBanner})`, 
+        backgroundImage: `url(http://localhost:3002/${eventObject.event_img}), url(${defaultEventBanner})`, 
         onerror: "this.onerror=null; this.src=${defaultEventBanner}"
     };
 

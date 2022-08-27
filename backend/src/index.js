@@ -22,8 +22,6 @@ var updateprofilepicRoute = require("./routes/useraccount");
 app.use("/useraccount/updateprofilepic", updateprofilepicRoute);
 var searchRoute = require("./routes/search");
 app.use("/search", searchRoute);
-var imgUploadRoute = require("./routes/imageupload");
-app.use("/imageupload", imgUploadRoute);
 
 server.listen(3001, () => console.log("Server started!"));
 

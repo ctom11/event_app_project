@@ -320,8 +320,8 @@
 }
 
 .admin-tabs {
-    --bs-nav-link-hover-color: white;
-    --bs-nav-link-color: white;
+    --bs-nav-link-hover-color: #ff5147;
+    --bs-nav-link-color: #ff5147;
 }
 
 .admin-view-card {
@@ -355,7 +355,6 @@
 
 .add-featured-btn {
     font-weight: 500;
-    margin-top: 2%;
     margin: 1%;
     color: white;
     background-color: #ff5147;
@@ -363,11 +362,15 @@
     padding: 1% 5% 1% 5%;
     border: #ff5147;
     font-size: large;
-    margin-top: 5%;
     width: 50%;
 }
 
+.nav-link.active {
+    background-color: ghostwhite;
+}
+
 .add-featured-btn:hover {
+    color: #276174;
     background-color: #ff5147;
 }
 

@@ -3,6 +3,22 @@ const express = require('express');
 const db = require("../config/db");
 const router = express.Router();
 const {validateToken} = require("../authentication/authentication");
+const path = require('path');
+const multer = require('multer');
+
+//storage is where all file specifications are determined
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, '../event_images/images')
+    },
+    filename: (req, file, cb) => {
+        console.log(file)
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+});
+
+//middleware
+const upload = multer({storage: storage})
 
 // for comparing input password with hashed password in db
 const bcrypt = require("bcrypt");
@@ -46,10 +62,10 @@ router.get("/", (req, res)=> {
 });
 
 //update profile pic
-router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
+router.post("/updateprofilepic/:id", validateToken, upload.single("userProfilePicture"), (req, res)=> {
 
     console.log(req);
-    const userProfilePicture = req.body.userProfilePicture
+    const userProfilePicture = req.file.filename
     const id =  req.params.id;
 
     const postProfilePic = "UPDATE user_account SET user_profile_picture = ? WHERE user_account_id= ?";
@@ -58,7 +74,7 @@ router.post("/updateprofilepic/:id", validateToken, (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if (result.affectedRows >0) {
+            if (result.affectedRows) {
                 res.send({message: "success"})
             } else {
                 res.send(result)
