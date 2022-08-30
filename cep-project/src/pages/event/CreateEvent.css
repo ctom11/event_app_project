@@ -1,5 +1,5 @@
 .create-event {
-   width: 60%;
+   width: 70%;
    align-items: center;
 }
 
@@ -14,7 +14,7 @@
 
 .create-input {
     margin-bottom: 50px;
-    min-width: 90%;
+    min-width: 100%;
 }
 
 .long-input {
@@ -40,8 +40,9 @@
 
 .create-event-btn {
     cursor: pointer;
-    margin-top: 40px;
-    margin-bottom: 50px;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
     width: 80% !important;
     font-size: x-large;
 }
@@ -51,6 +52,6 @@
 }
 
 .create-label {
-    width: 90%;
+    width: 80%;
     font-weight: 600;
 }

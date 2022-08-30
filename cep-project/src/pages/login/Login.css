@@ -50,11 +50,6 @@ h2 {
     font-size: 1.2rem !important;
 }
 
-/*keep me signed in checkbox*/
-.form-check {
-    margin-top: 10%;
-}
-
 /*input box style*/
 .login {
     border-radius: 0px;

@@ -6,6 +6,8 @@ const { validateToken } = require("../authentication/authentication");
 const path = require('path');
 const multer = require('multer');
 
+
+
 //storage is where all file specifications are determined
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
