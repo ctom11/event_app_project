@@ -109,8 +109,8 @@ router.post("/updatebio/:id", validateToken, (req, res)=> {
 router.post("/changename/:id", validateToken, (req, res)=> {
 
     console.log(req);
-    const updatedFirstName = req.body.updatedFirstName
-    const updatedLastName = req.body.updatedLastName
+    const updatedFirstName = req.body.newFirstName
+    const updatedLastName = req.body.newLastName
     const id =  req.params.id;
 
     const postUpdateName = "UPDATE user_account SET first_name = ?, last_name = ? WHERE user_account_id= ?";

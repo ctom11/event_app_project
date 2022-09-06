@@ -49,12 +49,10 @@ router.get("/byId/:id", (req, res)=> {
         (err, rows) => {
             if (err) {
                 res.send({err: err});
-            }
-            else if(rows){
+            } if (rows.length > 0) {
                 res.send(rows[0])
-            }
-            else {
-                res.send({message:"No event"})
+            } else {
+                res.send({message:"No events found"})
             }
         });
 });
@@ -72,7 +70,7 @@ router.get("/sortaz", (req, res)=> {
                 res.send(rows)
             }
             else {
-                res.send({message:"Couldn't sort"})
+                res.send({message:"Couldn't sort events"})
             }
         });
 });
@@ -230,7 +228,7 @@ router.post("/createevent", upload.single("eventImage"), (req, res)=> {
     const eventDescriptionBody = req.body.eventDescriptionBody
     const eventFree = req.body.eventFree
     const eventTicketLink = req.body.eventTicketLink
-    const eventDate = req.body.eventDate
+    const eventDate = new Date(req.body.eventDate).toISOString().split('T')[0]
     const eventTime = req.body.eventTime
     const eventLocation = req.body.eventLocation
     const eventImage = req.file.filename

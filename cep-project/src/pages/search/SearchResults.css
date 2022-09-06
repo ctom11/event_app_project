@@ -1,3 +1,7 @@
+.search-results-page {
+    margin-left: 3%;
+}
+
 .search-results-card {
     margin: auto;
     width: 80%;
@@ -9,4 +13,8 @@
     padding: 2.5%;
     color: #276174;
     text-align: left;
+}
+
+.nothing-to-show {
+    color:#276174;
 }

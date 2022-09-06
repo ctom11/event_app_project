@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -54,23 +54,23 @@ export const ChangePassword = () => {
 
             <Formik initialValues={initialValues} onSubmit={changePassword} validationSchema={validationSchema}>
                 <Form>
-            <div className="mb-3 change-label-input">
-                <label className="form-label change-label">New Password</label><br/>
-                <br/>
-                <ErrorMessage name="updatedPassword" component="span"/>
-                <Field type="password" className="form-control login change-input" name="updatedPassword" id="updatedPassword"></Field>
-            </div>
-            <div className="mb-3 change-label-input">
-                <label className="form-label change-label">Re-enter Password:</label><br/>
-                <br/>
-                <ErrorMessage name="updatedPasswordReenter" component="span"/>
-                <Field type="password" className="form-control login change-input" name="updatedPasswordReenter" id="updatedPasswordReenter"></Field>
-            </div>
-            <div className="change-options">
-                <button className="btn btn-primary eventure-btn change-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>Cancel</button>
-                <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={changePassword}>Save</button>
-            </div>
-            </Form>
+                    <div className="mb-3 change-label-input">
+                        <label className="form-label change-label">New Password</label><br/>
+                        <br/>
+                        <ErrorMessage name="updatedPassword" component="span"/>
+                        <Field type="password" className="form-control login change-input" name="updatedPassword" id="updatedPassword"></Field>
+                    </div>
+                    <div className="mb-3 change-label-input">
+                        <label className="form-label change-label">Re-enter Password:</label><br/>
+                        <br/>
+                        <ErrorMessage name="updatedPasswordReenter" component="span"/>
+                        <Field type="password" className="form-control login change-input" name="updatedPasswordReenter" id="updatedPasswordReenter"></Field>
+                    </div>
+                    <div className="change-options">
+                        <button className="btn btn-primary eventure-btn change-btn" onClick={() => {navigate(`/userprofile/${id}`)}}>Cancel</button>
+                        <button type="submit" className="btn btn-primary eventure-btn change-btn" onClick={changePassword}>Save</button>
+                    </div>
+                </Form>
             </Formik>
 
         </Card> 

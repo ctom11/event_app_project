@@ -79,6 +79,10 @@
     background-color: cadetblue;
 }
 
+.profile-admin-card {
+    height: 85vh;
+}
+
 .profile-picture {
     height: 40vh;
     border: 6px solid #276174;

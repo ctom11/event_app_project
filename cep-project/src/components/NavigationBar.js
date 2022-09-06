@@ -31,18 +31,20 @@ export const NavigationBar = () => {
         window.location.reload();
     }
 
-    let navbarContent = <Nav className="ml-auto">
-    <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
-    <Nav.Item><Nav.Link href="/signup" className="nav-nav">Sign Up</Nav.Link></Nav.Item>
-    <Nav.Item><Nav.Link href="/login" className="nav-nav">Login</Nav.Link></Nav.Item>
+    let navbarContent = 
+    <Nav className="ml-auto">
+        <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="/signup" className="nav-nav">Sign Up</Nav.Link></Nav.Item>
+        <Nav.Item><Nav.Link href="/login" className="nav-nav">Login</Nav.Link></Nav.Item>
     </Nav>;
 
     if (accessToken) {
-        navbarContent = <Nav className="ml-auto">
-        <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
-        <Nav.Item><Nav.Link href={"/userprofile/" + authState.id} className="nav-nav">My Profile</Nav.Link></Nav.Item>
-        <Nav.Item><Nav.Link onClick={logout} href="/" className="nav-nav">Logout</Nav.Link></Nav.Item>
-    </Nav>
+        navbarContent = 
+        <Nav className="ml-auto">
+            <Nav.Item><Nav.Link href="/whatson" className="nav-nav">What's On</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link href={"/userprofile/" + authState.id} className="nav-nav">My Profile</Nav.Link></Nav.Item>
+            <Nav.Item><Nav.Link onClick={logout} href="/" className="nav-nav">Logout</Nav.Link></Nav.Item>
+        </Nav>
     }
 
     return(

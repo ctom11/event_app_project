@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './SearchResults.css';
-import { Col, Row, Card, Button } from "react-bootstrap";
+import { Col, Row, Card } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import Moment from "moment";
 import Axios from 'axios';
@@ -26,10 +26,17 @@ export const SearchResults = () => {
         });
     }, [])
 
-    //show my events only if there are any
-    let displaySearchResults =  <h2 className="nothing-to-show">Your search returned 0 results.</h2>
-    if (eventsObject) {
-        displaySearchResults = 
+ //show my events only if there are any
+ let displaySearchResults =  <h1 className="search-results-header">Your search returned 0 results..</h1>
+ if (eventsObject.length > 0) {
+     displaySearchResults =  <h1 className="search-results-header">Your search returned the following results..</h1>
+ }
+
+    return (
+        <div className="search-results-page">
+            <Card className="search-results-card">
+                {displaySearchResults}
+            </Card>
         <Row xs={1} md={3} className="g-4">
             {eventsObject.map((value, key) => { 
                 console.log(value);
@@ -49,15 +56,7 @@ export const SearchResults = () => {
                     </Col>
                 )
             })}
-        </Row>
-    }
-
-    return (
-        <div>
-            <Card className="search-results-card">
-                <h1 className="search-results-header">Your search returned the following results..</h1>
-            </Card>
-            {displaySearchResults}           
+        </Row>          
         </div>
     )
 

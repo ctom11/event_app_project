@@ -92,7 +92,7 @@ export const Userprofile = () => {
   //set default profile picture
   let profilePicture = TestImage;
   if (userObject.user_profile_picture) {
-    profilePicture = userObject.user_profile_picture
+    profilePicture = `http://localhost:3002/${userObject.user_profile_picture}`
   }
   const changepicpopover = (
     <Popover id="popover-basic">
@@ -166,7 +166,7 @@ export const Userprofile = () => {
       <Row xs={1} md={1} className="g-4 profile-row">
         <Col className="col-md-4 profile-left">
           <Card className="profile-left-info">
-            <Card.Img className="profile-picture" variant="top" src={`http://localhost:3002/${profilePicture}`} />
+            <Card.Img className="profile-picture" variant="top" src={profilePicture} />
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>

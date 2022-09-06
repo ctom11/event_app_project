@@ -53,7 +53,7 @@ export const Event = () => {
             //set default profile picture
             let profilePicture = TestImage;
             if (value.user_profile_picture) {
-                profilePicture = value.user_profile_picture
+                profilePicture = `http://localhost:3002/${value.user_profile_picture}`
             }
             //for displaying comment time for now
             var date = Moment().format(value.event_comment_time);
@@ -132,15 +132,25 @@ export const Event = () => {
         ticketOptions = <a className="tickets-text" href={eventObject.event_ticket_link}><h1 className="tickets-text">Get Tickets</h1></a>
     }
 
-     //only let users comment if they are logged in
-     let displayCommentBox = ""
+    //only let users comment if they are logged in
+    let displayCommentBox = ""
+    if (accessToken) {
+        displayCommentBox = 
+        <div className="add-comment-container">
+            <h2 className="leave-comment-here">Leave a comment here:</h2>
+            <textarea className="form-control comment-form" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing..." onChange={(e) => {setNewComment(e.target.value)}}></textarea>
+            <button className="add-comment-btn" onClick={addComment}>Add Comment</button>
+        </div>
+    }
+
+     //only let users mark as interested if they are logged in
+     let displayInterestButton = ""
      if (accessToken) {
-        displayCommentBox = <div className="add-comment-container">
-        <h2 className="leave-comment-here">Leave a comment here:</h2>
-        <textarea className="form-control comment-form" id="exampleFormControlTextarea1" rows="3" placeholder="Start typing..." onChange={(e) => {setNewComment(e.target.value)}}></textarea>
-        <button className="add-comment-btn" onClick={addComment}>Add Comment</button>
-    </div>
-     }
+        displayInterestButton = 
+        <div className="user-event-status">
+            <Button className="event-status-btn" onClick={addToInterested}>{buttonText}</Button>
+        </div>
+    }
 
     return (
 
@@ -176,9 +186,7 @@ export const Event = () => {
                                 <p>people interested in this event</p>
                             </div>
                         </Card>
-                        <div className="user-event-status">
-                            <Button className="event-status-btn" onClick={addToInterested}>{buttonText}</Button>
-                        </div>
+                        {displayInterestButton}
                     </Col>
                 </Row>
                 <Accordion defaultActiveKey="0">

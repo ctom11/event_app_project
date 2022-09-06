@@ -42,7 +42,7 @@ router.post("/", async (req, res)=> {
                 from: "eventureprojectsendtest@outlook.com",
                 to: `${emailId}`, //eventureprojecttest@gmail.com
                 subject: "Password reset request",
-                text: `Hi, user. Please use this temporary password to login to your account (we strongly recommend you change this is soon as you login. Password: ${newPassword}`
+                text: `Hi there. Please use this temporary password to login to your account (we strongly recommend you change this is soon as you login). Password: ${newPassword}`
             };
 
             transporter.sendMail(options, function (err, info) {

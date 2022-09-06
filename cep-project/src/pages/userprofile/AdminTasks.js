@@ -136,7 +136,6 @@ export const AdminTasks = () => {
           if (Response.data.error) {
             alert(Response.data.error);
           } else {
-          navigate("/admintasks")
           window.location.reload();
           }
         });
@@ -153,7 +152,6 @@ export const AdminTasks = () => {
           if (Response.data.error) {
             alert(Response.data.error);
           } else {
-          navigate("/admintasks")
           window.location.reload();
           }
         });
@@ -167,7 +165,6 @@ export const AdminTasks = () => {
           if (Response.data.error) {
             alert(Response.data.error);
           } else {
-            navigate("/admintasks")
             window.location.reload();
           }
       });
@@ -179,7 +176,7 @@ export const AdminTasks = () => {
       <Row xs={1} md={1} className="g-4">
         <Col className="col-md-4 profile-left">
           <Card className="admin-left-info">
-            <Card.Img className="profile-picture" variant="top" src={profilePicture} />
+            <Card.Img className="profile-picture" variant="top" src={`http://localhost:3002/${userObject.user_profile_picture}`} />
             <Card.Body className="profile-user-details">
               <Card.Text className="profile-text">
                 <p className="user-name-profile">{userObject.first_name} {userObject.last_name}</p>
@@ -193,8 +190,8 @@ export const AdminTasks = () => {
                 <Offcanvas.Body className="account-settings-body">
                   <h1>Account Settings</h1>
                   <div className="account-settings-options">
-                    <h2 className="settings-option">Update Profile Picture</h2>
-                    <h2 className="settings-option">Update Bio</h2>
+                    <h2 className="settings-option" onClick={() => {navigate(`/updateprofilepic/${userObject.user_account_id}`)}}>Update Profile Picture</h2>
+                    <h2 className="settings-option" onClick={() => {navigate(`/updatebio/${userObject.user_account_id}`)}}>Update Bio</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/changename/${userObject.user_account_id}`)}}>Change My Name</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/changepassword/${userObject.user_account_id}`)}}>Change My Password</h2>
                     <h2 className="settings-option" onClick={() => {navigate(`/deleteaccount/${userObject.user_account_id}`)}}>Delete My Account</h2>
@@ -206,7 +203,7 @@ export const AdminTasks = () => {
         </Col>
 
         <Col className="col-md-8 profile-right">
-          <Card className="profile-event-card">
+          <Card className="profile-admin-card">
             <Card.Body>
               <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 admin-tabs">
                 <Tab eventKey="home" title="Events Awaiting Approval"> 
