@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
         cb(null, '../event_images/images')
     },
     filename: (req, file, cb) => {
-        console.log(file)
         cb(null, Date.now() + path.extname(file.originalname))
     }
 });
@@ -46,8 +45,6 @@ router.get("/byId/:id", validateToken, (req, res)=> {
 //get account info (no longer used)
 router.get("/", (req, res)=> {
 
-    console.log(req);
-
     const getAccountInfo = "SELECT first_name, last_name, email_address, password, user_profile_picture, admin_status FROM user_account";
     db.normalDb.query(getAccountInfo,
         (err, rows) => {
@@ -64,7 +61,6 @@ router.get("/", (req, res)=> {
 //update profile pic
 router.post("/updateprofilepic/:id", validateToken, upload.single("userProfilePicture"), (req, res)=> {
 
-    console.log(req);
     const userProfilePicture = req.file.filename
     const id =  req.params.id;
 
@@ -86,7 +82,6 @@ router.post("/updateprofilepic/:id", validateToken, upload.single("userProfilePi
 //update bio
 router.post("/updatebio/:id", validateToken, (req, res)=> {
 
-    console.log(req);
     const userBio = req.body.userBio
     const id =  req.params.id;
 
@@ -99,7 +94,7 @@ router.post("/updatebio/:id", validateToken, (req, res)=> {
             if (result.affectedRows) {
                 res.send({message: "success"})
             } else {
-                res.send(result)
+                res.send({message:"Can't update bio"})
             }
         }
     );
@@ -108,7 +103,6 @@ router.post("/updatebio/:id", validateToken, (req, res)=> {
 //update name
 router.post("/changename/:id", validateToken, (req, res)=> {
 
-    console.log(req);
     const updatedFirstName = req.body.newFirstName
     const updatedLastName = req.body.newLastName
     const id =  req.params.id;
@@ -131,7 +125,6 @@ router.post("/changename/:id", validateToken, (req, res)=> {
 //update password
 router.post("/changepassword/:id", validateToken, (req, res)=> {
 
-    console.log(req);
     const updatedPassword = req.body.updatedPassword
     const id =  req.params.id;
 
@@ -141,9 +134,8 @@ router.post("/changepassword/:id", validateToken, (req, res)=> {
         const postUpdatePassword = "UPDATE user_account SET password = ? WHERE user_account_id = ?"
         db.normalDb.query(postUpdatePassword, [hash, id], (err, result) => {
             if(err){
-                console.log(err);
+                res.status(500).send({error: "Failed to update password"})
             }
-            console.log(result);
             res.send(result)
         })
     })

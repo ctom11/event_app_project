@@ -37,7 +37,7 @@ export const Event = () => {
 
     useEffect(() => {
         document.title = `${eventObject.event_name} - Eventure`;
-      });
+    });
 
     //get event comments
     useEffect(() => {
@@ -60,7 +60,6 @@ export const Event = () => {
             const fromNow = Moment(date).fromNow();
             return(
                 <Toast className="comments-toast">
-                    
                     <Toast.Header>
                         <img src={profilePicture} className="rounded me-2 comment-user-pic" alt="" />
                         <strong className="me-auto comment-user-name">{value.first_name} {value.last_name}</strong>
@@ -69,7 +68,7 @@ export const Event = () => {
                     <Toast.Body>{value.event_comment_body}</Toast.Body>
                 </Toast>
             )
-            })
+        })
     }
 
     //set background image for banner
@@ -156,10 +155,8 @@ export const Event = () => {
 
         <div className="event-full">
             <Card className="event-img-card">
-            <div className="p-5 text-center bg-image rounded-3 no-repeat h-120 event-image-div" style={eventImageStyle}>
-            </div>
+                <div className="p-5 text-center bg-image rounded-3 no-repeat h-120 event-image-div" style={eventImageStyle}></div>
             </Card>
-            
             <Card className="event-bottom-card">
                 <Row className="justify-content-md-center">
                     <Col xs lg="8">
@@ -168,9 +165,7 @@ export const Event = () => {
                     </Col>
                     <Col xs lg="4">
                         <Card className="tickets-card">
-                            <div>
-                                {ticketOptions}
-                            </div>
+                            <div>{ticketOptions}</div>
                         </Card>
                     </Col>
                 </Row>
@@ -202,14 +197,11 @@ export const Event = () => {
                         <Accordion.Header className="event-p">Comments</Accordion.Header>
                         <Accordion.Body>
                             {displayCommentBox}
-                            <div>
-                                {commentblock}
-                            </div>
+                            <div>{commentblock}</div>
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
             </Card>
         </div>
-
     )
 }

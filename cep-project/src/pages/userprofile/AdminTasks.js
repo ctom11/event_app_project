@@ -37,12 +37,12 @@ export const AdminTasks = () => {
 
   //get all user info
   useEffect(() => {
-      Axios.get(`http://localhost:3001/useraccount/byId/${id}`, {
-        headers: {accessToken: localStorage.getItem("accessToken")}, 
-      }) .then((Response) => {
-          console.log(Response)
-          setUserObject(Response.data);
-      });
+    Axios.get(`http://localhost:3001/useraccount/byId/${id}`, {
+      headers: {accessToken: localStorage.getItem("accessToken")}, 
+    }) .then((Response) => {
+      console.log(Response)
+      setUserObject(Response.data);
+    });
   }, [])
 
   //get events awaiting admin approval
@@ -63,13 +63,13 @@ export const AdminTasks = () => {
 
   //update user profile picture
   const UpdateProfilePicture = () => {
-      Axios.post(`http://localhost:3001/updateprofilepic/${id}`,{
-        headers: {accessToken: localStorage.getItem("accessToken")}, 
-      }, {
-          userProfilePicture: userObject.user_profile_picture
-      }).then(() => {
-          alert("profile picture successfully updated");
-      });
+    Axios.post(`http://localhost:3001/updateprofilepic/${id}`,{
+      headers: {accessToken: localStorage.getItem("accessToken")}, 
+    }, {
+      userProfilePicture: userObject.user_profile_picture
+    }).then(() => {
+      alert("profile picture successfully updated");
+    });
   };
 
   //update user bio
@@ -126,35 +126,33 @@ export const AdminTasks = () => {
 
   //approve event
   const approveEvent = (eventId) => {
-        Axios.post(`http://localhost:3001/event/approveevent/${eventId}`,
-        {},
-        {
-         headers: {
-             accessToken: localStorage.getItem("accessToken"),
-         }
-     }).then((Response) => {
-          if (Response.data.error) {
-            alert(Response.data.error);
-          } else {
+    Axios.post(`http://localhost:3001/event/approveevent/${eventId}`,
+      {},
+      {headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      }
+      }).then((Response) => {
+        if (Response.data.error) {
+          alert(Response.data.error);
+        } else {
           window.location.reload();
-          }
-        });
-    };
+        }
+      });
+  };
 
   //decline event
   const declineEvent = (eventId) => {
     Axios.delete(`http://localhost:3001/event/deleteevent/${eventId}`,
-           {
-            headers: {
-                accessToken: localStorage.getItem("accessToken"),
-            }
-        }).then((Response) => {
-          if (Response.data.error) {
-            alert(Response.data.error);
-          } else {
-          window.location.reload();
-          }
-        });
+      {headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      }
+      }).then((Response) => {
+        if (Response.data.error) {
+          alert(Response.data.error);
+        } else {
+        window.location.reload();
+        }
+     });
   }
 
   //remove event from featured events

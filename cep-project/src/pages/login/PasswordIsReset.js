@@ -16,7 +16,6 @@ export const PasswordIsReset = () => {
         <Card className="create-event">
             <h1 className='create-event-header'>Thank you</h1>
             <h2 className='create-event-h2'>Your password has been reset. You can access your new password in your emails.</h2>
-           
             <Link to="/login"><h2 className='create-event-h2 back-to-home'>Click here to go to login</h2></Link>
         </Card>
 

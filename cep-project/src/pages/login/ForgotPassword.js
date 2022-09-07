@@ -36,7 +36,6 @@ export const ForgotPassword = () => {
         <Card className="create-event">
             <h1 className='create-event-header'>Forgotten your password?</h1>
             <h2 className='create-event-h2 forgotten-pw'>Don't panic! Just enter your email address here and we can send you an email with a new password. We do recommend that you change this password as soon as you login again!</h2>
-            
             <div>
                 <label className="create-label input-pw-email">email address</label>
                 <input type="email" className="form-input-signup signup create-input long-input"

@@ -19,23 +19,23 @@ export const Login = () => {
   let navigate = useNavigate()
   
   const login = () => {
-      Axios.post('http://localhost:3001/login', {
-          emailAddress: email_address, password: password
-      }).then((Response) => {
-          if (Response.data.error) {
-            alert(Response.data.error);
-          } else {
-            console.log(Response.data);
-            localStorage.setItem("accessToken", Response.data.token);
-            setAuthState({
-              firstName: Response.data.firstName, 
-              id: Response.data.id, 
-              adminStatus: Response.data.adminStatus
-            })
-            navigate(`/userprofile/${Response.data.id}`);
-          }
-          window.location.reload();
-      });
+    Axios.post('http://localhost:3001/login', {
+      emailAddress: email_address, password: password
+    }).then((Response) => {
+      if (Response.data.error) {
+        alert(Response.data.error);
+      } else {
+        console.log(Response.data);
+        localStorage.setItem("accessToken", Response.data.token);
+        setAuthState({
+          firstName: Response.data.firstName, 
+          id: Response.data.id, 
+          adminStatus: Response.data.adminStatus
+        })
+        navigate(`/userprofile/${Response.data.id}`);
+      }
+        window.location.reload();
+    });
   };
 
   return (

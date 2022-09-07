@@ -15,7 +15,6 @@ export const NavigationBar = () => {
     const { authState } = useContext(AuthContext);
 
     const [searchQuery, setSearchQuery] = useState('');
-    //setSearchState([]);
 
     const Search = () => {
         navigate('/searchresults/' + searchQuery);
@@ -48,25 +47,25 @@ export const NavigationBar = () => {
     }
 
     return(
-    <Navbar expand="lg" fixed="top">
-        <Container fluid>
-            <Navbar.Brand href="/">
-                <img className="logo" src={Logo} width="220" height="60"  alt="Acar Yatak logo" />
-            </Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-            <Navbar.Collapse id="basic-navbar-nav">
-                {navbarContent}
-            </Navbar.Collapse>
-            <div className="search">
-                <form className="d-flex" role="search">
-                    <input className="form-control me-2" type="search" placeholder="Search for Events" aria-label="Search"
-                    onChange={(e) => {
-                        setSearchQuery(e.target.value);
-                    }}></input>
-                    <button className="btn btn-outline-success search-btn" type="submit" onClick={Search}>Search</button>
-                </form>
-            </div>
-        </Container>
-    </Navbar>
+        <Navbar expand="lg" fixed="top">
+            <Container fluid>
+                <Navbar.Brand href="/">
+                    <img className="logo" src={Logo} width="220" height="60"  alt="Acar Yatak logo" />
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                <Navbar.Collapse id="basic-navbar-nav">
+                    {navbarContent}
+                </Navbar.Collapse>
+                <div className="search">
+                    <form className="d-flex" role="search">
+                        <input className="form-control me-2" type="search" placeholder="Search for Events" aria-label="Search"
+                        onChange={(e) => {
+                            setSearchQuery(e.target.value);
+                        }}></input>
+                        <button className="btn btn-outline-success search-btn" type="submit" onClick={Search}>Search</button>
+                    </form>
+                </div>
+            </Container>
+        </Navbar>
     )
 }

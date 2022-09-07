@@ -9,7 +9,6 @@ export const FAQs = () => {
             <Card className="about-us-card">
                 <h1 className="about-us-title">FAQs</h1>
                 <div className="about-us-text">
-
                     <h4 className="about-us-question">Can I buy tickets for events on the Eventure webapp?</h4>
                     <h4>Unfortunately, tickets aren't available for purchase directly from us here at Eventure. We do however provide a link straight to the official ticket provider!</h4>
 
@@ -21,10 +20,9 @@ export const FAQs = () => {
 
                     <h4 className="about-us-question">What area do you promote events for?</h4>
                     <h4>We share events for across Northern Ireland.</h4>
-
                 </div>
             </Card>
         </div>
     )
-
+    
 }

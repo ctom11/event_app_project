@@ -10,7 +10,7 @@ export const Signup = () => {
 
     useEffect(() => {
         document.title = 'Sign Up - Eventure';
-      });
+    });
 
     /*set up for connecting to individual event page*/
     let navigate = useNavigate()
@@ -41,8 +41,7 @@ export const Signup = () => {
             alert("Registration successful!")
             navigate(`/login`);
             window.location.reload();
-        });    
-           
+        });         
     };
 
     return (
@@ -50,35 +49,29 @@ export const Signup = () => {
     <div className="card signup-card">
         <div className="card-body">
             <h5 className="card-title signup-title">Sign Up</h5>
-
             <Formik initialValues={initialValues} onSubmit={submitRegister} validationSchema={validationSchema}>
                 <Form className="signup-form">
                     <div className="row">
-
                         <div className="form-group col-md-6">
                             <label htmlFor="inputFirstName">First Name</label><br/>
                             <ErrorMessage name="firstName" component="span"/>
                             <Field type="text" className="form-control form-input-signup signup" id="inputFirstName" name="firstName" placeholder="First Name"></Field>
                         </div>
-
                         <div className="form-group col-md-6">
                             <label htmlFor="inputLastName">Last Name</label><br/>
                             <ErrorMessage name="lastName" component="span"/>
                             <Field type="text" className="form-control form-input-signup signup" id="inputLastName" name="lastName" placeholder="Last Name"></Field>
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="inputEmail4">Email</label><br/>
                             <ErrorMessage name="emailAddress" component="span"/>
                             <Field type="email" className="form-control form-input-signup signup" id="inputEmail4" name="emailAddress" placeholder="Email"></Field>
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="inputPassword4">Password</label><br/>
                             <ErrorMessage name="password" component="span"/>
                             <Field type="password" className="form-control form-input-signup signup" id="inputPassword4" name="password" placeholder="Password"></Field>
                         </div>
-
                         <div className="form-group">
                             <label htmlFor="inputConfirmPassword4">Confirm Password</label><br/>
                             <ErrorMessage name="confirmPassword" component="span"/>

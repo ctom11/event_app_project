@@ -27,16 +27,15 @@ export const Home = () => {
 
   //get featured events
   useEffect(() => {
-      Axios.get('http://localhost:3001/event/featured').then((Response) => {
-          console.log(Response)
-          setListOfEvents(Response.data)
-  });
+    Axios.get('http://localhost:3001/event/featured').then((Response) => {
+      console.log(Response)
+      setListOfEvents(Response.data)
+    });
   }, []);
 
   return (
 
     <div className="home-page-full">
-
       <Carousel fade>
         <Carousel.Item>
           <img className="w-100 home-carousel-image" src={homeImage1} alt="First slide"/>
@@ -60,13 +59,10 @@ export const Home = () => {
               <h3 className="carousel-slide-label">Want to keep up to date with the latest events? Create your account now.</h3>
             </Carousel.Caption>
           </Link>
-        
         </Carousel.Item>
       </Carousel>
-
       <div className="home-featured-events">
         <h1 className="h1-featured">Featured Events</h1>
-
         <Row xs={1} md={2} className="g-4 home-event-cards">
           {listOfEvents.map((value, key) => { 
             return(
@@ -87,7 +83,6 @@ export const Home = () => {
             )})}
         </Row>
       </div>
-
     </div>
 
   )

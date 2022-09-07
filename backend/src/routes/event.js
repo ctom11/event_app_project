@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
         cb(null, '../event_images/images')
     },
     filename: (req, file, cb) => {
-        console.log(file)
         cb(null, Date.now() + path.extname(file.originalname))
     }
 });
@@ -24,8 +23,6 @@ const upload = multer({storage: storage})
 
 /*get all info about an event*/
 router.get("/", (req, res)=> {
-
-    console.log(req);
 
     db.normalDb.query(
         "SELECT * FROM event WHERE admin_approved = 1",
@@ -165,14 +162,8 @@ router.post("/addtofeatured/:id", validateToken, (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows){
-                res.send(rows)
-                return;
-            }
-            else {
-                res.send({message:"No featured events"})
-                return;
-            }
+            res.send(rows)
+            return;
         });
 });
 
@@ -193,7 +184,7 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
                 return;
             }
             else {
-                res.send({message:"No featured events"})
+                res.send({message:"Event not found"})
                 return;
             }
         });
@@ -210,7 +201,7 @@ router.get("/comments/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows){
+            if (rows.length > 0) {
                 res.send(rows)
             }
             else {
@@ -222,7 +213,6 @@ router.get("/comments/:id", (req, res)=> {
 /*create new event*/
 router.post("/createevent", upload.single("eventImage"), (req, res)=> {
 
-    console.log(req.body)
     const eventName = req.body.eventName
     const eventDescriptionIntro = req.body.eventDescriptionIntro
     const eventDescriptionBody = req.body.eventDescriptionBody
@@ -235,14 +225,11 @@ router.post("/createevent", upload.single("eventImage"), (req, res)=> {
     const userId = req.body.userId
     const genreId = req.body.genreId
 
-    console.log(eventName)
-
     const postInsertEvent = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id, genre_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     db.normalDb.query(postInsertEvent, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId, genreId], (err, result) => {
         if(err){
-            console.log(err);
+            res.status(500).send({error: "Create failed"})
         }
-        console.log(result);
         res.send(result);
     })
 
@@ -251,23 +238,23 @@ router.post("/createevent", upload.single("eventImage"), (req, res)=> {
 /*add new event comment*/
 router.post("/addcomment", validateToken, (req, res)=> {
 
-    console.log(req.body)
     const commentBody = req.body.commentBody
     const commentEventId = req.body.commentEventId
     const commentTime = req.body.commentTime
 
     const userId = req.user.user_account_id;
 
-    console.log(commentBody)
-
-    const postEventComment = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id, user_account_id) VALUES (?, ?, ?, ?)"
-    db.normalDb.query(postEventComment, [commentBody, commentTime, commentEventId, userId], (err, result) => {
-        if(err){
-            console.log(err);
-        }
-        console.log(result);
-        res.send(result)
-    })
+    if (Number.isInteger(Number(commentEventId))) {
+        const postEventComment = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id, user_account_id) VALUES (?, ?, ?, ?)"
+        db.normalDb.query(postEventComment, [commentBody, commentTime, commentEventId, userId], (err, result) => {
+            if(err){
+                res.status(500).send({error: "Failed to add comment"})
+            }
+            res.send(result)
+        })
+    } else {
+        res.send({message:"Parameter validation failed"})
+    }
 });
 
 /*delete comment*/
@@ -277,9 +264,8 @@ router.delete("/comment/:commentId", validateToken, async (req, res) => {
     const deleteEventComment = "DELETE FROM `comments` WHERE comment_id = ?"
     db.normalDb.query(deleteEventComment, [commentId], (err, result) => {
         if(err){
-            console.log(err);
+            res.status(500).send({error:err});
         }
-        console.log(result);
         res.send(result)
     })
 
@@ -339,8 +325,6 @@ router.delete("/deleteevent/:id", validateToken, (req, res)=> {
             }
             if (result) {
                 res.send({message: "success"})
-            } else {
-                res.send(result)
             }
         }
     );
@@ -353,14 +337,13 @@ router.post("/increaseinterested/:id", (req, res)=> {
 
     const postIncreaseInterested = "UPDATE event SET event_interested = event_interested + 1 WHERE event_id = ?";
     db.normalDb.query(postIncreaseInterested, [id],
-        (err, rows) => {
+        (err, result) => {
             if (err) {
                 res.send({err: err});
                 return;
             }
-            if(rows){
-                res.send(rows)
-                return;
+            if (result) {
+                res.send({message: "success"})
             }
             else {
                 res.send({message:"Can't add interested event"})

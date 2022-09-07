@@ -22,9 +22,8 @@ router.post("/", async (req, res)=> {
                 const resetPassword = "UPDATE user_account SET password = ? WHERE email_address= ?";
                 db.normalDb.query(resetPassword, [hash, emailId], (err, result) => {
                     if(err){
-                        console.log(err);
+                        res.status(500).send({error: "Failed to reset password"})
                     }
-                    console.log(result);
                     res.send(result)
                 })
             })
@@ -47,10 +46,9 @@ router.post("/", async (req, res)=> {
 
             transporter.sendMail(options, function (err, info) {
                 if(err) {
-                    console.log(err);
+                    res.status(500).send({error: "Failed to send email"})
                     return;
                 }
-                console.log("Sent: " + info.response);
             })
         }
     } catch(err) {

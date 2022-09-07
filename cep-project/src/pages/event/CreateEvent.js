@@ -12,7 +12,7 @@ export const CreateEvent = () => {
 
     useEffect(() => {
         document.title = 'Create Event - Eventure';
-      });
+    });
 
     const { authState } = useContext(AuthContext);
     let navigate = useNavigate();
@@ -35,7 +35,7 @@ export const CreateEvent = () => {
           data: e.target.files[0],
         }
         setImage(img)
-      }
+    }
 
     const onSubmit = () => {
         let formData = new FormData();
@@ -55,15 +55,15 @@ export const CreateEvent = () => {
             headers: {
                 accessToken: localStorage.getItem("accessToken"),
                 "Content-Type": "multipart/form-data"
-        }
-        }).then((Response) => {
-            if (Response.data.error) {
-              alert(Response.data.error);
-            } else {
-              console.log(Response.data);
-              navigate('/neweventsubmitted');
             }
-        });
+            }).then((Response) => {
+                if (Response.data.error) {
+                    alert(Response.data.error);
+                } else {
+                    console.log(Response.data);
+                    navigate('/neweventsubmitted');
+                }
+            });
     }
 
     return (

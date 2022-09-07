@@ -21,18 +21,18 @@ export const SearchResults = () => {
         Axios.get(`http://localhost:3001/search/${searchQuery}`).then((Response) => {
             console.log("Search Response");
             console.log(Response);
-        
             setEventsObject(Response.data);
         });
     }, [])
 
- //show my events only if there are any
- let displaySearchResults =  <h1 className="search-results-header">Your search returned 0 results..</h1>
- if (eventsObject.length > 0) {
-     displaySearchResults =  <h1 className="search-results-header">Your search returned the following results..</h1>
- }
+    //show my events only if there are any
+    let displaySearchResults =  <h1 className="search-results-header">Your search returned 0 results..</h1>
+    if (eventsObject.length > 0) {
+        displaySearchResults =  <h1 className="search-results-header">Your search returned the following results..</h1>
+    }
 
     return (
+        
         <div className="search-results-page">
             <Card className="search-results-card">
                 {displaySearchResults}

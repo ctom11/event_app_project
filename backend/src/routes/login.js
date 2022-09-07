@@ -11,17 +11,15 @@ const {sign} =  require("jsonwebtoken");
 
 router.post("/", async (req, res)=> {
 
-    console.log(req);
     const emailAddress = req.body.emailAddress
     const attemptedPassword = req.body.password
-    console.log(emailAddress);
 
     const getForEmailAddress = "SELECT * FROM user_account WHERE email_address = ?";
 
     try {
         const [rows, fields] = await db.promiseDb.query(getForEmailAddress,[emailAddress]);
         if(rows.length <= 0){
-            res.send({error: "Incorrect email"})
+            res.status(401).send({error: "Incorrect email"})
             return;
         }
         let accountId = rows[0].user_account_id
@@ -30,7 +28,7 @@ router.post("/", async (req, res)=> {
         
         bcrypt.compare(attemptedPassword, password).then((match) => {
             if(!match){
-                res.send({error: "Wrong Username and password combination"})
+                res.status(401).send({error: "Wrong Username and password combination"})
                 return;
             }
 
@@ -40,7 +38,7 @@ router.post("/", async (req, res)=> {
             return accountId;
         })
     } catch(err) {
-        throw err;
+        res.status(500).send({error: "Login error"});
     }
 });
 
