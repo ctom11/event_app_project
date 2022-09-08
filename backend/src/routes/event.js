@@ -41,7 +41,6 @@ router.get("/byId/:id", (req, res)=> {
 
     const id =  req.params.id
 
-    
     const getEventInfo = `CALL eventGetInfo(?)`;
     db.normalDb.query(getEventInfo, [id],
         (err, rows) => {
@@ -173,7 +172,7 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id
 
-    const postRemoveFeaturedEvents =  `CALL eventRemoveFromFeatured(?)`;
+    const postRemoveFeaturedEvents = `CALL eventRemoveFromFeatured(?)`;
     db.normalDb.query(postRemoveFeaturedEvents, [id],
         (err, rows) => {
             if (err) {
@@ -195,7 +194,7 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
 router.get("/comments/:id", (req, res)=> {
     const id =  req.params.id
 
-    const getAllEventComments = "SELECT comment_id, event_comment_body, event_comment_time, first_name, last_name, user_profile_picture FROM comments JOIN user_account ON comments.user_account_id = user_account.user_account_id WHERE comments.comment_event_id = ?";
+    const getAllEventComments =  `CALL eventGetComments(?)`;
     db.normalDb.query(getAllEventComments, [id],
         (err, rows) => {
             if (err) {
@@ -225,7 +224,7 @@ router.post("/createevent", upload.single("eventImage"), (req, res)=> {
     const userId = req.body.userId
     const genreId = req.body.genreId
 
-    const postInsertEvent = "INSERT INTO event (event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_free, event_ticket_link, event_img, user_account_id, genre_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    const postInsertEvent =  `CALL eventCreate(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     db.normalDb.query(postInsertEvent, [eventName, eventDate, eventTime, eventLocation, eventDescriptionIntro, eventDescriptionBody, eventFree, eventTicketLink, eventImage, userId, genreId], (err, result) => {
         if(err){
             res.status(500).send({error: "Create failed"})
@@ -245,7 +244,7 @@ router.post("/addcomment", validateToken, (req, res)=> {
     const userId = req.user.user_account_id;
 
     if (Number.isInteger(Number(commentEventId))) {
-        const postEventComment = "INSERT INTO comments (event_comment_body, event_comment_time, comment_event_id, user_account_id) VALUES (?, ?, ?, ?)"
+        const postEventComment =  `CALL eventAddComment(?, ?, ?, ?)`;
         db.normalDb.query(postEventComment, [commentBody, commentTime, commentEventId, userId], (err, result) => {
             if(err){
                 res.status(500).send({error: "Failed to add comment"})
@@ -261,7 +260,7 @@ router.post("/addcomment", validateToken, (req, res)=> {
 router.delete("/comment/:commentId", validateToken, async (req, res) => {
     const commentId = req.params.commentId
 
-    const deleteEventComment = "DELETE FROM `comments` WHERE comment_id = ?"
+    const deleteEventComment =  `CALL eventCommentDelete(?)`;
     db.normalDb.query(deleteEventComment, [commentId], (err, result) => {
         if(err){
             res.status(500).send({error:err});
@@ -274,7 +273,7 @@ router.delete("/comment/:commentId", validateToken, async (req, res) => {
 /*get all events requiring admin approval*/
 router.get("/awaitingapproval", (req, res)=> {
 
-    const getEventsAwaitingApproval = "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img, genre_id FROM event WHERE event.admin_approved = 0";
+    const getEventsAwaitingApproval =  `CALL eventAwaitingApproval()`;
     db.normalDb.query(getEventsAwaitingApproval,
         (err, rows) => {
             if (err) {
@@ -297,7 +296,7 @@ router.post("/approveevent/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id;
 
-    const postApproveEvent = "UPDATE event SET admin_approved = 1 WHERE event_id= ?";
+    const postApproveEvent =  `CALL eventApprove(?)`;
     db.normalDb.query(postApproveEvent, [id],
         (err, result) => {
             if (err) {
@@ -317,7 +316,7 @@ router.delete("/deleteevent/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id;
 
-    const deleteEvent = "DELETE FROM event WHERE event_id= ?";
+    const deleteEvent =  `CALL eventDelete(?)`;
     db.normalDb.query(deleteEvent, [id],
         (err, result) => {
             if (err) {
@@ -335,7 +334,7 @@ router.post("/increaseinterested/:id", (req, res)=> {
 
     const id =  req.params.id
 
-    const postIncreaseInterested = "UPDATE event SET event_interested = event_interested + 1 WHERE event_id = ?";
+    const postIncreaseInterested =  `CALL eventIncreaseInterested(?)`;
     db.normalDb.query(postIncreaseInterested, [id],
         (err, result) => {
             if (err) {

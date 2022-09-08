@@ -9,7 +9,7 @@ router.post("/", async (req, res)=> {
     const emailId = req.body.emailId
     const newPassword = Math.random().toString(16).substr(2, 8); 
 
-    const checkEmailAddress = "SELECT * FROM user_account WHERE email_address = ?";
+    const checkEmailAddress =  `CALL userForgotPassword(?)`;
     try {
         const [rows, fields] = await db.promiseDb.query(checkEmailAddress,[emailId]);
         if(rows.length <= 0){

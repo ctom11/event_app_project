@@ -14,7 +14,7 @@ router.post("/", async (req, res)=> {
     const emailAddress = req.body.emailAddress
     const attemptedPassword = req.body.password
 
-    const getForEmailAddress = "SELECT * FROM user_account WHERE email_address = ?";
+    const getForEmailAddress =  `CALL userLogin(?)`;
 
     try {
         const [rows, fields] = await db.promiseDb.query(getForEmailAddress,[emailAddress]);
@@ -22,9 +22,9 @@ router.post("/", async (req, res)=> {
             res.status(401).send({error: "Incorrect email"})
             return;
         }
-        let accountId = rows[0].user_account_id
-        let password = rows[0].password;
-        let adminStatus = rows[0].admin_status;
+        let accountId = rows[0][0].user_account_id
+        let password = rows[0][0].password;
+        let adminStatus = rows[0][0].admin_status;
         
         bcrypt.compare(attemptedPassword, password).then((match) => {
             if(!match){

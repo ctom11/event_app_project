@@ -26,7 +26,7 @@ const bcrypt = require("bcrypt");
 router.get("/byId/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    const getUserInfo = "SELECT * FROM user_account WHERE user_account_id = ?";
+    const getUserInfo = `CALL userGetInfo(?)`;
     db.normalDb.query(getUserInfo, [id],
         (err, rows) => {
             if (err) {
@@ -64,7 +64,7 @@ router.post("/updateprofilepic/:id", validateToken, upload.single("userProfilePi
     const userProfilePicture = req.file.filename
     const id =  req.params.id;
 
-    const postProfilePic = "UPDATE user_account SET user_profile_picture = ? WHERE user_account_id= ?";
+    const postProfilePic = `CALL userUpdateProfilePicture(?, ?)`;
     db.normalDb.query(postProfilePic, [userProfilePicture, id],
         (err, result) => {
             if (err) {
@@ -85,7 +85,7 @@ router.post("/updatebio/:id", validateToken, (req, res)=> {
     const userBio = req.body.userBio
     const id =  req.params.id;
 
-    const postUpdateBio = "UPDATE user_account SET user_bio = ? WHERE user_account_id= ?";
+    const postUpdateBio = `CALL userUpdateBio(?, ?)`;
     db.normalDb.query(postUpdateBio, [userBio, id],
         (err, result) => {
             if (err) {
@@ -107,7 +107,7 @@ router.post("/changename/:id", validateToken, (req, res)=> {
     const updatedLastName = req.body.newLastName
     const id =  req.params.id;
 
-    const postUpdateName = "UPDATE user_account SET first_name = ?, last_name = ? WHERE user_account_id= ?";
+    const postUpdateName = `CALL userChangeName(?, ?, ?)`;
     db.normalDb.query(postUpdateName, [updatedFirstName, updatedLastName, id],
         (err, result) => {
             if (err) {
@@ -131,7 +131,7 @@ router.post("/changepassword/:id", validateToken, (req, res)=> {
     /*bcrypt hashes new passwords as they are added to the db*/
     bcrypt.hash(updatedPassword, 10).then((hash) => {
 
-        const postUpdatePassword = "UPDATE user_account SET password = ? WHERE user_account_id = ?"
+        const postUpdatePassword = `CALL userChangePassword(?, ?)`;
         db.normalDb.query(postUpdatePassword, [hash, id], (err, result) => {
             if(err){
                 res.status(500).send({error: "Failed to update password"})
@@ -145,7 +145,7 @@ router.post("/changepassword/:id", validateToken, (req, res)=> {
 router.get("/myevents/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    const getInterestedEvents = "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event JOIN user_events_interested on user_events_interested.event_id = event.event_id WHERE user_events_interested.user_account_id = ?";
+    const getInterestedEvents = `CALL userInterestedEvents(?)`;
     db.normalDb.query(getInterestedEvents, [id],
         (err, rows) => {
             if (err) {
@@ -166,7 +166,7 @@ router.get("/myevents/:id", validateToken, (req, res)=> {
 router.get("/postedevents/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    const getPostedEvents = "SELECT event.event_id, event.event_name, event.event_date, event.event_time, event.event_img FROM event WHERE user_account_id = ?";
+    const getPostedEvents = `CALL userPostedEvents(?)`;
     db.normalDb.query(getPostedEvents, [id],
         (err, rows) => {
             if (err) {
@@ -187,7 +187,7 @@ router.get("/postedevents/:id", validateToken, (req, res)=> {
 router.delete("/deleteaccount/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    const deleteUserAccount = "DELETE FROM `user_account` WHERE user_account_id = ?";
+    const deleteUserAccount = `CALL userDeleteAccount(?)`;
     db.normalDb.query(deleteUserAccount, [id],
         (err, rows) => {
             if (err) {
@@ -208,7 +208,7 @@ router.delete("/deleteaccount/:id", validateToken, (req, res)=> {
 router.delete("/deleteevent/:id", validateToken, (req, res)=> {
     const id =  req.params.id;
 
-    const deleteUserEvent = "DELETE FROM `event` WHERE event_id = ?";
+    const deleteUserEvent = `CALL userDeleteEvent(?)`;
     db.normalDb.query(deleteUserEvent, [id],
         (err, rows) => {
             if (err) {
@@ -231,7 +231,7 @@ router.post("/addtointerested/:id", validateToken, (req, res)=> {
     const id =  req.params.id
     const eventId = req.body.eventId
 
-    const postInterestedEvents = "INSERT INTO user_events_interested(user_account_id, event_id) VALUES (?, ?)";
+    const postInterestedEvents = `CALL userAddInterested(?, ?)`;
     db.normalDb.query(postInterestedEvents, [id, eventId],
         (err, rows) => {
             if (err) {
