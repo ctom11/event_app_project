@@ -116,7 +116,7 @@ router.post("/changename/:id", validateToken, (req, res)=> {
             if (result.affectedRows) {
                 res.send({message: "success"})
             } else {
-                res.send(result)
+                res.send({message:"Can't update name"})
             }
         }
     );
@@ -152,7 +152,7 @@ router.get("/myevents/:id", validateToken, (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows){
+            if(rows.length > 0){
                 res.send(rows)
             }
             else {
@@ -173,11 +173,11 @@ router.get("/postedevents/:id", validateToken, (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows){
+            if(rows.length > 0){
                 res.send(rows)
             }
             else {
-                res.send({message:"This user isn't interested in any events"})
+                res.send({message:"This user hasn't posted any events"})
             }
         });
 
@@ -239,7 +239,7 @@ router.post("/addtointerested/:id", validateToken, (req, res)=> {
                 return;
             }
             if(rows){
-                res.send(rows)
+                res.send({message: "success"})
                 return;
             }
             else {

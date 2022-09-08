@@ -15,7 +15,7 @@ describe("Login Service Unit Tests", function () {
             })
         expect(response.status).equals(200);
         expect(response.body.token).to.exist;
-        expect(response.body.id).equals(47);
+        expect(response.body.id).equals(58);
       })
       it("should return login error message if login not possible", async function () {
         const response = await request(app)
