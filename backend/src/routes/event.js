@@ -41,7 +41,8 @@ router.get("/byId/:id", (req, res)=> {
 
     const id =  req.params.id
 
-    const getEventInfo = "SELECT * FROM event WHERE event_id = ?";
+    
+    const getEventInfo = `CALL eventGetInfo(?)`;
     db.normalDb.query(getEventInfo, [id],
         (err, rows) => {
             if (err) {
@@ -57,7 +58,7 @@ router.get("/byId/:id", (req, res)=> {
 /*sort events a-z*/
 router.get("/sortaz", (req, res)=> {
 
-    const getSortAZ = "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_name ASC;";
+    const getSortAZ = `CALL eventSortAZ()`;
     db.normalDb.query(getSortAZ,
         (err, rows) => {
             if (err) {
@@ -75,7 +76,7 @@ router.get("/sortaz", (req, res)=> {
 /*sort events by date*/
 router.get("/sortdate", (req, res)=> {
 
-    const getSortDate = "SELECT * FROM event WHERE admin_approved = 1 ORDER BY event_date";
+    const getSortDate = `CALL eventSortByDate()`;
     db.normalDb.query(getSortDate,
         (err, rows) => {
             if (err) {
@@ -96,7 +97,7 @@ router.get("/byGenre/:id", (req, res)=> {
 
     const id =  req.params.id
 
-    const getGenre = "SELECT genre_id, event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE genre_id = ? AND admin_approved = 1";
+    const getGenre =  `CALL eventByGenre(?)`;
     db.normalDb.query(getGenre, [id],
         (err, rows) => {
             if (err) {
@@ -114,7 +115,7 @@ router.get("/byGenre/:id", (req, res)=> {
 /*get all free events*/
 router.get("/free", (req, res)=> {
 
-    const getFreeEvents = "SELECT genre_id, event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_free = 1 AND admin_approved = 1";
+    const getFreeEvents =  `CALL eventFree()`;
     db.normalDb.query(getFreeEvents,
         (err, rows) => {
             if (err) {
@@ -132,7 +133,7 @@ router.get("/free", (req, res)=> {
 /*get all featured events*/
 router.get("/featured", (req, res)=> {
 
-    const getFeaturedEvents = "SELECT event.event_id, event_name, event_date, event_time, event_location, event_description_intro, event_description_body, event_ticket_link, event_img FROM event WHERE event.event_featured = 1 AND event.admin_approved = 1";
+    const getFeaturedEvents =  `CALL eventFeatured()`;
     db.normalDb.query(getFeaturedEvents,
         (err, rows) => {
             if (err) {
@@ -155,7 +156,7 @@ router.post("/addtofeatured/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id
 
-    const postFeaturedEvents = "UPDATE event SET event_featured = 1 WHERE event_id = ?";
+    const postFeaturedEvents =  `CALL eventAddToFeatured(?)`;
     db.normalDb.query(postFeaturedEvents, [id],
         (err, rows) => {
             if (err) {
@@ -172,7 +173,7 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
 
     const id =  req.params.id
 
-    const postRemoveFeaturedEvents = "UPDATE event SET event_featured = 0 WHERE event_id = ?";
+    const postRemoveFeaturedEvents =  `CALL eventRemoveFromFeatured(?)`;
     db.normalDb.query(postRemoveFeaturedEvents, [id],
         (err, rows) => {
             if (err) {
@@ -189,7 +190,6 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
             }
         });
 });
-
 
 /*get all event comments*/
 router.get("/comments/:id", (req, res)=> {
