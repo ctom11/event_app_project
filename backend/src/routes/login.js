@@ -34,7 +34,7 @@ router.post("/", async (req, res)=> {
 
             const accessToken = sign({email_address: emailAddress, user_account_id: accountId, admin_status: adminStatus}, "q1p0w2o9e3i8r4u7t5y6");
             //allow the front end to receive the access token
-            res.json({token: accessToken, firstName: rows[0].first_name, id: rows[0].user_account_id, adminStatus: rows[0].admin_status});
+            res.json({token: accessToken, firstName: rows[0][0].first_name, id: rows[0][0].user_account_id, adminStatus: rows[0][0].admin_status});
             return accountId;
         })
     } catch(err) {

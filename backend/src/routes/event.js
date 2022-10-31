@@ -47,7 +47,7 @@ router.get("/byId/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             } if (rows.length > 0) {
-                res.send(rows[0])
+                res.send(rows[0][0])
             } else {
                 res.send({message:"No events found"})
             }
@@ -63,8 +63,8 @@ router.get("/sortaz", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            else if(rows){
-                res.send(rows)
+            else if(rows.length > 0){
+                res.send(rows[0])
             }
             else {
                 res.send({message:"Couldn't sort events"})
@@ -81,8 +81,8 @@ router.get("/sortdate", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            else if(rows){
-                res.send(rows)
+            else if(rows.length > 0){
+                res.send(rows[0])
             }
             else {
                 res.send({message:"Couldn't sort"})
@@ -102,8 +102,8 @@ router.get("/byGenre/:id", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            else if(rows){
-                res.send(rows)
+            else if(rows.length > 0){
+                res.send(rows[0])
             }
             else {
                 res.send({message:"No events in this genre"})
@@ -120,8 +120,8 @@ router.get("/free", (req, res)=> {
             if (err) {
                 res.send({err: err});
             }
-            if(rows){
-                res.send(rows)
+            if(rows.length > 0){
+                res.send(rows[0])
             }
             else {
                 res.send({message:"No free events"})
@@ -139,8 +139,8 @@ router.get("/featured", (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows){
-                res.send(rows)
+            if(rows.length > 0){
+                res.send(rows[0])
                 return;
             }
             else {
@@ -162,7 +162,7 @@ router.post("/addtofeatured/:id", validateToken, (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            res.send(rows)
+            res.send(rows[0])
             return;
         });
 });
@@ -180,7 +180,7 @@ router.post("/removefromfeatured/:id", validateToken, (req, res)=> {
                 return;
             }
             if(rows){
-                res.send(rows)
+                res.send(rows[0])
                 return;
             }
             else {
@@ -201,7 +201,7 @@ router.get("/comments/:id", (req, res)=> {
                 res.send({err: err});
             }
             if (rows.length > 0) {
-                res.send(rows)
+                res.send(rows[0])
             }
             else {
                 res.send({message:"No comments for this event"})
@@ -229,7 +229,7 @@ router.post("/createevent", upload.single("eventImage"), (req, res)=> {
         if(err){
             res.status(500).send({error: "Create failed"})
         }
-        res.send(result);
+        res.send(result[0]);
     })
 
 });
@@ -249,7 +249,7 @@ router.post("/addcomment", validateToken, (req, res)=> {
             if(err){
                 res.status(500).send({error: "Failed to add comment"})
             }
-            res.send(result)
+            res.send(result[0])
         })
     } else {
         res.send({message:"Parameter validation failed"})
@@ -265,7 +265,7 @@ router.delete("/comment/:commentId", validateToken, async (req, res) => {
         if(err){
             res.status(500).send({error:err});
         }
-        res.send(result)
+        res.send(result[0])
     })
 
 })
@@ -280,8 +280,8 @@ router.get("/awaitingapproval", (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows){
-                res.send(rows)
+            if(rows.length > 0){
+                res.send(rows[0])
                 return;
             }
             else {

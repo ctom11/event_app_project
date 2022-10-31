@@ -33,7 +33,7 @@ router.get("/byId/:id", validateToken, (req, res)=> {
                 res.send({err: err});
             }
             if(rows.length > 0){
-                res.send(rows[0])
+                res.send(rows[0][0])
             }
             else {
                 res.send({message:"No users"})
@@ -152,8 +152,8 @@ router.get("/myevents/:id", validateToken, (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows.length > 0){
-                res.send(rows)
+            if(rows[0].length > 0){
+                res.send(rows[0])
             }
             else {
                 res.send({message:"This user isn't interested in any events"})
@@ -173,8 +173,8 @@ router.get("/postedevents/:id", validateToken, (req, res)=> {
                 res.send({err: err});
                 return;
             }
-            if(rows.length > 0){
-                res.send(rows)
+            if(rows[0].length > 0){
+                res.send(rows[0])
             }
             else {
                 res.send({message:"This user hasn't posted any events"})

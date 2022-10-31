@@ -12,7 +12,7 @@ router.get("/:searchQuery", (req, res)=> {
             if (err) {
                 res.send({err: err});
             } if (rows.length > 0) {
-                res.send(rows)
+                res.send(rows[0])
             } else {
                 res.send({message:"No search results"})
             }
