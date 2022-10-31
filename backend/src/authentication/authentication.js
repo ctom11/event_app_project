@@ -8,7 +8,7 @@ const validateToken = (req, res, next) => {
     if (!accessToken) return res.json({error: "User not logged in"})
 
     try {
-        const validToken = verify(accessToken, "q1p0w2o9e3i8r4u7t5y6");
+        // const validToken = verify(accessToken, "SECRET KEY");
         req.user = validToken;
         if (validToken) {
             return next();

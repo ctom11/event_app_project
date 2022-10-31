@@ -32,14 +32,14 @@ router.post("/", async (req, res)=> {
             const transporter = nodemailer.createTransport({
                 service: "hotmail",
                 auth: {
-                    user: "eventureprojectsendtest@outlook.com",
-                    pass: "Eventureproject100%",
+                    // user: //email,
+                    // pass: //password
                 },
             });
 
             const options = {
-                from: "eventureprojectsendtest@outlook.com",
-                to: `${emailId}`, //eventureprojecttest@gmail.com
+                // from: PROJECTNAME
+                to: `${emailId}`,
                 subject: "Password reset request",
                 text: `Hi there. Please use this temporary password to login to your account (we strongly recommend you change this is soon as you login). Password: ${newPassword}`
             };
